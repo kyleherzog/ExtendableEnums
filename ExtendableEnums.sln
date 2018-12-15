@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28306.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums", "ExtendableEnums\ExtendableEnums.csproj", "{F1480E33-BFD8-4818-B028-6EC1DC73A6B2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.UnitTests", "ExtendableEnums.UnitTests\ExtendableEnums.UnitTests.csproj", "{6401EF15-346C-4DA9-985E-716D73446CB2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1480E33-BFD8-4818-B028-6EC1DC73A6B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1480E33-BFD8-4818-B028-6EC1DC73A6B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1480E33-BFD8-4818-B028-6EC1DC73A6B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1480E33-BFD8-4818-B028-6EC1DC73A6B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6401EF15-346C-4DA9-985E-716D73446CB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6401EF15-346C-4DA9-985E-716D73446CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6401EF15-346C-4DA9-985E-716D73446CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6401EF15-346C-4DA9-985E-716D73446CB2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FDEA9A3-6506-4F3F-9AE6-4BEF21E2F44E}
+	EndGlobalSection
+EndGlobal
