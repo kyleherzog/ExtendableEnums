@@ -1,5 +1,5 @@
 # Extendable Enums
-
+[![Build status](https://ci.appveyor.com/api/projects/status/9w357to4mu4ds05u?svg=true)](https://ci.appveyor.com/project/kyleherzog/extendableenums)
 
 This library is available from [NuGet.org](https://www.nuget.org/packages/ExtendableEnums/)
 or download from the [CI build feed](https://ci.appveyor.com/nuget/extendableenums).
