@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/kyleherzog/ExtendableEnums/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/kyleherzog/ExtendableEnums</PackageProjectUrl>
+    <PackageTags>Enum Enumeration Extendable Class</PackageTags>
+    <RepositoryUrl>https://github.com/kyleherzog/ExtendableEnums</RepositoryUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>Kyle Herzog</Authors>
+    <Description>A .NET Standard library that provides extendable class based enums.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
