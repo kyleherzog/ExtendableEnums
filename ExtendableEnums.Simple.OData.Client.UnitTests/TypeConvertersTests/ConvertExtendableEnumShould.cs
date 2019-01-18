@@ -19,17 +19,29 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests.TypeConvertersTests
             {
                 BaseUri = AssemblyInitializer.StaticTestingHost.BaseODataUrl
             };
-            settings.TypeCache.Converter.RegisterTypeConverter(typeof(SampleStatus), TypeConverters.ConvertExtendableEnum<SampleStatus, int>);
 
+            ExtendableEnumConverter.Register<SampleStatus>(settings);
             var client = new ODataClient(settings);
-
+            
             var book = await client
                 .For<SampleBook>()
                 .Key("1")
                 .FindEntryAsync()
                 .ConfigureAwait(true);
 
-            Assert.AreEqual(SampleStatus.Active, book.Id);
+            Assert.AreEqual(SampleStatus.Deleted, book.Status);
+        }
+
+        [TestMethod]
+        public async Task ConvertValueOnlyToSampleStatusGivenTypesPassed()
+        {
+            var dictionary = new Dictionary<string, object>
+            {
+                { "value", 1 }
+            };
+
+            var result = ExtendableEnumConverter.Convert(typeof(SampleStatus), typeof(int), dictionary);
+            Assert.AreEqual(SampleStatus.Active, result);
         }
     }
 }
