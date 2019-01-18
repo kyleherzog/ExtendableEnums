@@ -1,4 +1,4 @@
-﻿namespace ExtendableEnums.UnitTests.Models
+﻿namespace ExtendableEnums.Testing.Models
 {
     public class SampleStatus : ExtendableEnums.ExtendableEnum<SampleStatus>
     {
