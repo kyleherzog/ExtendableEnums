@@ -50,7 +50,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExtendableEnums\ExtendableEnums.csproj" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExtendableEnums.Testing.Models\ExtendableEnums.Testing.Models.csproj" />
   </ItemGroup>
 
 </Project>
