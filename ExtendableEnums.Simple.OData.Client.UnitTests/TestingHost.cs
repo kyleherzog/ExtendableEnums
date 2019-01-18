@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ExtendableEnums.OData.TestHost;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
@@ -9,14 +10,16 @@ using Microsoft.Extensions.PlatformAbstractions;
 
 namespace ExtendableEnums.SimpleOData.Client.UnitTests
 {
-    public class TestingHost<TStartup> : ITestingHost
-        where TStartup : class
+    public class TestingHost
     {
+        public static TestingHost Instance { get; set; }
+
         private bool hasDisposed;
         private IWebHost host;
 
-        public TestingHost(string solutionRelativeRootPath, bool deferWebHostCreation = false)
+        public TestingHost(Type startupType, string solutionRelativeRootPath, bool deferWebHostCreation = false)
         {
+            StartupType = startupType;
             SolutionRelativeRootPath = solutionRelativeRootPath;
             if (!deferWebHostCreation)
             {
@@ -28,6 +31,8 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests
         {
             Dispose(false);
         }
+
+        public Type StartupType { get; }
 
         public string Address
         {
@@ -62,6 +67,7 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests
             }
 
             GetNewWebHostInternal();
+            DataContext.ResetData();
             return host;
         }
 
@@ -100,7 +106,7 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests
                 })
                 .UseKestrel()
                 .UseContentRoot(GetSolutionRelativeContentRoot(SolutionRelativeRootPath))
-                .UseStartup<TStartup>()
+                .UseStartup(StartupType)
                 .Build();
 
             host.Start();
