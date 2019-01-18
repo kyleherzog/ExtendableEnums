@@ -9,7 +9,7 @@ namespace ExtendableEnums.OData.TestHost
 {
     public static class DataContext
     {
-        public static IList<SampleBook> Books { get; set; }
+        public static IList<SampleBook> Books { get; } = new List<SampleBook>();
 
         public static void ResetData()
         {
@@ -18,7 +18,7 @@ namespace ExtendableEnums.OData.TestHost
 
         private static void ResetBooks()
         {
-            Books = new List<SampleBook>();
+            Books.Clear();
             var itemCount = 20;
             for (var i = 0; i < itemCount; i++)
             {
