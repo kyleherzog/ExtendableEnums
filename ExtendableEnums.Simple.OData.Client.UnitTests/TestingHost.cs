@@ -10,10 +10,8 @@ using Microsoft.Extensions.PlatformAbstractions;
 
 namespace ExtendableEnums.SimpleOData.Client.UnitTests
 {
-    public class TestingHost
+    public class TestingHost : IDisposable
     {
-        public static TestingHost Instance { get; set; }
-
         private bool hasDisposed;
         private IWebHost host;
 
@@ -32,7 +30,7 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests
             Dispose(false);
         }
 
-        public Type StartupType { get; }
+        public static TestingHost Instance { get; set; }
 
         public string Address
         {
@@ -52,6 +50,8 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests
 
         public string SolutionRelativeRootPath { get; set; }
 
+        public Type StartupType { get; }
+
         public void Dispose()
         {
             Dispose(true);
@@ -63,7 +63,10 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests
             if (host != null)
             {
                 await host.StopAsync().ConfigureAwait(false);
-                host?.Dispose();
+                if (host != null)
+                {
+                    host.Dispose();
+                }
             }
 
             GetNewWebHostInternal();

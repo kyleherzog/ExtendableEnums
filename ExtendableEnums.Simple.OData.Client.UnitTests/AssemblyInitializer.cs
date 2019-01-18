@@ -1,12 +1,11 @@
-using System.Threading.Tasks;
 using ExtendableEnums.OData.TestHost;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.SimpleOData.Client.UnitTests
 {
     [TestClass]
-    public class AssemblyInitializer
-    {      
+    public static class AssemblyInitializer
+    {
         [AssemblyCleanup]
         public static void CleanUp()
         {

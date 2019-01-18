@@ -1,7 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Runtime.Serialization;
-using ExtendableEnums.Microsoft.AspNetCore.OData;
+﻿using ExtendableEnums.Microsoft.AspNetCore.OData;
 using ExtendableEnums.Testing.Models;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
@@ -26,6 +23,8 @@ namespace ExtendableEnums.OData.TestHost
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            DataContext.ResetData();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -53,7 +52,6 @@ namespace ExtendableEnums.OData.TestHost
         {
             var builder = new ODataConventionModelBuilder();
             builder.AddExtendableEnum<SampleStatus>();
-            // AddProperty(builder.AddComplexType(typeof(SampleStatus)), nameof(SampleStatus.Value));
             builder.EntitySet<SampleBook>("SampleBooks");
 
             return builder.GetEdmModel();
