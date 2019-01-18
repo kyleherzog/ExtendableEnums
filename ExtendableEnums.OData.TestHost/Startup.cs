@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.Serialization;
+using ExtendableEnums.Microsoft.AspNetCore.OData;
 using ExtendableEnums.Testing.Models;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
@@ -51,30 +52,31 @@ namespace ExtendableEnums.OData.TestHost
         private static IEdmModel GetEdmModel()
         {
             var builder = new ODataConventionModelBuilder();
-            AddProperty(builder.AddComplexType(typeof(SampleStatus)), nameof(SampleStatus.Value));
+            builder.AddExtendableEnum<SampleStatus>();
+            // AddProperty(builder.AddComplexType(typeof(SampleStatus)), nameof(SampleStatus.Value));
             builder.EntitySet<SampleBook>("SampleBooks");
 
             return builder.GetEdmModel();
         }
 
-        public static StructuralTypeConfiguration AddProperty(StructuralTypeConfiguration config, string propertyName)
-        {
-            var propertyInfo = config.ClrType.GetProperty(propertyName);
-            var property = config.AddProperty(propertyInfo);
+        //public static StructuralTypeConfiguration AddProperty(StructuralTypeConfiguration config, string propertyName)
+        //{
+        //    var propertyInfo = config.ClrType.GetProperty(propertyName);
+        //    var property = config.AddProperty(propertyInfo);
 
-            var attribute = propertyInfo.GetCustomAttribute<DataMemberAttribute>(inherit: false);
+        //    var attribute = propertyInfo.GetCustomAttribute<DataMemberAttribute>(inherit: false);
 
-            if (attribute != null && !String.IsNullOrWhiteSpace(attribute.Name))
-            {
-                property.Name = attribute.Name;
-            }
-            else
-            {
-                var caser = new LowerCamelCaser();
-                property.Name = caser.ToLowerCamelCase(propertyInfo.Name);
-            }
+        //    if (attribute != null && !String.IsNullOrWhiteSpace(attribute.Name))
+        //    {
+        //        property.Name = attribute.Name;
+        //    }
+        //    else
+        //    {
+        //        var caser = new LowerCamelCaser();
+        //        property.Name = caser.ToLowerCamelCase(propertyInfo.Name);
+        //    }
 
-            return config;
-        }
+        //    return config;
+        //}
     }
 }

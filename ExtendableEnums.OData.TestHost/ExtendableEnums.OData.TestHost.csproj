@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ExtendableEnums.Microsoft.AspNetCore.OData\ExtendableEnums.Microsoft.AspNetCore.OData.csproj" />
     <ProjectReference Include="..\ExtendableEnums.Testing.Models\ExtendableEnums.Testing.Models.csproj" />
   </ItemGroup>
 
