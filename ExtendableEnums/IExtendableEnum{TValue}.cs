@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ExtendableEnums
 {
-    public interface IExtendableEnum<TValue> : IExtendableEnum
+    public interface IExtendableEnum<out TValue> : IExtendableEnum
         where TValue : IComparable
     {
         TValue Value { get; }

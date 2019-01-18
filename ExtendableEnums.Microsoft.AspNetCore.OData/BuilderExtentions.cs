@@ -20,7 +20,7 @@ namespace ExtendableEnums.Microsoft.AspNetCore.OData
             return result;
         }
 
-        private static StructuralTypeConfiguration AddProperty(StructuralTypeConfiguration config, string propertyName)
+        private static void AddProperty(StructuralTypeConfiguration config, string propertyName)
         {
             var propertyInfo = config.ClrType.GetProperty(propertyName);
             var property = config.AddProperty(propertyInfo);
@@ -36,8 +36,6 @@ namespace ExtendableEnums.Microsoft.AspNetCore.OData
                 var caser = new LowerCamelCaser();
                 property.Name = caser.ToLowerCamelCase(propertyInfo.Name);
             }
-
-            return config;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using ExtendableEnums.Testing.Models;
@@ -23,7 +24,7 @@ namespace ExtendableEnums.OData.TestHost
             {
                 Books.Add(new SampleBook
                 {
-                    Id = i.ToString(),
+                    Id = i.ToString(CultureInfo.InvariantCulture),
                     Title = $"Book #{i}",
                     Status = i % 2 == 0 ? SampleStatus.Deleted : SampleStatus.Active
                 });

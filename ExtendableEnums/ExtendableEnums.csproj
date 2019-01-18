@@ -13,11 +13,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>ExtendableEnums.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\ExtendableEnums.UnitTests\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>ExtendableEnums.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\ExtendableEnums.UnitTests\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
