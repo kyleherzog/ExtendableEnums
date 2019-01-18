@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace ExtendableEnums
 {
     [JsonConverter(typeof(ExtendableEnumJsonConverter))]
-    public abstract class ExtendableEnumBase<TEnumeration, TValue> : IComparable<TEnumeration>, IEquatable<TEnumeration>
+    public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum<TValue>, IComparable<TEnumeration>, IEquatable<TEnumeration>
             where TEnumeration : ExtendableEnumBase<TEnumeration, TValue>
             where TValue : IComparable
     {

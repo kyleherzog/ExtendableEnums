@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExtendableEnums.OData.TestHost\ExtendableEnums.OData.TestHost.csproj" />
-    <ProjectReference Include="..\ExtendableEnums.SimpleOData.Client\ExtendableEnums.SimpleOData.Client.csproj" />
+    <ProjectReference Include="..\ExtendableEnums.Simple.OData.Client\ExtendableEnums.Simple.OData.Client.csproj" />
   </ItemGroup>
 
 </Project>
