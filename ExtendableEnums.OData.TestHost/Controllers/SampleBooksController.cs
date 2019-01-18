@@ -14,19 +14,7 @@ namespace ExtendableEnums.OData.TestHost.Controllers
         [EnableQuery]
         public IEnumerable<SampleBook> Get()
         {
-            var results = new List<SampleBook>();
-            var itemCount = 20;
-            for (var i = 0; i < itemCount; i++)
-            {
-                results.Add(new SampleBook
-                {
-                    Id = i.ToString(),
-                    Title = $"Book #{i}",
-                    Status = i % 2 == 0 ? SampleStatus.Deleted : SampleStatus.Active 
-                });
-            }
-
-            return results;
+            return DataContext.Books;
         }
     }
 }

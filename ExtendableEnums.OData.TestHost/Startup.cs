@@ -58,25 +58,5 @@ namespace ExtendableEnums.OData.TestHost
 
             return builder.GetEdmModel();
         }
-
-        //public static StructuralTypeConfiguration AddProperty(StructuralTypeConfiguration config, string propertyName)
-        //{
-        //    var propertyInfo = config.ClrType.GetProperty(propertyName);
-        //    var property = config.AddProperty(propertyInfo);
-
-        //    var attribute = propertyInfo.GetCustomAttribute<DataMemberAttribute>(inherit: false);
-
-        //    if (attribute != null && !String.IsNullOrWhiteSpace(attribute.Name))
-        //    {
-        //        property.Name = attribute.Name;
-        //    }
-        //    else
-        //    {
-        //        var caser = new LowerCamelCaser();
-        //        property.Name = caser.ToLowerCamelCase(propertyInfo.Name);
-        //    }
-
-        //    return config;
-        //}
     }
 }

@@ -6,13 +6,11 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests
 {
     [TestClass]
     public class AssemblyInitializer
-    {
-        public static ITestingHost StaticTestingHost { get; set; }
-
+    {      
         [AssemblyCleanup]
         public static void CleanUp()
         {
-            StaticTestingHost.Dispose();
+            TestingHost.Instance.Dispose();
         }
 
         [AssemblyInitialize]
@@ -20,7 +18,7 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests
         {
             context.WriteLine("Initiaizing test assembly...");
 
-            StaticTestingHost = new TestingHost<Startup>("ExtendableEnums.OData.TestHost", deferWebHostCreation: true);
+            TestingHost.Instance = new TestingHost(typeof(Startup), "ExtendableEnums.OData.TestHost", deferWebHostCreation: true);
         }
     }
 }

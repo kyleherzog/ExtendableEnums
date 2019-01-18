@@ -25,7 +25,7 @@ namespace ExtendableEnums.SimpleOData.Client
         private static dynamic Convert(TypeConverterConfiguration config, IDictionary<string, object> dictionary)
         {
             return Convert(config.EnumerationType, config.ValueType, dictionary);
-        } 
+        }
 
         public static dynamic Convert(Type enumerationType, Type valueType, IDictionary<string, object> dictionary)
         {
@@ -47,7 +47,7 @@ namespace ExtendableEnums.SimpleOData.Client
                 throw new ArgumentException($"The type argument must inherit from ExtendableEnumBase.", nameof(enumDescendant));
             }
 
-            settings.TypeCache.Converter.RegisterTypeConverter(enumDescendant, d => 
+            settings.TypeCache.Converter.RegisterTypeConverter(enumDescendant, d =>
             {
                 return Convert(config, d);
             });
@@ -81,4 +81,3 @@ namespace ExtendableEnums.SimpleOData.Client
         public Type EnumerationType { get; set; }
     }
 }
-
