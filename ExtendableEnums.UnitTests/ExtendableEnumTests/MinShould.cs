@@ -9,7 +9,7 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
         [TestMethod]
         public void ReturnTheEnumerationItemWithTheMinimumValue()
         {
-            Assert.AreEqual(SampleStatus.Active, SampleStatus.Min);
+            Assert.AreEqual(SampleStatus.Unknown, SampleStatus.Min);
         }
     }
 }

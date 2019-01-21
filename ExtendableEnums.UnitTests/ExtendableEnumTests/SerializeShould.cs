@@ -15,6 +15,27 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
         }
 
         [TestMethod]
+        public void DeserializeFromObjectWithNumericValueProperty()
+        {
+            var status = JsonConvert.DeserializeObject<SampleStatus>($"{{\"value\" : {SampleStatus.Inactive.Value}}}");
+            Assert.AreEqual(SampleStatus.Inactive, status);
+        }
+
+        [TestMethod]
+        public void DeserializeFromObjectWithStringValueProperty()
+        {
+            var status = JsonConvert.DeserializeObject<SampleStatus>($"{{\"value\" : \"{SampleStatus.Inactive.Value}\"}}");
+            Assert.AreEqual(SampleStatus.Inactive, status);
+        }
+
+        [TestMethod]
+        public void DeserializeFromObjectWithNoValuePropertyToDefaultValue()
+        {
+            var status = JsonConvert.DeserializeObject<SampleStatus>($"{{\"id\" : \"{SampleStatus.Inactive.Value}\"}}");
+            Assert.AreEqual(SampleStatus.Unknown, status);
+        }
+
+        [TestMethod]
         public void SerializeTheValueOnly()
         {
             var status = SampleStatus.Active;

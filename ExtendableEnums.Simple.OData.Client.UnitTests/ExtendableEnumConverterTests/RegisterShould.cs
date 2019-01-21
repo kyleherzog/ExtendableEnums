@@ -32,7 +32,7 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "The Never Ending Novel",
-                Status = SampleStatus.Bogus
+                Status = SampleStatus.Active
             };
 
             var book = await client
