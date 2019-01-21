@@ -1,4 +1,4 @@
-﻿using ExtendableEnums.UnitTests.Models;
+﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
@@ -9,7 +9,7 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
         [TestMethod]
         public void ReturnTheEnumerationItemWithTheMinimumValue()
         {
-            Assert.AreEqual(SampleStatus.Active, SampleStatus.Min);
+            Assert.AreEqual(SampleStatus.Unknown, SampleStatus.Min);
         }
     }
 }

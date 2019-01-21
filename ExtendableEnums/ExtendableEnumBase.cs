@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -6,7 +7,7 @@ using Newtonsoft.Json;
 namespace ExtendableEnums
 {
     [JsonConverter(typeof(ExtendableEnumJsonConverter))]
-    public abstract class ExtendableEnumBase<TEnumeration, TValue> : IComparable<TEnumeration>, IEquatable<TEnumeration>
+    public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum<TValue>, IComparable<TEnumeration>, IEquatable<TEnumeration>
             where TEnumeration : ExtendableEnumBase<TEnumeration, TValue>
             where TValue : IComparable
     {
@@ -43,6 +44,7 @@ namespace ExtendableEnums
         /// <summary>
         /// Gets the core name to be used for display purposes and for identifying this enumeration object.
         /// </summary>
+        [NotMapped]
         public string DisplayName { get; }
 
         /// <summary>
