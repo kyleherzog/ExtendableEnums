@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -13,6 +14,10 @@ namespace ExtendableEnums
         private static readonly Lazy<TEnumeration[]> enumerations = new Lazy<TEnumeration[]>(GetEnumerations);
         private static readonly Lazy<TEnumeration> maximum = new Lazy<TEnumeration>(() => ParseValue(GetAll().Max(x => x.Value)));
         private static readonly Lazy<TEnumeration> minimum = new Lazy<TEnumeration>(() => ParseValue(GetAll().Min(x => x.Value)));
+
+        protected ExtendableEnumBase()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> class.
@@ -43,12 +48,13 @@ namespace ExtendableEnums
         /// <summary>
         /// Gets the core name to be used for display purposes and for identifying this enumeration object.
         /// </summary>
+        [NotMapped]
         public string DisplayName { get; }
 
         /// <summary>
         /// Gets the core value that represents this enumeration object.
         /// </summary>
-        public TValue Value { get; }
+        public TValue Value { get; set; }
 
         public static implicit operator ExtendableEnumBase<TEnumeration, TValue>(TValue value)
         {
