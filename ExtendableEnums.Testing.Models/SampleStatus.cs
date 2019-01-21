@@ -1,7 +1,10 @@
-﻿namespace ExtendableEnums.UnitTests.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ExtendableEnums.Testing.Models
 {
     public class SampleStatus : ExtendableEnums.ExtendableEnum<SampleStatus>
     {
+        public static readonly SampleStatus Unknown = new SampleStatus(0, nameof(Unknown), "???");
         public static readonly SampleStatus Active = new SampleStatus(1, nameof(Active), "ACT");
         public static readonly SampleStatus Deleted = new SampleStatus(2, nameof(Deleted), "DEL");
         public static readonly SampleStatus Discontinued = new SampleStatus(2, nameof(Discontinued), "DIS");
@@ -13,6 +16,7 @@
             Code = code;
         }
 
-        public string Code { get; private set; }
+        [NotMapped]
+        public string Code { get; }
     }
 }
