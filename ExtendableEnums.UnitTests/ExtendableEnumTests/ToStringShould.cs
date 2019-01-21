@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ExtendableEnums.UnitTests.Models;
+using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests

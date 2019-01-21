@@ -1,8 +1,7 @@
 # Extendable Enums
-[![Build status](https://ci.appveyor.com/api/projects/status/9w357to4mu4ds05u?svg=true)](https://ci.appveyor.com/project/kyleherzog/extendableenums)
+[![Build Status](https://kyleherzog.visualstudio.com/ExtendableEnums/_apis/build/status/ExtendableEnums?branchName=develop)](https://kyleherzog.visualstudio.com/ExtendableEnums/_build/latest?definitionId=2?branchName=develop)
 
-This library is available from [NuGet.org](https://www.nuget.org/packages/ExtendableEnums/)
-or download from the [CI build feed](https://ci.appveyor.com/nuget/extendableenums).
+This library is available from [NuGet.org](https://www.nuget.org/packages/ExtendableEnums/).
 
 --------------------------
 
@@ -46,5 +45,82 @@ All values that have been defined in an derived enumeration class can be retriev
 ### Min/Max Values
 The minimum or maximum values in an enumeration can be retrieved by calling the static `Min` and `Max` properties.
 
+### OData Support
+Using ExtendedableEnums in OData requires some modifications.
+
+#### OData ASP.net Core Server Support
+Support for adding ExtendableEnums to an ASP.net core OData server can be achieved by adding a NuGet package reference to `ExtendableEnums.Microsoft.AspNetCore.OData`.  Once this packages is added, the EDM model will need to register each ExtendableEnum type by calling an `ODataConventionModelBuilder` extension method called `AddExtendableEnum<>` as seen in the following example.
+```
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    DataContext.ResetData();
+
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        app.UseHsts();
+    }
+
+    app.UseMvc(routebuilder =>
+    {
+        routebuilder.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
+        routebuilder.MapODataServiceRoute("odata", "odata", GetEdmModel());
+    });
+}
+
+private static IEdmModel GetEdmModel()
+{
+    var builder = new ODataConventionModelBuilder();
+    builder.AddExtendableEnum<SampleStatus>();
+    builder.EntitySet<SampleBook>("SampleBooks");
+
+    return builder.GetEdmModel();
+}
+```
+
+Any POST methods for objects that have a property that includes an ExtendableEnum type can not have the parameter be the object type directly, but rather a `JObject` that is then converted to the actual object in the controller method.  This can be seen in the following example.
+```        
+[EnableQuery]
+public IActionResult Post([FromBody] JObject json)
+{
+    var book = json.ToObject<SampleBook>();
+    var matchingBook = books.FirstOrDefault(b => b.Id == book.Id);
+    if (matchingBook == null)
+    {
+        books.Add(book);
+        return Created(book);
+    }
+    else
+    {
+        var index = books.IndexOf(matchingBook);
+        books.RemoveAt(index);
+        books.Insert(index, book);
+        return Updated(book);
+    }
+}
+```
+
+#### OData Simple.OData.Client Support
+Compatibility with Simple.Odata.Client can be obtained by adding a NuGet package reference to `ExtendableEnums.Simple.OData.Client`. Once this package is added, a call can be made to `ExtendableEnumConverter.Register<>(ODataClientSettings)`.  This will allow Simple.OData.Client handle the minimal serialization of ExtendableEnums.  
+```
+var settings = new ODataClientSettings
+{
+    BaseUri = TestingHost.Instance.BaseODataUrl,
+    IgnoreUnmappedProperties = true
+};
+
+ExtendableEnumConverter.Register<SampleStatus>(settings);
+var client = new ODataClient(settings);
+```
+
+All extended properties on any ExtendableEnums will also need to have the `NotMappedAttribute` applied as well.
+```        
+[NotMapped]
+public string Code { get; }
+```
+
 ## License
-[Apache 2.0](LICENSE)
+[MIT](LICENSE)
