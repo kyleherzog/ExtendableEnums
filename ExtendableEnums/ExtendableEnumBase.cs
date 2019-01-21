@@ -15,10 +15,6 @@ namespace ExtendableEnums
         private static readonly Lazy<TEnumeration> maximum = new Lazy<TEnumeration>(() => ParseValue(GetAll().Max(x => x.Value)));
         private static readonly Lazy<TEnumeration> minimum = new Lazy<TEnumeration>(() => ParseValue(GetAll().Min(x => x.Value)));
 
-        protected ExtendableEnumBase()
-        {
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> class.
         /// </summary>
@@ -54,7 +50,7 @@ namespace ExtendableEnums
         /// <summary>
         /// Gets the core value that represents this enumeration object.
         /// </summary>
-        public TValue Value { get; set; }
+        public TValue Value { get; }
 
         public static implicit operator ExtendableEnumBase<TEnumeration, TValue>(TValue value)
         {
