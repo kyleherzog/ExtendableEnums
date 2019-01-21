@@ -14,6 +14,37 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
     public class RegisterShould
     {
         [TestMethod]
+        public async Task RegisterConverterGivenGenericMethodCalledAndPosted()
+        {
+            await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
+            var settings = new ODataClientSettings
+            {
+                BaseUri = TestingHost.Instance.BaseODataUrl,
+                IgnoreUnmappedProperties = true
+            };
+
+            ExtendableEnumConverter.Register<SampleStatus>(settings);
+            var client = new ODataClient(settings);
+
+            var originalCount = DataContext.Books.Count;
+
+            var novel = new SampleBook
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "The Never Ending Novel",
+                Status = SampleStatus.Bogus
+            };
+
+            var book = await client
+                .For<SampleBook>()
+                .Set(novel)
+                .InsertEntryAsync()
+                .ConfigureAwait(true);
+
+            Assert.AreEqual(originalCount + 1, DataContext.Books.Count);
+        }
+
+        [TestMethod]
         public async Task RegisterConverterGivenGenericMethodCalled()
         {
             await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);

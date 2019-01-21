@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Globalization;
 using System.Reflection;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ExtendableEnums
 {
@@ -20,7 +21,16 @@ namespace ExtendableEnums
             var valueType = GetTypeOfValueParameter(objectType);
 
             var method = GetParseValueMethod(objectType);
-            var value = Convert.ChangeType(reader.Value, valueType, CultureInfo.InvariantCulture);
+
+            var rawValue = reader.Value;
+            if (rawValue == null)
+            {
+                reader.Read(); // "value"
+                reader.Read(); // the actual value
+                rawValue = reader.Value;
+            }
+
+            var value = Convert.ChangeType(rawValue, valueType, CultureInfo.InvariantCulture);
             var result = method.Invoke(null, new object[] { value });
             return result;
         }
