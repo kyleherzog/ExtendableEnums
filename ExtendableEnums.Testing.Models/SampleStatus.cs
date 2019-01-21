@@ -10,11 +10,6 @@ namespace ExtendableEnums.Testing.Models
         public static readonly SampleStatus Discontinued = new SampleStatus(2, nameof(Discontinued), "DIS");
         public static readonly SampleStatus Inactive = new SampleStatus(3, nameof(Inactive), "INA");
 
-        public SampleStatus()
-            : base()
-        {
-        }
-
         private SampleStatus(int value, string displayName, string code)
             : base(value, displayName)
         {
@@ -22,6 +17,6 @@ namespace ExtendableEnums.Testing.Models
         }
 
         [NotMapped]
-        public string Code { get; private set; }
+        public string Code { get; }
     }
 }
