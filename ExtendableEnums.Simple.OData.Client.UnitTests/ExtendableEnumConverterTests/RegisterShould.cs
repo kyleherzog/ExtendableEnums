@@ -35,7 +35,7 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
                 Status = SampleStatus.Active
             };
 
-            var book = await client
+            await client
                 .For<SampleBook>()
                 .Set(novel)
                 .InsertEntryAsync()
