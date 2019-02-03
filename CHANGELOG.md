@@ -18,7 +18,9 @@ on NuGet.org.
 - [x] Support for deserializing from JSON object with `value` property
 - [x] Added supporting packages for using ExtendableEnums with OData
 
-
+## 1.2
+**2019-2-3**
+- [x] Added ExtendableEnumTypeConverter to allow for ExtendableEnums to be serialized as dictionary keys
 
 
  
