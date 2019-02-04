@@ -1,10 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <ApplicationVersion>1.1.0</ApplicationVersion>
+    <ApplicationVersion>1.2.0</ApplicationVersion>
     <ApplicationRevision>0</ApplicationRevision>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <PackageLicenseUrl>https://raw.githubusercontent.com/kyleherzog/ExtendableEnums/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/kyleherzog/ExtendableEnums</PackageProjectUrl>
     <PackageTags>Enum Enumeration Extendable Class</PackageTags>
@@ -13,15 +12,12 @@
     <Authors>Kyle Herzog</Authors>
     <Description>A .NET Standard library that provides extendable class based enums.</Description>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>..\ExtendableEnums.UnitTests\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>..\ExtendableEnums.UnitTests\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="codecracker.CSharp" Version="1.1.0">
       <PrivateAssets>all</PrivateAssets>
@@ -40,7 +36,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="Puma.Security.Rules" Version="2.0.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -71,5 +67,4 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
 </Project>
