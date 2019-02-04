@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +9,7 @@ using Newtonsoft.Json;
 namespace ExtendableEnums
 {
     [JsonConverter(typeof(ExtendableEnumJsonConverter))]
+    [TypeConverter(typeof(ExtendableEnumTypeConverter))]
     public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum<TValue>, IComparable<TEnumeration>, IEquatable<TEnumeration>
             where TEnumeration : ExtendableEnumBase<TEnumeration, TValue>
             where TValue : IComparable
@@ -221,12 +224,17 @@ namespace ExtendableEnums
         private static TEnumeration[] GetEnumerations()
         {
             var enumerationType = typeof(TEnumeration);
-            return enumerationType
+            var results = GetEnumerations(enumerationType);
+
+            return results.Cast<TEnumeration>().ToArray();
+        }
+
+        private static IEnumerable<object> GetEnumerations(Type type)
+        {
+            return type
                 .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly)
-                .Where(info => enumerationType.IsAssignableFrom(info.FieldType))
-                .Select(info => info.GetValue(null))
-                .Cast<TEnumeration>()
-                .ToArray();
+                .Where(info => type.IsAssignableFrom(info.FieldType))
+                .Select(info => info.GetValue(null));
         }
 
         private static bool TryFind(Func<TEnumeration, bool> predicate, out TEnumeration result)
