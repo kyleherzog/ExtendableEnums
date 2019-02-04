@@ -10,10 +10,10 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
     public class SerializeShould
     {
         [TestMethod]
-        public void DeserializeFromTheValueOnly()
+        public void DeserializeFromObjectWithNoValuePropertyToDefaultValue()
         {
-            var status = JsonConvert.DeserializeObject<SampleStatus>($"{SampleStatus.Inactive.Value}");
-            Assert.AreEqual(SampleStatus.Inactive, status);
+            var status = JsonConvert.DeserializeObject<SampleStatus>($"{{\"id\" : \"{SampleStatus.Inactive.Value}\"}}");
+            Assert.AreEqual(SampleStatus.Unknown, status);
         }
 
         [TestMethod]
@@ -31,22 +31,6 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
         }
 
         [TestMethod]
-        public void DeserializeFromObjectWithNoValuePropertyToDefaultValue()
-        {
-            var status = JsonConvert.DeserializeObject<SampleStatus>($"{{\"id\" : \"{SampleStatus.Inactive.Value}\"}}");
-            Assert.AreEqual(SampleStatus.Unknown, status);
-        }
-
-        [TestMethod]
-        public void SerializeTheValueOnly()
-        {
-            var status = SampleStatus.Active;
-            var serialized = JsonConvert.SerializeObject(status);
-
-            Assert.AreEqual($"{status.Value}", serialized);
-        }
-
-        [TestMethod]
         public void DeserializeFromSerializedDictionaryGivenExtendedEnumIsKey()
         {
             var dictionary = new Dictionary<SampleStatus, string>();
@@ -56,6 +40,22 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
             Console.WriteLine(serialized);
             var deserialized = JsonConvert.DeserializeObject<Dictionary<SampleStatus, string>>(serialized);
             Assert.AreEqual(dictionary[keyStatus], deserialized[keyStatus]);
+        }
+
+        [TestMethod]
+        public void DeserializeFromTheValueOnly()
+        {
+            var status = JsonConvert.DeserializeObject<SampleStatus>($"{SampleStatus.Inactive.Value}");
+            Assert.AreEqual(SampleStatus.Inactive, status);
+        }
+
+        [TestMethod]
+        public void SerializeTheValueOnly()
+        {
+            var status = SampleStatus.Active;
+            var serialized = JsonConvert.SerializeObject(status);
+
+            Assert.AreEqual($"{status.Value}", serialized);
         }
     }
 }
