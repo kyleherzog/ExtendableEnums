@@ -26,8 +26,15 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
         [TestMethod]
         public void DeserializeFromObjectWithStringValueProperty()
         {
-            var status = JsonConvert.DeserializeObject<SampleStatus>($"{{\"value\" : \"{SampleStatus.Inactive.Value}\"}}");
-            Assert.AreEqual(SampleStatus.Inactive, status);
+            var status = JsonConvert.DeserializeObject<SampleStatusByString>($"{{\"value\" : \"{SampleStatusByString.Inactive.Value}\"}}");
+            Assert.AreEqual(SampleStatusByString.Inactive, status);
+        }
+
+        [TestMethod]
+        public void DeserializeFromObjectGivenNumericValuePripertyNotDeclaredInPrimaryType()
+        {
+            var status = JsonConvert.DeserializeObject<SampleStatus>($"{{\"value\" : \"{SampleStatusDeclared.Pending.Value}\"}}");
+            Assert.AreEqual(SampleStatusDeclared.Pending, status);
         }
 
         [TestMethod]
