@@ -9,7 +9,7 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
         [TestMethod]
         public void ReturnTheEnumerationItemWithTheMaximumValue()
         {
-            Assert.AreEqual(SampleStatus.Inactive, SampleStatus.Max);
+            Assert.AreEqual(SampleStatusDeclared.Pending, SampleStatus.Max);
         }
     }
 }

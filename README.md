@@ -42,6 +42,12 @@ To create an extended enumeration based on a different type of value, just inher
 ### Getting All Values
 All values that have been defined in an derived enumeration class can be retrieved by calling the static `GetAll()` method.
 
+### Defining Values in Multiple Classes
+Values can be defined in multiple classes.  However, upon startup of the assembly, the `DeclaringTypes` property must be set to include any classes that define the values other than the primary class that inherits from `ExtendableEnumBase` as seen in the following example.
+```
+MyEnum.DeclaringTypes.Add(typeof(MyEnumExtraValuesClass));
+```
+
 ### Min/Max Values
 The minimum or maximum values in an enumeration can be retrieved by calling the static `Min` and `Max` properties.
 
