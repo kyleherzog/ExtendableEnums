@@ -45,6 +45,11 @@ namespace ExtendableEnums
         public static TEnumeration Min => minimum.Value;
 
         /// <summary>
+        /// Gets a list of types other than itself that declare static extendable enums of this type.
+        /// </summary>
+        public static IList<Type> DeclaringTypes { get; } = new List<Type>();
+
+        /// <summary>
         /// Gets the core name to be used for display purposes and for identifying this enumeration object.
         /// </summary>
         [NotMapped]
@@ -106,7 +111,7 @@ namespace ExtendableEnums
         /// <returns>The enumeration object with a matching display name.  Throws an ArgumentException if no match exists.</returns>
         public static TEnumeration Parse(string displayName)
         {
-            if (!TryFind(item => item.DisplayName == displayName, out TEnumeration result))
+            if (!TryFind(item => item.DisplayName == displayName, out var result))
             {
                 var message = $"'{displayName}' is not a valid display name in {typeof(TEnumeration)}";
                 throw new ArgumentException(message, nameof(displayName));
@@ -122,7 +127,7 @@ namespace ExtendableEnums
         /// <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
         public static TEnumeration ParseValue(TValue value)
         {
-            if (!TryFind(item => item.Value.Equals(value), out TEnumeration result))
+            if (!TryFind(item => item.Value.Equals(value), out var result))
             {
                 var message = $"'{value}' is not a valid value in {typeof(TEnumeration)}";
                 throw new ArgumentException(message, nameof(value));
@@ -224,7 +229,13 @@ namespace ExtendableEnums
         private static TEnumeration[] GetEnumerations()
         {
             var enumerationType = typeof(TEnumeration);
-            var results = GetEnumerations(enumerationType);
+            var results = new List<object>();
+            results.AddRange(GetEnumerations(enumerationType));
+
+            foreach (var type in DeclaringTypes)
+            {
+                results.AddRange(GetEnumerations(type));
+            }
 
             return results.Cast<TEnumeration>().ToArray();
         }
@@ -233,7 +244,7 @@ namespace ExtendableEnums
         {
             return type
                 .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly)
-                .Where(info => type.IsAssignableFrom(info.FieldType))
+                .Where(info => typeof(TEnumeration).IsAssignableFrom(info.FieldType))
                 .Select(info => info.GetValue(null));
         }
 

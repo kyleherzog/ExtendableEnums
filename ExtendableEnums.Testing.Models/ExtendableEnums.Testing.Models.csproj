@@ -13,6 +13,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Fakes\**" />
+    <EmbeddedResource Remove="Fakes\**" />
+    <None Remove="Fakes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="codecracker.CSharp" Version="1.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -61,10 +67,6 @@
   
   <ItemGroup>
     <ProjectReference Include="..\ExtendableEnums\ExtendableEnums.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Fakes\" />
   </ItemGroup>
 
   <ItemGroup>

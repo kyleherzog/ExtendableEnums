@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28306.52
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums", "ExtendableEnums\ExtendableEnums.csproj", "{F1480E33-BFD8-4818-B028-6EC1DC73A6B2}"
 EndProject
@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.Simple.ODat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.Simple.OData.Client.UnitTests", "ExtendableEnums.Simple.OData.Client.UnitTests\ExtendableEnums.Simple.OData.Client.UnitTests.csproj", "{E17E06CA-1E9E-481E-8D37-A58B4522439D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendableEnums.Microsoft.AspNetCore.OData", "ExtendableEnums.Microsoft.AspNetCore.OData\ExtendableEnums.Microsoft.AspNetCore.OData.csproj", "{232D13F8-1D08-495F-AC07-B0B4CA84FF89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.Microsoft.AspNetCore.OData", "ExtendableEnums.Microsoft.AspNetCore.OData\ExtendableEnums.Microsoft.AspNetCore.OData.csproj", "{232D13F8-1D08-495F-AC07-B0B4CA84FF89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
