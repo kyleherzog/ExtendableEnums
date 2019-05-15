@@ -19,5 +19,10 @@ namespace ExtendableEnums.Testing.Models
 
         [NotMapped]
         public string Code { get; }
+
+        public static SampleStatus Extend(int value, string displayName, string code)
+        {
+            return new SampleStatus(value, displayName, code);
+        }
     }
 }

@@ -22,6 +22,8 @@ on NuGet.org.
 **2019-2-3**
 - [x] Added ExtendableEnumTypeConverter to allow for ExtendableEnums to be serialized as dictionary keys
 
-
+## 1.3
+**2019-5-15**
+- [x] Added option to declare instances of the same ExtendableEnum across multiple classes.
  
  
