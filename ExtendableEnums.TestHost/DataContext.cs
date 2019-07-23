@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using ExtendableEnums.Testing.Models;
 
-namespace ExtendableEnums.OData.TestHost
+namespace ExtendableEnums.TestHost
 {
     public static class DataContext
     {

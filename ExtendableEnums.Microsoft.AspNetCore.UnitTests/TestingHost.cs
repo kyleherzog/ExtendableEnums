@@ -2,13 +2,13 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using ExtendableEnums.OData.TestHost;
+using ExtendableEnums.TestHost;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 
-namespace ExtendableEnums.SimpleOData.Client.UnitTests
+namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests
 {
     public class TestingHost : IDisposable
     {

@@ -5,7 +5,7 @@ using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
-namespace ExtendableEnums.OData.TestHost.Controllers
+namespace ExtendableEnums.TestHost.Controllers.OData
 {
     public class SampleBooksController : ODataController
     {

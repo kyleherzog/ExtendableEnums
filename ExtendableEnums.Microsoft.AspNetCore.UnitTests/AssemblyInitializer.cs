@@ -1,8 +1,7 @@
-using ExtendableEnums.Microsoft.AspNetCore.UnitTests;
 using ExtendableEnums.TestHost;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.SimpleOData.Client.UnitTests
+namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests
 {
     [TestClass]
     public static class AssemblyInitializer
