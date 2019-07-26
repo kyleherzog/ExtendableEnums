@@ -1,4 +1,5 @@
-﻿using ExtendableEnums.Testing.Models;
+﻿using System;
+using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.UnitTests
@@ -9,6 +10,11 @@ namespace ExtendableEnums.UnitTests
         [AssemblyInitialize]
         public static void Initialize(TestContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             context.WriteLine("Initializing test assembly...");
             SampleStatus.DeclaringTypes.Add(typeof(SampleStatusDeclared));
         }

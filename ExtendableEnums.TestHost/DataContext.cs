@@ -23,7 +23,7 @@ namespace ExtendableEnums.TestHost
                 {
                     Id = i.ToString(CultureInfo.InvariantCulture),
                     Title = $"Book #{i}",
-                    Status = i % 2 == 0 ? SampleStatus.Deleted : SampleStatus.Active
+                    Status = i % 2 == 0 ? SampleStatus.Deleted : SampleStatus.Active,
                 });
             }
         }

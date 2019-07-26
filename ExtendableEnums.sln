@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{32247F60-42DD-4C36-A777-AFFF96B61C7B}"
 	ProjectSection(SolutionItems) = preProject
 		CHANGELOG.md = CHANGELOG.md
+		ExtendableEnums.ruleset = ExtendableEnums.ruleset
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -26,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.Microsoft.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.Microsoft.AspNetCore", "ExtendableEnums.Microsoft.AspNetCore\ExtendableEnums.Microsoft.AspNetCore.csproj", "{366E2D7D-C7E2-4574-B482-D2BD8FCAA799}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendableEnums.Microsoft.AspNetCore.UnitTests", "ExtendableEnums.Microsoft.AspNetCore.UnitTests\ExtendableEnums.Microsoft.AspNetCore.UnitTests.csproj", "{A606A5C0-5174-4A46-876F-A4971D72AFFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.Microsoft.AspNetCore.UnitTests", "ExtendableEnums.Microsoft.AspNetCore.UnitTests\ExtendableEnums.Microsoft.AspNetCore.UnitTests.csproj", "{A606A5C0-5174-4A46-876F-A4971D72AFFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

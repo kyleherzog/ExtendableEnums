@@ -12,7 +12,7 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests.ExtendableEnumConverterTe
         {
             var dictionary = new Dictionary<string, object>
             {
-                { "value", 1 }
+                { "value", 1 },
             };
 
             var result = ExtendableEnumConverter.Convert(typeof(SampleStatus), typeof(int), dictionary);

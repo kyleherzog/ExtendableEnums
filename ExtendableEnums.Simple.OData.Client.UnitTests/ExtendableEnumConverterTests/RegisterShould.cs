@@ -19,7 +19,7 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
             await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
             var settings = new ODataClientSettings
             {
-                BaseUri = TestingHost.Instance.BaseODataUrl
+                BaseUri = TestingHost.Instance.BaseODataUrl,
             };
 
             ExtendableEnumConverter.Register<SampleStatus>(settings);
@@ -43,7 +43,7 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
             var settings = new ODataClientSettings
             {
                 BaseUri = TestingHost.Instance.BaseODataUrl,
-                IgnoreUnmappedProperties = true
+                IgnoreUnmappedProperties = true,
             };
 
             ExtendableEnumConverter.Register<SampleStatus>(settings);
@@ -55,7 +55,7 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "The Never Ending Novel",
-                Status = SampleStatus.Active
+                Status = SampleStatus.Active,
             };
 
             await client
@@ -73,7 +73,7 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
             await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
             var settings = new ODataClientSettings
             {
-                BaseUri = TestingHost.Instance.BaseODataUrl
+                BaseUri = TestingHost.Instance.BaseODataUrl,
             };
 
             ExtendableEnumConverter.Register(typeof(SampleStatus), settings);
@@ -97,7 +97,7 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
             await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
             var settings = new ODataClientSettings
             {
-                BaseUri = TestingHost.Instance.BaseODataUrl
+                BaseUri = TestingHost.Instance.BaseODataUrl,
             };
 
             ExtendableEnumConverter.Register(typeof(string), settings);

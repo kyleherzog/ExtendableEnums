@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ExtendableEnums.Testing.Models;
 using Microsoft.AspNet.OData;
@@ -20,6 +21,11 @@ namespace ExtendableEnums.TestHost.Controllers.OData
         [EnableQuery]
         public IActionResult Post([FromBody] JObject json)
         {
+            if (json == null)
+            {
+                throw new ArgumentNullException(nameof(json));
+            }
+
             var book = json.ToObject<SampleBook>();
             var matchingBook = books.FirstOrDefault(b => b.Id == book.Id);
             if (matchingBook == null)

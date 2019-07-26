@@ -6,29 +6,48 @@ using Newtonsoft.Json;
 
 namespace ExtendableEnums
 {
+    /// <summary>
+    /// Converts ExtendableEnum obects to and from JSON.
+    /// </summary>
     public class ExtendableEnumJsonConverter : JsonConverter
     {
         private static readonly ConcurrentDictionary<Type, MethodInfo> parseValueMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
 
-        public static object GetDefault(Type t)
-        {
-            if (t.IsValueType && Nullable.GetUnderlyingType(t) == null)
-            {
-                return Activator.CreateInstance(t);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
+        /// <summary>
+        /// Determines whether this instance can convert the specified object type.
+        /// </summary>
+        /// <param name="objectType">Type of the object.</param>
+        /// <returns><c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.</returns>
         public override bool CanConvert(Type objectType)
         {
             return true;
         }
 
+        /// <summary>
+        /// Reads the JSON representation of the object.
+        /// </summary>
+        /// <param name="reader">The <see cref="JsonReader"/> to read from.</param>
+        /// <param name="objectType">Type of the object.</param>
+        /// <param name="existingValue">The existing value of object being read.</param>
+        /// <param name="serializer">The calling serializer.</param>
+        /// <returns>The object value.</returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            if (reader == null)
+            {
+                throw new ArgumentNullException(nameof(reader));
+            }
+
+            if (objectType == null)
+            {
+                throw new ArgumentNullException(nameof(objectType));
+            }
+
+            if (serializer == null)
+            {
+                throw new ArgumentNullException(nameof(serializer));
+            }
+
             var valueType = GetTypeOfValueParameter(objectType);
             var method = GetParseValueMethod(objectType);
 
@@ -53,10 +72,33 @@ namespace ExtendableEnums
             }
         }
 
+        /// <summary>
+        /// Writes the JSON representation of the object.
+        /// </summary>
+        /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var dynamicValue = value as dynamic;
             writer.WriteValue(dynamicValue.Value);
+        }
+
+        private static object GetDefault(Type t)
+        {
+            if (t == null)
+            {
+                throw new ArgumentNullException(nameof(t));
+            }
+
+            if (t.IsValueType && Nullable.GetUnderlyingType(t) == null)
+            {
+                return Activator.CreateInstance(t);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private static MethodInfo GetParseValueMethod(Type type)

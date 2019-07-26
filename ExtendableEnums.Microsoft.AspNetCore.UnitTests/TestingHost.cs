@@ -58,7 +58,7 @@ namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests
             GC.SuppressFinalize(this);
         }
 
-        public async Task<IWebHost> GetNewWebHost()
+        public async Task GetNewWebHost()
         {
             if (host != null)
             {
@@ -71,7 +71,6 @@ namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests
 
             GetNewWebHostInternal();
             DataContext.ResetData();
-            return host;
         }
 
         protected virtual void Dispose(bool disposing)

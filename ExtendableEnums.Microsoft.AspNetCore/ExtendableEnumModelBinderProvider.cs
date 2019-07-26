@@ -1,27 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ExtendableEnums.Microsoft.AspNetCore
 {
     public class ExtendableEnumModelBinderProvider : IModelBinderProvider
     {
-        public IModelBinder GetBinder(ModelBinderProviderContext context)
-        {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (IsTypeDerivedFromGenericType(context.Metadata.ModelType, typeof(ExtendableEnumBase<,>)))
-            {
-                return new ExtendableEnumBinder();
-            }
-
-            return null;
-        }
-
         public static bool IsTypeDerivedFromGenericType(Type typeToCheck, Type genericType)
         {
             if (typeToCheck == typeof(object))
@@ -40,6 +23,21 @@ namespace ExtendableEnums.Microsoft.AspNetCore
             {
                 return IsTypeDerivedFromGenericType(typeToCheck.BaseType, genericType);
             }
+        }
+
+        public IModelBinder GetBinder(ModelBinderProviderContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (IsTypeDerivedFromGenericType(context.Metadata.ModelType, typeof(ExtendableEnumBase<,>)))
+            {
+                return new ExtendableEnumBinder();
+            }
+
+            return null;
         }
     }
 }

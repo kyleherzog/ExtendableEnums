@@ -1,3 +1,4 @@
+using System;
 using ExtendableEnums.Microsoft.AspNetCore.UnitTests;
 using ExtendableEnums.TestHost;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,6 +17,11 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests
         [AssemblyInitialize]
         public static void Initialize(TestContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             context.WriteLine("Initiaizing test assembly...");
 
             TestingHost.Instance = new TestingHost(typeof(Startup), "ExtendableEnums.TestHost", deferWebHostCreation: true);
