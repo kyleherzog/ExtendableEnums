@@ -51,11 +51,20 @@ MyEnum.DeclaringTypes.Add(typeof(MyEnumExtraValuesClass));
 ### Min/Max Values
 The minimum or maximum values in an enumeration can be retrieved by calling the static `Min` and `Max` properties.
 
+### ASP.net Core Support
+ExtendableEnums must be registered when configuring services in ASP.net core projects in order for model binding to work correctly when posting back to the server.  This is done by calling `UseExtendableEnumModelBinding` on the `MvcOptions` parameter when calling `AddMvc`.
+```
+ services.AddMvc(options =>
+{
+    options.UseExtendableEnumModelBinding();
+});
+```
+
 ### OData Support
 Using ExtendedableEnums in OData requires some modifications.
 
 #### OData ASP.net Core Server Support
-Support for adding ExtendableEnums to an ASP.net core OData server can be achieved by adding a NuGet package reference to `ExtendableEnums.Microsoft.AspNetCore.OData`.  Once this packages is added, the EDM model will need to register each ExtendableEnum type by calling an `ODataConventionModelBuilder` extension method called `AddExtendableEnum<>` as seen in the following example.
+Support for adding ExtendableEnums to an ASP.net core OData server can be achieved by adding a NuGet package reference to `ExtendableEnums.Microsoft.AspNetCore.OData`.  Once this packages is added, the EDM model will need to register each ExtendableEnum type.  This can be done for all types that inherit from `ExtendableEnumBase` in a given assembly by calling an `ODataConventionModelBuilder` extension method called `AddAllExtendableEnums`. 
 ```
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
@@ -80,11 +89,23 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 private static IEdmModel GetEdmModel()
 {
     var builder = new ODataConventionModelBuilder();
-    builder.AddExtendableEnum<SampleStatus>();
+    builder.AddAllExtendableEnums(Assembly.GetExecutingAssembly());
     builder.EntitySet<SampleBook>("SampleBooks");
 
     return builder.GetEdmModel();
 }
+```
+
+A reference type can be passed to `AddAllExtendableEnums` instead of passing the assembly directly.  When this is done, the containing assembly of the type specified is scanned for ExtendableEnums to be registered.
+
+```
+builder.AddAllExtendableEnums(this.GetType());
+```
+
+
+If desired, ExtendableEnum types can be registered individually as well, by calling an `ODataConventionModelBuilder` extension method called `AddExtendableEnum<>` as seen in the following example.
+```
+builder.AddExtendableEnum<SampleStatus>();
 ```
 
 Any POST methods for objects that have a property that includes an ExtendableEnum type can not have the parameter be the object type directly, but rather a `JObject` that is then converted to the actual object in the controller method.  This can be seen in the following example.
@@ -110,7 +131,7 @@ public IActionResult Post([FromBody] JObject json)
 ```
 
 #### OData Simple.OData.Client Support
-Compatibility with Simple.Odata.Client can be obtained by adding a NuGet package reference to `ExtendableEnums.Simple.OData.Client`. Once this package is added, a call can be made to `ExtendableEnumConverter.Register<>(ODataClientSettings)`.  This will allow Simple.OData.Client handle the minimal serialization of ExtendableEnums.  
+Compatibility with Simple.Odata.Client can be obtained by adding a NuGet package reference to `ExtendableEnums.Simple.OData.Client`. Once this package is added, a call can be made to `ExtendableEnumConverter.RegisterAll` to register all ExtendableEnums in a given assembly.  This will allow Simple.OData.Client handle the minimal serialization of ExtendableEnums.  
 ```
 var settings = new ODataClientSettings
 {
@@ -118,8 +139,18 @@ var settings = new ODataClientSettings
     IgnoreUnmappedProperties = true
 };
 
-ExtendableEnumConverter.Register<SampleStatus>(settings);
+ExtendableEnumConverter.RegisterAll(settings, Assembly.GetExecutingAssembly());
 var client = new ODataClient(settings);
+```
+A reference type can be passed to `RegisterAll` instead of passing the assembly directly.  When this is done, the containing assembly of the type specified is scanned for ExtendableEnums to be registered.
+
+```
+ExtendableEnumConverter.RegisterAll(this.GetType());
+```
+
+If desired, ExtendableEnum types can be registered individually as well, by calling `Register<>`.
+```
+ExtendableEnumConverter.Register<SampleStatus>(settings);
 ```
 
 All extended properties on any ExtendableEnums will also need to have the `NotMappedAttribute` applied as well.
