@@ -1,4 +1,5 @@
-﻿using ExtendableEnums.Microsoft.AspNetCore.OData;
+﻿using ExtendableEnums.Microsoft.AspNetCore;
+using ExtendableEnums.Microsoft.AspNetCore.OData;
 using ExtendableEnums.Testing.Models;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
@@ -9,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 
-namespace ExtendableEnums.OData.TestHost
+namespace ExtendableEnums.TestHost
 {
     public class Startup
     {
@@ -36,6 +37,7 @@ namespace ExtendableEnums.OData.TestHost
 
             app.UseMvc(routebuilder =>
             {
+                routebuilder.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 routebuilder.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
                 routebuilder.MapODataServiceRoute("odata", "odata", GetEdmModel());
             });
@@ -45,7 +47,10 @@ namespace ExtendableEnums.OData.TestHost
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOData();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options =>
+            {
+                options.UseExtendableEnumModelBinding();
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         private static IEdmModel GetEdmModel()

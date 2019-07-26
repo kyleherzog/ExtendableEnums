@@ -8,6 +8,11 @@ using Newtonsoft.Json;
 
 namespace ExtendableEnums
 {
+    /// <summary>
+    /// An abastract base class providing extendedable enumeration support.
+    /// </summary>
+    /// <typeparam name="TEnumeration">The <see cref="Type"/> of this enumeration (itself).</typeparam>
+    /// <typeparam name="TValue">The <see cref="Type"/> of the value property.</typeparam>
     [JsonConverter(typeof(ExtendableEnumJsonConverter))]
     [TypeConverter(typeof(ExtendableEnumTypeConverter))]
     public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum<TValue>, IComparable<TEnumeration>, IEquatable<TEnumeration>
@@ -60,36 +65,76 @@ namespace ExtendableEnums
         /// </summary>
         public TValue Value { get; }
 
+        /// <summary>
+        /// Implicitly converts an object of the value type to a full ExtendableEnum.
+        /// </summary>
+        /// <param name="value">The value of the Value property of the ExtendableEnum entry to parse.</param>
         public static implicit operator ExtendableEnumBase<TEnumeration, TValue>(TValue value)
         {
             return ParseValue(value);
         }
 
+        /// <summary>
+        /// Checks to see if two <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> values are not equal.
+        /// </summary>
+        /// <param name="left">The first <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <param name="right">The second <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <returns><c>true</c> if the two parameter values do not have Value properties that are equal.</returns>
         public static bool operator !=(ExtendableEnumBase<TEnumeration, TValue> left, ExtendableEnumBase<TEnumeration, TValue> right)
         {
             return !Equals(left, right);
         }
 
+        /// <summary>
+        /// Checks to see if one <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> is less than another.
+        /// </summary>
+        /// <param name="left">The first <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <param name="right">The second <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <returns><c>true</c> if the first parameter value property is less than the other.</returns>
         public static bool operator <(ExtendableEnumBase<TEnumeration, TValue> left, ExtendableEnumBase<TEnumeration, TValue> right)
         {
             return left != null && left.CompareTo((TEnumeration)right) < 0;
         }
 
+        /// <summary>
+        /// Checks to see if one <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> is less than or equal to another.
+        /// </summary>
+        /// <param name="left">The first <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <param name="right">The second <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <returns><c>true</c> if the first parameter value property is less than or equal to the other.</returns>
         public static bool operator <=(ExtendableEnumBase<TEnumeration, TValue> left, ExtendableEnumBase<TEnumeration, TValue> right)
         {
             return left != null && left.CompareTo((TEnumeration)right) <= 0;
         }
 
+        /// <summary>
+        /// Checks to see if two <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> values are equal.
+        /// </summary>
+        /// <param name="left">The first <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <param name="right">The second <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <returns><c>true</c> if the two parameters have Value properties that are equal.</returns>
         public static bool operator ==(ExtendableEnumBase<TEnumeration, TValue> left, ExtendableEnumBase<TEnumeration, TValue> right)
         {
             return Equals(left, right);
         }
 
+        /// <summary>
+        /// Checks to see if one <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> is greater than another.
+        /// </summary>
+        /// <param name="left">The first <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <param name="right">The second <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <returns><c>true</c> if the first parameter value property is greater than the other.</returns>
         public static bool operator >(ExtendableEnumBase<TEnumeration, TValue> left, ExtendableEnumBase<TEnumeration, TValue> right)
         {
             return left != null && left.CompareTo((TEnumeration)right) > 0;
         }
 
+        /// <summary>
+        /// Checks to see if one <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> is greater than or equal to another.
+        /// </summary>
+        /// <param name="left">The first <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <param name="right">The second <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</param>
+        /// <returns><c>true</c> if the first parameter value property is greater than or equal to the other.</returns>
         public static bool operator >=(ExtendableEnumBase<TEnumeration, TValue> left, ExtendableEnumBase<TEnumeration, TValue> right)
         {
             return left != null && left.CompareTo((TEnumeration)right) >= 0;

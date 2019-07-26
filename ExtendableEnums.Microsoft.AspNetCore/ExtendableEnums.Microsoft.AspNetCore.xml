@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ExtendableEnums.Microsoft.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="T:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumBinder">
+            <summary>
+            Defines an interface for ExtendableEnum model binders.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumBinder.BindModelAsync(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext)">
+             <summary>
+             Attempts to bind a model.
+             </summary>
+             <param name="bindingContext">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext"/>.</param>
+             <returns>
+                 A <see cref="T:System.Threading.Tasks.Task"/> which will complete when the model binding process completes.
+            
+                 If model binding was successful, IsMOdelSet is set to <c>true</c>.
+             </returns>
+        </member>
+        <member name="T:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumModelBinderProvider">
+            <summary>
+            The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinderProvider"/> that provides model binding for ExtendableEnums.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumModelBinderProvider.GetBinder(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderProviderContext)">
+            <summary>
+            Creates a IModelBinder based on ModelBinderProviderContext.
+            </summary>
+            <param name="context">The current <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderProviderContext"/>.</param>
+            <returns>An <see cref="T:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumBinder"/> if the model type derives from <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>, otherwise null.</returns>
+        </member>
+        <member name="T:ExtendableEnums.Microsoft.AspNetCore.MvcOptionsExtensions">
+            <summary>
+            Provides extention methods for adding ExtendableEnum support to <see cref="T:Microsoft.AspNetCore.Mvc.MvcOptions"/>.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.Microsoft.AspNetCore.MvcOptionsExtensions.UseExtendableEnumModelBinding(Microsoft.AspNetCore.Mvc.MvcOptions)">
+            <summary>
+            Adds the Asp.net MVC model binding providers for ExtendableEnum object.
+            </summary>
+            <param name="options">The <see cref="T:Microsoft.AspNetCore.Mvc.MvcOptions"/> for which to add the model binding provider.</param>
+        </member>
+    </members>
+</doc>

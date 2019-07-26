@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace ExtendableEnums.OData.TestHost
+namespace ExtendableEnums.TestHost
 {
     public static class Program
     {
