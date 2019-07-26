@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ExtendableEnums</name>
+    </assembly>
+    <members>
+        <member name="T:ExtendableEnums.ExtendableEnum`1">
+            <summary>
+            An <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> that has its value type set as an <see cref="T:System.Int32"/>.
+            </summary>
+            <typeparam name="TEnumeration">The type of this enumeration (itself).</typeparam>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnum`1.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExtendableEnums.ExtendableEnum`1"/> class.
+            </summary>
+            <param name="value">The unique value that represents this enumeration value.</param>
+            <param name="displayName">The <see cref="T:System.String"/> value that represents its display name.</param>
+        </member>
+        <member name="T:ExtendableEnums.ExtendableEnumBase`2">
+            <summary>
+            An abastract base class providing extendedable enumeration support.
+            </summary>
+            <typeparam name="TEnumeration">The <see cref="T:System.Type"/> of this enumeration (itself).</typeparam>
+            <typeparam name="TValue">The <see cref="T:System.Type"/> of the value property.</typeparam>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.#ctor(`1,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> class.
+            </summary>
+            <param name="value">The core value with which to create this instance.</param>
+            <param name="displayName">The core name with which to identify this instance.</param>
+        </member>
+        <member name="P:ExtendableEnums.ExtendableEnumBase`2.Max">
+            <summary>
+            Gets the enumeration object with the highest Value property.
+            </summary>
+        </member>
+        <member name="P:ExtendableEnums.ExtendableEnumBase`2.Min">
+            <summary>
+            Gets the enumeration object with the lowest Value property.
+            </summary>
+        </member>
+        <member name="P:ExtendableEnums.ExtendableEnumBase`2.DeclaringTypes">
+            <summary>
+            Gets a list of types other than itself that declare static extendable enums of this type.
+            </summary>
+        </member>
+        <member name="P:ExtendableEnums.ExtendableEnumBase`2.DisplayName">
+            <summary>
+            Gets the core name to be used for display purposes and for identifying this enumeration object.
+            </summary>
+        </member>
+        <member name="P:ExtendableEnums.ExtendableEnumBase`2.Value">
+            <summary>
+            Gets the core value that represents this enumeration object.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.op_Implicit(`1)~ExtendableEnums.ExtendableEnumBase{`0,`1}">
+            <summary>
+            Implicitly converts an object of the value type to a full ExtendableEnum.
+            </summary>
+            <param name="value">The value of the Value property of the ExtendableEnum entry to parse.</param>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.op_Inequality(ExtendableEnums.ExtendableEnumBase{`0,`1},ExtendableEnums.ExtendableEnumBase{`0,`1})">
+            <summary>
+            Checks to see if two <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> values are not equal.
+            </summary>
+            <param name="left">The first <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <param name="right">The second <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <returns><c>true</c> if the two parameter values do not have Value properties that are equal.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.op_LessThan(ExtendableEnums.ExtendableEnumBase{`0,`1},ExtendableEnums.ExtendableEnumBase{`0,`1})">
+            <summary>
+            Checks to see if one <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> is less than another.
+            </summary>
+            <param name="left">The first <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <param name="right">The second <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <returns><c>true</c> if the first parameter value property is less than the other.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.op_LessThanOrEqual(ExtendableEnums.ExtendableEnumBase{`0,`1},ExtendableEnums.ExtendableEnumBase{`0,`1})">
+            <summary>
+            Checks to see if one <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> is less than or equal to another.
+            </summary>
+            <param name="left">The first <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <param name="right">The second <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <returns><c>true</c> if the first parameter value property is less than or equal to the other.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.op_Equality(ExtendableEnums.ExtendableEnumBase{`0,`1},ExtendableEnums.ExtendableEnumBase{`0,`1})">
+            <summary>
+            Checks to see if two <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> values are equal.
+            </summary>
+            <param name="left">The first <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <param name="right">The second <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <returns><c>true</c> if the two parameters have Value properties that are equal.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.op_GreaterThan(ExtendableEnums.ExtendableEnumBase{`0,`1},ExtendableEnums.ExtendableEnumBase{`0,`1})">
+            <summary>
+            Checks to see if one <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> is greater than another.
+            </summary>
+            <param name="left">The first <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <param name="right">The second <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <returns><c>true</c> if the first parameter value property is greater than the other.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.op_GreaterThanOrEqual(ExtendableEnums.ExtendableEnumBase{`0,`1},ExtendableEnums.ExtendableEnumBase{`0,`1})">
+            <summary>
+            Checks to see if one <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> is greater than or equal to another.
+            </summary>
+            <param name="left">The first <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <param name="right">The second <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
+            <returns><c>true</c> if the first parameter value property is greater than or equal to the other.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.GetAll">
+            <summary>
+            Get all the enumeration objects that have been defined for this type of enumeration.
+            </summary>
+            <returns>An array of all enumeration objects defined for this type of enumeration.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.Parse(System.String)">
+            <summary>
+            Finds the enumeration object with the matching DisplayName property.
+            </summary>
+            <param name="displayName">The display name property for which to find a matching enumeration object.</param>
+            <returns>The enumeration object with a matching display name.  Throws an ArgumentException if no match exists.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.ParseValue(`1)">
+            <summary>
+            Finds the enumeration object with the matching value.
+            </summary>
+            <param name="value">The value which should be searched for.</param>
+            <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.FromTValue(`1)">
+            <summary>
+            Finds the enumeration object with the matching value.
+            </summary>
+            <param name="value">The value which should be seached for.</param>
+            <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.TryParse(System.String,`0@)">
+            <summary>
+            Tries to find an enumeration object with the specified display name.
+            </summary>
+            <param name="displayName">The display name which should be searched for.</param>
+            <param name="result">The output variable to populate with the matching enumeration object if a match is found.</param>
+            <returns>True if an enumeration object with a matching display name is found, otherwise false.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.TryParseValue(`1,`0@)">
+            <summary>
+            Tries to find an enumeration object with the specified value.
+            </summary>
+            <param name="value">The value which should be searched for.</param>
+            <param name="result">An ouput variable that will be populated with an enumeration object if a match is found.</param>
+            <returns>True if an enumeration object with a matching value is found, otherwise false.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.CompareTo(`0)">
+            <summary>
+            Compares the value of this object with another enumeration object value to check for equality.
+            </summary>
+            <param name="other">The other enumeration object with which to compare.</param>
+            <returns>Zero if the enumeration objects have matching values. Less than zero if this instance preceeds the other. More than zero if the other value preceeds this instance.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.Equals(System.Object)">
+            <summary>
+            Compares this instance with another to see if they have the same value.
+            </summary>
+            <param name="obj">The other object with which to compare.</param>
+            <returns>True if this instance and the the other have the same value, otherwise false.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.Equals(`0)">
+            <summary>
+            Compares this instance with another to see if they have the same value.
+            </summary>
+            <param name="other">The other enumeration object with which to compare.</param>
+            <returns>True if this instance and the the other have the same value, otherwise false.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.GetHashCode">
+            <summary>
+            Gets a hash code for this particular instance.
+            </summary>
+            <returns>The hash code for this instance.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.ToString">
+            <summary>
+            Gets the string representation of this instance, which is its DisplayName property.
+            </summary>
+            <returns>The string representation of this instance, which is its DisplayName property.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.ValueEquals(`1)">
+            <summary>
+            Checks to see if the value of this instance equals the specified value.
+            </summary>
+            <param name="value">The value with which to compare.</param>
+            <returns>True if this values match, otherwise false.</returns>
+        </member>
+        <member name="T:ExtendableEnums.ExtendableEnumJsonConverter">
+            <summary>
+            Converts ExtendableEnum obects to and from JSON.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumJsonConverter.CanConvert(System.Type)">
+            <summary>
+            Determines whether this instance can convert the specified object type.
+            </summary>
+            <param name="objectType">Type of the object.</param>
+            <returns><c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON representation of the object.
+            </summary>
+            <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
+            <param name="objectType">Type of the object.</param>
+            <param name="existingValue">The existing value of object being read.</param>
+            <param name="serializer">The calling serializer.</param>
+            <returns>The object value.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the JSON representation of the object.
+            </summary>
+            <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter"/> to write to.</param>
+            <param name="value">The value.</param>
+            <param name="serializer">The calling serializer.</param>
+        </member>
+        <member name="T:ExtendableEnums.ExtendableEnumTypeConverter">
+            <summary>
+            Provides a way of converting ExtendableEnums to/from other predefined types.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumTypeConverter.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExtendableEnums.ExtendableEnumTypeConverter"/> class.
+            </summary>
+            <param name="type">A type that extends ExtendableEnumBase.</param>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumTypeConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Returns whether this converter can convert an object of the given type to the type of this converter, using the specified context.
+            </summary>
+            <param name="context">An <see cref="T:System.ComponentModel.ITypeDescriptorContext"/> that provides a format context.</param>
+            <param name="sourceType">A <see cref="T:System.Type"/> that represents the type you want to convert from.</param>
+            <returns><c>true</c> if this converter can perform the conversion; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Returns whether this converter can convert the object to the specified type.
+            </summary>
+            <param name="context">An <see cref="T:System.ComponentModel.ITypeDescriptorContext"/> that provides a format context.</param>
+            <param name="destinationType">A <see cref="T:System.Type"/> that represents the type you want to convert from.</param>
+            <returns><c>true</c> if this converter can perform the conversion; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumTypeConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <summary>
+            Converts the given value to the type of this converter.
+            </summary>
+            <param name="context">An <see cref="T:System.ComponentModel.ITypeDescriptorContext"/> that provides a format context.</param>
+            <param name="culture">The <see cref="T:System.Globalization.CultureInfo"/> to use as the current culture.</param>
+            <param name="value">The <see cref="T:System.Object"/> to convert.</param>
+            <returns>An <see cref="T:System.Object"/> that represents the converted value.</returns>
+        </member>
+        <member name="T:ExtendableEnums.IExtendableEnum">
+            <summary>
+            Base interface for <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>, providing access to DisplayName.
+            </summary>
+        </member>
+        <member name="P:ExtendableEnums.IExtendableEnum.DisplayName">
+            <summary>
+            Gets the display name of the enumeration entry.
+            </summary>
+        </member>
+        <member name="T:ExtendableEnums.IExtendableEnum`1">
+            <summary>
+            An interface extending <see cref="T:ExtendableEnums.IExtendableEnum"/> which also exposes the value property.
+            </summary>
+            <typeparam name="TValue">The <see cref="T:System.Type"/> of the value property.</typeparam>
+        </member>
+        <member name="P:ExtendableEnums.IExtendableEnum`1.Value">
+            <summary>
+            Gets the unique value which represents this enumeration entry.
+            </summary>
+        </member>
+        <member name="T:ExtendableEnums.TypeExtensions">
+            <summary>
+            Provides extension method on <see cref="T:System.Type"/> that relate to ExtendableEnums.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.TypeExtensions.IsExtendableEnum(System.Type)">
+            <summary>
+            Checks to see if the the given type is derived from <see cref="T:ExtendableEnums.ExtendableEnumBase`2" />.
+            </summary>
+            <param name="type">The <see cref="T:System.Type" /> to check to see if it is an <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> decendant.</param>
+            <returns><c>true</c> if the type inherits from <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>, otherwise <c>false</c>.</returns>
+        </member>
+    </members>
+</doc>

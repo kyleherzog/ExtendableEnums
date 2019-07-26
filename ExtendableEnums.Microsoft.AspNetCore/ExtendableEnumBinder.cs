@@ -5,8 +5,20 @@ using Newtonsoft.Json;
 
 namespace ExtendableEnums.Microsoft.AspNetCore
 {
+    /// <summary>
+    /// Defines an interface for ExtendableEnum model binders.
+    /// </summary>
     public class ExtendableEnumBinder : IModelBinder
     {
+        /// <summary>
+        /// Attempts to bind a model.
+        /// </summary>
+        /// <param name="bindingContext">The <see cref="ModelBindingContext"/>.</param>
+        /// <returns>
+        ///     A <see cref="Task"/> which will complete when the model binding process completes.
+        ///
+        ///     If model binding was successful, IsMOdelSet is set to <c>true</c>.
+        /// </returns>
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
             if (bindingContext == null)

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ApplicationVersion>1.4.0</ApplicationVersion>
@@ -14,9 +14,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>..\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>C:\Repos\kyleherzog\ExtendableEnums\ExtendableEnums\ExtendableEnums.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>..\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>C:\Repos\kyleherzog\ExtendableEnums\ExtendableEnums\ExtendableEnums.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="codecracker.CSharp" Version="1.1.0">

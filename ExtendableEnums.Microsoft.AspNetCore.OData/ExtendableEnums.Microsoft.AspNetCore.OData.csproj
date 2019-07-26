@@ -14,9 +14,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>..\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>C:\Repos\kyleherzog\ExtendableEnums\ExtendableEnums.Microsoft.AspNetCore.OData\ExtendableEnums.Microsoft.AspNetCore.OData.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>..\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>C:\Repos\kyleherzog\ExtendableEnums\ExtendableEnums.Microsoft.AspNetCore.OData\ExtendableEnums.Microsoft.AspNetCore.OData.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.1.0" />

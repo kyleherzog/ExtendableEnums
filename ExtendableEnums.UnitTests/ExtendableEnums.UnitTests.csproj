@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
 
     <IsPackable>false</IsPackable>
-    <NoWarn>SA1600</NoWarn>
+    <NoWarn>SA1600,SA0001</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
