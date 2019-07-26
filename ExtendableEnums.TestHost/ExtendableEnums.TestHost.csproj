@@ -1,27 +1,27 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <ApplicationVersion>1.4.0</ApplicationVersion>
-    <ApplicationRevision>0</ApplicationRevision>
-    <Version>1.4.0</Version>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/kyleherzog/ExtendableEnums/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/kyleherzog/ExtendableEnums</PackageProjectUrl>
-    <PackageTags>Enum Enumeration Extendable Class OData Aspnet Core</PackageTags>
-    <RepositoryUrl>https://github.com/kyleherzog/ExtendableEnums</RepositoryUrl>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Authors>Kyle Herzog</Authors>
-    <Description>A .NET Standard library that allows registration of ExtendableEnums with Microsoft's OData in Asp.net core, so that only the Value propery is output for OData requests.</Description>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <NoWarn>SEC0019,SEC0120,SA1600,SA0001</NoWarn>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>..\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>C:\Repos\kyleherzog\ExtendableEnums\ExtendableEnums.Microsoft.AspNetCore.OData\ExtendableEnums.Microsoft.AspNetCore.OData.xml</DocumentationFile>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>..\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>C:\Repos\kyleherzog\ExtendableEnums\ExtendableEnums.Microsoft.AspNetCore.OData\ExtendableEnums.Microsoft.AspNetCore.OData.xml</DocumentationFile>
   </PropertyGroup>
+
   <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+
     <PackageReference Include="codecracker.CSharp" Version="1.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -67,7 +67,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\ExtendableEnums\ExtendableEnums.csproj" />
+    <ProjectReference Include="..\ExtendableEnums.Microsoft.AspNetCore.OData\ExtendableEnums.Microsoft.AspNetCore.OData.csproj" />
+    <ProjectReference Include="..\ExtendableEnums.Microsoft.AspNetCore\ExtendableEnums.Microsoft.AspNetCore.csproj" />
+    <ProjectReference Include="..\ExtendableEnums.Testing.Models\ExtendableEnums.Testing.Models.csproj" />
   </ItemGroup>
+
 </Project>

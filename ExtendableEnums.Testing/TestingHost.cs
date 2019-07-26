@@ -2,13 +2,13 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using ExtendableEnums.OData.TestHost;
+using ExtendableEnums.TestHost;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 
-namespace ExtendableEnums.SimpleOData.Client.UnitTests
+namespace ExtendableEnums.Testing
 {
     public class TestingHost : IDisposable
     {
@@ -58,7 +58,7 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests
             GC.SuppressFinalize(this);
         }
 
-        public async Task<IWebHost> GetNewWebHost()
+        public async Task GetNewWebHost()
         {
             if (host != null)
             {
@@ -71,7 +71,6 @@ namespace ExtendableEnums.SimpleOData.Client.UnitTests
 
             GetNewWebHostInternal();
             DataContext.ResetData();
-            return host;
         }
 
         protected virtual void Dispose(bool disposing)

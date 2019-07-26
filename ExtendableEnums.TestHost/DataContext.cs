@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using ExtendableEnums.Testing.Models;
 
-namespace ExtendableEnums.OData.TestHost
+namespace ExtendableEnums.TestHost
 {
     public static class DataContext
     {
@@ -26,7 +23,7 @@ namespace ExtendableEnums.OData.TestHost
                 {
                     Id = i.ToString(CultureInfo.InvariantCulture),
                     Title = $"Book #{i}",
-                    Status = i % 2 == 0 ? SampleStatus.Deleted : SampleStatus.Active
+                    Status = i % 2 == 0 ? SampleStatus.Deleted : SampleStatus.Active,
                 });
             }
         }

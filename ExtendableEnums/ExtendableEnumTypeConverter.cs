@@ -6,6 +6,9 @@ using System.Reflection;
 
 namespace ExtendableEnums
 {
+    /// <summary>
+    /// Provides a way of converting ExtendableEnums to/from other predefined types.
+    /// </summary>
     public class ExtendableEnumTypeConverter : TypeConverter
     {
         private static readonly ConcurrentDictionary<Type, MethodInfo> ParseMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
@@ -13,14 +16,29 @@ namespace ExtendableEnums
         private Type enumerationType;
         private Type valueType;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExtendableEnumTypeConverter"/> class.
+        /// </summary>
+        /// <param name="type">A type that extends ExtendableEnumBase.</param>
         public ExtendableEnumTypeConverter(Type type)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
             if (!FillExtendedEnumTypeInfo(type))
             {
                 throw new ArgumentException("Incompatible type", nameof(type));
             }
         }
 
+        /// <summary>
+        /// Returns whether this converter can convert an object of the given type to the type of this converter, using the specified context.
+        /// </summary>
+        /// <param name="context">An <see cref="ITypeDescriptorContext"/> that provides a format context.</param>
+        /// <param name="sourceType">A <see cref="Type"/> that represents the type you want to convert from.</param>
+        /// <returns><c>true</c> if this converter can perform the conversion; otherwise, <c>false</c>.</returns>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(string))
@@ -31,6 +49,12 @@ namespace ExtendableEnums
             return base.CanConvertFrom(context, sourceType);
         }
 
+        /// <summary>
+        /// Returns whether this converter can convert the object to the specified type.
+        /// </summary>
+        /// <param name="context">An <see cref="ITypeDescriptorContext"/> that provides a format context.</param>
+        /// <param name="destinationType">A <see cref="Type"/> that represents the type you want to convert from.</param>
+        /// <returns><c>true</c> if this converter can perform the conversion; otherwise, <c>false</c>.</returns>
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             if (destinationType == typeof(string))
@@ -41,6 +65,13 @@ namespace ExtendableEnums
             return base.CanConvertTo(context, destinationType);
         }
 
+        /// <summary>
+        /// Converts the given value to the type of this converter.
+        /// </summary>
+        /// <param name="context">An <see cref="ITypeDescriptorContext"/> that provides a format context.</param>
+        /// <param name="culture">The <see cref="CultureInfo"/> to use as the current culture.</param>
+        /// <param name="value">The <see cref="Object"/> to convert.</param>
+        /// <returns>An <see cref="Object"/> that represents the converted value.</returns>
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
             if (value is string)
