@@ -57,6 +57,43 @@ namespace ExtendableEnums.SimpleOData.Client
         }
 
         /// <summary>
+        /// Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums in the <see cref="Assembly"/> that contais the given <see cref="Type"/>.
+        /// </summary>
+        /// <param name="assemblyMarkerType">The <see cref="Type"/> to use as a reference to find the containing <see cref="Assembly"/> that will be searched for ExtendableEnums to be registered.</param>
+        /// <param name="settings">The <see cref="ODataClientSettings" /> with which to register the type converter.</param>
+        public static void RegisterAll(Type assemblyMarkerType, ODataClientSettings settings)
+        {
+            if (assemblyMarkerType == null)
+            {
+                throw new ArgumentNullException(nameof(assemblyMarkerType));
+            }
+
+            RegisterAll(assemblyMarkerType.Assembly, settings);
+        }
+
+        /// <summary>
+        /// Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums in the given <see cref="Assembly"/>.
+        /// </summary>
+        /// <param name="assembly">The <see cref="Assembly "/> in which to search for ExtendableEnums to register.</param>
+        /// <param name="settings">The <see cref="ODataClientSettings" /> with which to register the type converter.</param>
+        public static void RegisterAll(Assembly assembly, ODataClientSettings settings)
+        {
+            if (assembly == null)
+            {
+                throw new ArgumentNullException(nameof(assembly));
+            }
+
+            var types = assembly.GetTypes();
+            foreach (var type in types)
+            {
+                if (type.IsExtendableEnum())
+                {
+                    Register(type, settings);
+                }
+            }
+        }
+
+        /// <summary>
         /// Converts a dictionary with a value key to an ExtendableEnum of equivilent value.
         /// </summary>
         /// <param name="enumerationType">The ExtendableEnum descendant type to convert to.</param>
