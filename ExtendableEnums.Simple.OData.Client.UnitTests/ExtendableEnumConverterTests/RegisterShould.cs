@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using ExtendableEnums.Microsoft.AspNetCore.UnitTests;
 using ExtendableEnums.SimpleOData.Client;
 using ExtendableEnums.TestHost;
+using ExtendableEnums.Testing;
 using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Simple.OData.Client;

@@ -1,6 +1,6 @@
 using System;
-using ExtendableEnums.Microsoft.AspNetCore.UnitTests;
 using ExtendableEnums.TestHost;
+using ExtendableEnums.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.SimpleOData.Client.UnitTests

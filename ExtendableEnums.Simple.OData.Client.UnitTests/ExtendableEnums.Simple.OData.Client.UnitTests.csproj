@@ -71,9 +71,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExtendableEnums.Microsoft.AspNetCore.UnitTests\ExtendableEnums.Microsoft.AspNetCore.UnitTests.csproj" />
     <ProjectReference Include="..\ExtendableEnums.Simple.OData.Client\ExtendableEnums.Simple.OData.Client.csproj" />
     <ProjectReference Include="..\ExtendableEnums.TestHost\ExtendableEnums.TestHost.csproj" />
+    <ProjectReference Include="..\ExtendableEnums.Testing\ExtendableEnums.Testing.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,9 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-
-    <IsPackable>false</IsPackable>
-    <NoWarn>SA1600,SA0001</NoWarn>
+    <NoWarn>SA0001,SA1600</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -21,11 +19,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AnalyzerPowerPack" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0">
+      <AllowExplicitVersion>true</AllowExplicitVersion>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
+    <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
     <PackageReference Include="Puma.Security.Rules" Version="2.2.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExtendableEnums.Testing\ExtendableEnums.Testing.csproj" />
+    <ProjectReference Include="..\ExtendableEnums.TestHost\ExtendableEnums.TestHost.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 
-namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests
+namespace ExtendableEnums.Testing
 {
     public class TestingHost : IDisposable
     {
