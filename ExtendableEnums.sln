@@ -29,7 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.Microsoft.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.Microsoft.AspNetCore.UnitTests", "ExtendableEnums.Microsoft.AspNetCore.UnitTests\ExtendableEnums.Microsoft.AspNetCore.UnitTests.csproj", "{A606A5C0-5174-4A46-876F-A4971D72AFFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendableEnums.Testing", "ExtendableEnums.Testing\ExtendableEnums.Testing.csproj", "{54597C63-D1D6-4B7C-A37A-F45D95A312E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.Testing", "ExtendableEnums.Testing\ExtendableEnums.Testing.csproj", "{54597C63-D1D6-4B7C-A37A-F45D95A312E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendableEnums.LiteDB", "ExtendableEnums.LiteDb\ExtendableEnums.LiteDB.csproj", "{46550387-DBB0-48DA-834E-614F8FC2093C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendableEnums.LiteDB.UnitTests", "ExtendableEnums.LiteDB.UnitTests\ExtendableEnums.LiteDB.UnitTests.csproj", "{AC0C651B-DCDA-4407-8CAB-4092A94A68E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +81,14 @@ Global
 		{54597C63-D1D6-4B7C-A37A-F45D95A312E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54597C63-D1D6-4B7C-A37A-F45D95A312E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54597C63-D1D6-4B7C-A37A-F45D95A312E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46550387-DBB0-48DA-834E-614F8FC2093C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46550387-DBB0-48DA-834E-614F8FC2093C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46550387-DBB0-48DA-834E-614F8FC2093C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46550387-DBB0-48DA-834E-614F8FC2093C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC0C651B-DCDA-4407-8CAB-4092A94A68E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC0C651B-DCDA-4407-8CAB-4092A94A68E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC0C651B-DCDA-4407-8CAB-4092A94A68E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC0C651B-DCDA-4407-8CAB-4092A94A68E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
