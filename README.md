@@ -52,7 +52,7 @@ MyEnum.DeclaringTypes.Add(typeof(MyEnumExtraValuesClass));
 The minimum or maximum values in an enumeration can be retrieved by calling the static `Min` and `Max` properties.
 
 ### ASP.net Core Support
-ExtendableEnums must be registered when configuring services in ASP.net core projects in order for model binding to work correctly when posting back to the server.  This is done by calling `UseExtendableEnumModelBinding` on the `MvcOptions` parameter when calling `AddMvc`.
+By default, ASP.Net will model bind ExtendableEnums by their DisplayName property.  In order to do model binding by the Value property, ExtendableEnums must be registered when configuring services in ASP.net core projects.  This is done by calling `UseExtendableEnumModelBinding` on the `MvcOptions` parameter when calling `AddMvc`.
 ```
  services.AddMvc(options =>
 {
@@ -159,5 +159,22 @@ All extended properties on any ExtendableEnums will also need to have the `NotMa
 public string Code { get; }
 ```
 
+### LiteDB Support
+Using ExtendedableEnums in LiteDB requires registering Bson mappings.  This can be done by adding a reference to the NuGet package `ExtendableEnums.LiteDB`.  Then, upon application startup, call the needed `BsonMapper` extension registration methods.  Currently, Int32 and string Value property types are supported.
+
+```
+BsonMapper.Global.RegisterAllInt32BasedExtendableEnums(Assembly.GetExecutingAssembly());
+```
+
+A reference type can also be passed to register all types in the containing assembly.
+
+```
+BsonMapper.Global.RegisterAllInt32BasedExtendableEnums(typeof(SampleBook));
+```
+
+If desired, individual ExtendableEnum types can be registered by calling `RegisterExtendableEnumAsInt32`
+```
+BsonMapper.Global.RegisterExtendableEnumsAsInt32(typeof(SampleStatus))
+```
 ## License
 [MIT](LICENSE)
