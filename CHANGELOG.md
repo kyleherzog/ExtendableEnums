@@ -7,7 +7,12 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 1.6
+**2019-7-29**
+- [x] Added ASP.net core select tag helper
+
 ## 1.5
+**2019-7-29**
 - [x] Added support for registering Bson mappings for int and string based ExtendableEnums with LiteDb
 
 ## 1.4

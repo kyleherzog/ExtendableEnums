@@ -52,6 +52,21 @@ MyEnum.DeclaringTypes.Add(typeof(MyEnumExtraValuesClass));
 The minimum or maximum values in an enumeration can be retrieved by calling the static `Min` and `Max` properties.
 
 ### ASP.net Core Support
+
+#### Tag Helpers
+A select tag helper is available through the `ExtendableEnums.Microsoft.AspNetCore` NuGet package. In order to use the tag helper, a call to `addTagHelper` must be added to the \_ViewImports.cshtml.
+```
+@addTagHelper *, ExtendableEnums.Microsoft.AspNetCore
+```
+
+Then, just add a select tag to the desired view with the `extendable-enum-for` attribute set to the ExtendableEnum property of the model.
+```
+<select extendable-enum-for="Status" ></select>
+```
+
+NOTE: This select tag helper requires the setup of the Model Binding, which is described next.
+
+#### Model Binding
 By default, ASP.Net will model bind ExtendableEnums by their DisplayName property.  In order to do model binding by the Value property, ExtendableEnums must be registered when configuring services in ASP.net core projects.  This is done by calling `UseExtendableEnumModelBinding` on the `MvcOptions` parameter when calling `AddMvc`.
 ```
  services.AddMvc(options =>

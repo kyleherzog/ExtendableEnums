@@ -32,6 +32,25 @@
             <param name="context">The current <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderProviderContext"/>.</param>
             <returns>An <see cref="T:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumBinder"/> if the model type derives from <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>, otherwise null.</returns>
         </member>
+        <member name="T:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumSelectTagHelper">
+            <summary>
+            <see cref="T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper"/> tag helper targeting select tag elements with extendable-enum-for attributes.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumSelectTagHelper.#ctor(Microsoft.AspNetCore.Mvc.ViewFeatures.IHtmlGenerator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumSelectTagHelper"/> class.
+            </summary>
+            <param name="generator">The current <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.IHtmlGenerator"/>.</param>
+        </member>
+        <member name="P:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumSelectTagHelper.ExtendableFor">
+            <summary>
+            Gets or sets an expression to be evaluated against the current model that points to the ExtendableEnum property.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumSelectTagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)">
+            <inheritdoc/>
+        </member>
         <member name="T:ExtendableEnums.Microsoft.AspNetCore.MvcOptionsExtensions">
             <summary>
             Provides extention methods for adding ExtendableEnum support to <see cref="T:Microsoft.AspNetCore.Mvc.MvcOptions"/>.
