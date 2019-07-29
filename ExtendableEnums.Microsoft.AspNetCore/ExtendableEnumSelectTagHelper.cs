@@ -50,7 +50,7 @@ namespace ExtendableEnums.Microsoft.AspNetCore
                 var items = result as IEnumerable<object>;
                 var valueProperty = items.First().GetType().GetProperty("Value");
                 var displayNameProperty = items.First().GetType().GetProperty("DisplayName");
-                var modelValue = valueProperty.GetValue(For.Model, null);
+
                 foreach (var item in items)
                 {
                     var value = valueProperty.GetValue(item, null);
@@ -60,7 +60,13 @@ namespace ExtendableEnums.Microsoft.AspNetCore
                 }
 
                 Items = selectItems;
-                ViewContext.ModelState.SetModelValue(For.Name, modelValue, modelValue.ToString());
+
+                // set the current value as selected.
+                if (For?.Model != null)
+                {
+                    var modelValue = valueProperty.GetValue(For.Model, null);
+                    ViewContext.ModelState.SetModelValue(For.Name, modelValue, modelValue.ToString());
+                }
             }
 
             base.Init(context);
