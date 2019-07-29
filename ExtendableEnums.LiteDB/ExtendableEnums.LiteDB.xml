@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ExtendableEnums.LiteDB</name>
+    </assembly>
+    <members>
+        <member name="T:ExtendableEnums.LiteDB.BsonMapperExtensions">
+            <summary>
+            Provides extension methods for mapping ExtendableEnums in LiteDB.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.LiteDB.BsonMapperExtensions.RegisterAllInt32BasedExtendableEnums(LiteDB.BsonMapper,System.Reflection.Assembly)">
+            <summary>
+            Registers mappings for all ExtendedEnums in a given assembly that have a Value property type of Int32.
+            </summary>
+            <param name="mapper">The <see cref="T:LiteDB.BsonMapper"/> for which the mapping will be registered.</param>
+            <param name="assembly">The assembly to search for ExtendableEnums.</param>
+        </member>
+        <member name="M:ExtendableEnums.LiteDB.BsonMapperExtensions.RegisterAllInt32BasedExtendableEnums(LiteDB.BsonMapper,System.Type)">
+            <summary>
+            Registers mappings for all ExtendedEnums in an assembly containing a given type that have a Value property type of Int32.
+            </summary>
+            <param name="mapper">The <see cref="T:LiteDB.BsonMapper"/> for which the mapping will be registered.</param>
+            <param name="assemblyMarkerType">A <see cref="T:System.Type"/> which is contained in an <see cref="T:System.Reflection.Assembly"/> which is to be searched.</param>
+        </member>
+        <member name="M:ExtendableEnums.LiteDB.BsonMapperExtensions.RegisterAllStringBasedExtendableEnums(LiteDB.BsonMapper,System.Reflection.Assembly)">
+            <summary>
+            Registers mappings for all ExtendedEnums in a given assembly that have a Value property type of string.
+            </summary>
+            <param name="mapper">The <see cref="T:LiteDB.BsonMapper"/> for which the mapping will be registered.</param>
+            <param name="assembly">The assembly to search for ExtendableEnums.</param>
+        </member>
+        <member name="M:ExtendableEnums.LiteDB.BsonMapperExtensions.RegisterAllStringBasedExtendableEnums(LiteDB.BsonMapper,System.Type)">
+            <summary>
+            Registers mappings for all ExtendedEnums in an assembly containing a given type that have a Value property type of string.
+            </summary>
+            <param name="mapper">The <see cref="T:LiteDB.BsonMapper"/> for which the mapping will be registered.</param>
+            <param name="assemblyMarkerType">A <see cref="T:System.Type"/> which is contained in an <see cref="T:System.Reflection.Assembly"/> which is to be searched.</param>
+        </member>
+        <member name="M:ExtendableEnums.LiteDB.BsonMapperExtensions.RegisterExtendableEnumAsInt32(LiteDB.BsonMapper,System.Type)">
+            <summary>
+            Registers mappings for a specific ExtendableEnum type with a Value property type of Int32.
+            </summary>
+            <param name="mapper">The <see cref="T:LiteDB.BsonMapper"/> for which the mapping will be registered.</param>
+            <param name="type">An ExtendableEnum <see cref="T:System.Type"/> which is to be registered.</param>
+        </member>
+        <member name="M:ExtendableEnums.LiteDB.BsonMapperExtensions.RegisterExtendableEnumAsString(LiteDB.BsonMapper,System.Type)">
+            <summary>
+            Registers mappings for a specific ExtendableEnum type with a Value property type of string.
+            </summary>
+            <param name="mapper">The <see cref="T:LiteDB.BsonMapper"/> for which the mapping will be registered.</param>
+            <param name="type">An ExtendableEnum <see cref="T:System.Type"/> which is to be registered.</param>
+        </member>
+    </members>
+</doc>
