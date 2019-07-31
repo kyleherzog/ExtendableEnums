@@ -36,7 +36,7 @@ namespace ExtendableEnums.Microsoft.AspNetCore
                 return Task.CompletedTask;
             }
 
-            var result = JsonConvert.DeserializeObject(valueProviderResult.FirstValue, bindingContext.ModelType);
+            var result = JsonConvert.DeserializeObject($"'{valueProviderResult.FirstValue}'", bindingContext.ModelType);
 
             bindingContext.Result = ModelBindingResult.Success(result);
 

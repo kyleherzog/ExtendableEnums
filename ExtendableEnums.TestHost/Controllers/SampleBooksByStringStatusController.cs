@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExtendableEnums.TestHost.Controllers
 {
-    public class SampleBooksController : Controller
+    public class SampleBooksByStringStatusController : Controller
     {
         public IActionResult Index()
         {
@@ -12,7 +12,7 @@ namespace ExtendableEnums.TestHost.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, SampleBook model)
+        public IActionResult Edit(int id, SampleBookByStringStatus model)
         {
             if (!ModelState.IsValid)
             {

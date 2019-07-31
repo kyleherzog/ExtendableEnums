@@ -13,7 +13,7 @@ namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests
     [TestClass]
     public class ModelBindingTests : IDisposable
     {
-        private static readonly HttpClient client = new HttpClient();
+        private readonly HttpClient client = new HttpClient();
 
         private bool hasDisposed;
 
@@ -24,7 +24,7 @@ namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests
         }
 
         [TestMethod]
-        public async Task BindTheExtendableEnumCorrectly()
+        public async Task BindTheExtendableEnumCorrectlyGivenIntBasedValue()
         {
             await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
 
@@ -46,6 +46,33 @@ namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests
                     var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
 
                     Assert.AreEqual(SampleStatus.Deleted, book.Status);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task BindTheExtendableEnumCorrectlyGivenStringBasedValue()
+        {
+            await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
+
+            var values = new Dictionary<string, string>()
+            {
+                { "id", "4" },
+                { "title", "My Title" },
+                { "status", "C" },
+            };
+
+            using (var content = new FormUrlEncodedContent(values))
+            {
+                var targetUrl = new Uri($"{TestingHost.Instance.Address}/samplebooksbystringstatus/edit/1");
+                using (var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true))
+                {
+                    Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+
+                    var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+                    var book = JsonConvert.DeserializeObject<SampleBookByStringStatus>(responseContent);
+
+                    Assert.AreEqual(SampleStatusByString.Deleted, book.Status);
                 }
             }
         }
