@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <ApplicationVersion>1.6.0</ApplicationVersion>
+    <ApplicationVersion>1.7.0</ApplicationVersion>
     <ApplicationRevision>0</ApplicationRevision>
-    <Version>1.6.0</Version>
+    <Version>1.7.0</Version>
     <PackageLicenseUrl>https://raw.githubusercontent.com/kyleherzog/ExtendableEnums/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/kyleherzog/ExtendableEnums</PackageProjectUrl>
     <PackageTags>Enum Enumeration Extendable Class</PackageTags>
