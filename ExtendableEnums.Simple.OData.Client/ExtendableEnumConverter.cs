@@ -21,18 +21,18 @@ namespace ExtendableEnums.SimpleOData.Client
         /// </summary>
         /// <typeparam name="T">The <see cref="Type" /> to be registered as an ExtenableEnum.</typeparam>
         /// <param name="settings">The <see cref="ODataClientSettings" /> with which to register the type converter.</param>
-        public static void Register<T>(ODataClientSettings settings)
+        public static void RegisterExtendableEnum<T>(this ODataClientSettings settings)
             where T : IExtendableEnum
         {
-            Register(typeof(T), settings);
+            RegisterExtendableEnum(settings, typeof(T));
         }
 
         /// <summary>
         /// Registers type converter with the ODataSettings to be used with an ODataClient.
         /// </summary>
-        /// <param name="enumDescendant">The <see cref="Type" /> to be registered as an ExtenableEnum.</param>
         /// <param name="settings">The <see cref="ODataClientSettings" /> with which to register the type converter.</param>
-        public static void Register(Type enumDescendant, ODataClientSettings settings)
+        /// <param name="enumDescendant">The <see cref="Type" /> to be registered as an ExtenableEnum.</param>
+        public static void RegisterExtendableEnum(this ODataClientSettings settings, Type enumDescendant)
         {
             if (enumDescendant == null)
             {
@@ -59,24 +59,24 @@ namespace ExtendableEnums.SimpleOData.Client
         /// <summary>
         /// Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums in the <see cref="Assembly"/> that contais the given <see cref="Type"/>.
         /// </summary>
-        /// <param name="assemblyMarkerType">The <see cref="Type"/> to use as a reference to find the containing <see cref="Assembly"/> that will be searched for ExtendableEnums to be registered.</param>
         /// <param name="settings">The <see cref="ODataClientSettings" /> with which to register the type converter.</param>
-        public static void RegisterAll(Type assemblyMarkerType, ODataClientSettings settings)
+        /// <param name="assemblyMarkerType">The <see cref="Type"/> to use as a reference to find the containing <see cref="Assembly"/> that will be searched for ExtendableEnums to be registered.</param>
+        public static void RegisterAllExtendableEnums(this ODataClientSettings settings, Type assemblyMarkerType)
         {
             if (assemblyMarkerType == null)
             {
                 throw new ArgumentNullException(nameof(assemblyMarkerType));
             }
 
-            RegisterAll(assemblyMarkerType.Assembly, settings);
+            RegisterAllExtendableEnums(settings, assemblyMarkerType.Assembly);
         }
 
         /// <summary>
         /// Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums in the given <see cref="Assembly"/>.
         /// </summary>
-        /// <param name="assembly">The <see cref="Assembly "/> in which to search for ExtendableEnums to register.</param>
         /// <param name="settings">The <see cref="ODataClientSettings" /> with which to register the type converter.</param>
-        public static void RegisterAll(Assembly assembly, ODataClientSettings settings)
+        /// <param name="assembly">The <see cref="Assembly "/> in which to search for ExtendableEnums to register.</param>
+        public static void RegisterAllExtendableEnums(this ODataClientSettings settings, Assembly assembly)
         {
             if (assembly == null)
             {
@@ -88,7 +88,7 @@ namespace ExtendableEnums.SimpleOData.Client
             {
                 if (type.IsExtendableEnum())
                 {
-                    Register(type, settings);
+                    RegisterExtendableEnum(settings, type);
                 }
             }
         }
