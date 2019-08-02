@@ -22,7 +22,7 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
                 BaseUri = TestingHost.Instance.BaseODataUrl,
             };
 
-            ExtendableEnumConverter.Register<SampleStatus>(settings);
+            settings.RegisterExtendableEnum<SampleStatus>();
             var client = new ODataClient(settings);
 
             var target = DataContext.Books.First();
@@ -46,7 +46,7 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
                 IgnoreUnmappedProperties = true,
             };
 
-            ExtendableEnumConverter.Register<SampleStatus>(settings);
+            settings.RegisterExtendableEnum<SampleStatus>();
             var client = new ODataClient(settings);
 
             var originalCount = DataContext.Books.Count;
@@ -75,8 +75,7 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
             {
                 BaseUri = TestingHost.Instance.BaseODataUrl,
             };
-
-            ExtendableEnumConverter.Register(typeof(SampleStatus), settings);
+            settings.RegisterExtendableEnum(typeof(SampleStatus));
             var client = new ODataClient(settings);
 
             var target = DataContext.Books.First();
@@ -100,7 +99,7 @@ namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterT
                 BaseUri = TestingHost.Instance.BaseODataUrl,
             };
 
-            ExtendableEnumConverter.Register(typeof(string), settings);
+            settings.RegisterExtendableEnum(typeof(string));
             Assert.Fail("An ArgumentException should have been thrown.");
         }
     }

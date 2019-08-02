@@ -146,26 +146,26 @@ public IActionResult Post([FromBody] JObject json)
 ```
 
 #### OData Simple.OData.Client Support
-Compatibility with Simple.Odata.Client can be obtained by adding a NuGet package reference to `ExtendableEnums.Simple.OData.Client`. Once this package is added, a call can be made to `ExtendableEnumConverter.RegisterAll` to register all ExtendableEnums in a given assembly.  This will allow Simple.OData.Client handle the minimal serialization of ExtendableEnums.  
+Compatibility with Simple.Odata.Client can be obtained by adding a NuGet package reference to `ExtendableEnums.Simple.OData.Client`. Once this package is added, a call can be made to the `ODataClientSettings` extension method `RegisterAllExtendableEnums` to register all ExtendableEnums in a given assembly.  This will allow Simple.OData.Client handle the minimal serialization of ExtendableEnums.  
 ```
-var settings = new ODataClientSettings
+var clientSettings = new ODataClientSettings
 {
     BaseUri = TestingHost.Instance.BaseODataUrl,
     IgnoreUnmappedProperties = true
 };
 
-ExtendableEnumConverter.RegisterAll(settings, Assembly.GetExecutingAssembly());
-var client = new ODataClient(settings);
+clientSettings.RegisterAllExtendableEnums(Assembly.GetExecutingAssembly());
+var client = new ODataClient(clientSettings);
 ```
-A reference type can be passed to `RegisterAll` instead of passing the assembly directly.  When this is done, the containing assembly of the type specified is scanned for ExtendableEnums to be registered.
+A reference type can be passed to `RegisterAllExtendableEnums` instead of passing the assembly directly.  When this is done, the containing assembly of the type specified is scanned for ExtendableEnums to be registered.
 
 ```
-ExtendableEnumConverter.RegisterAll(this.GetType());
+clientSettings.RegisterAllExtendableEnums(this.GetType());
 ```
 
 If desired, ExtendableEnum types can be registered individually as well, by calling `Register<>`.
 ```
-ExtendableEnumConverter.Register<SampleStatus>(settings);
+settings.RegisterExtendableEnum<SampleStatus>();
 ```
 
 All extended properties on any ExtendableEnums will also need to have the `NotMappedAttribute` applied as well.
