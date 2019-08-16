@@ -21,7 +21,7 @@
     <DocumentationFile>C:\Repos\kyleherzog\ExtendableEnums\ExtendableEnums.Microsoft.AspNetCore.OData\ExtendableEnums.Microsoft.AspNetCore.OData.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.2.1" />
     <PackageReference Include="codecracker.CSharp" Version="1.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
