@@ -6,6 +6,8 @@
 
 These are the changes to each version that has been released
 on NuGet.org.
+## 1.8
+- [x] Fix for deserializing from null.
 
 ## 1.7
 ***2019-8-2*
