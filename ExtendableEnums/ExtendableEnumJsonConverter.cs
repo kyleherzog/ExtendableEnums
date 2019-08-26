@@ -55,6 +55,11 @@ namespace ExtendableEnums
             if (rawValue == null)
             {
                 var dynamicObject = serializer.Deserialize<dynamic>(reader);
+                if (dynamicObject == null)
+                {
+                    return null;
+                }
+
                 rawValue = dynamicObject.value?.Value;
             }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using ExtendableEnums.Testing.Models;
 
 namespace ExtendableEnums.TestHost
@@ -26,6 +27,8 @@ namespace ExtendableEnums.TestHost
                     Status = i % 2 == 0 ? SampleStatus.Deleted : SampleStatus.Active,
                 });
             }
+
+            Books.Last().Status = null;
         }
     }
 }

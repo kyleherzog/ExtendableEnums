@@ -10,6 +10,21 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
     public class SerializeShould
     {
         [TestMethod]
+        public void DeserializeFromNull()
+        {
+            var nullSerialized = JsonConvert.SerializeObject(null);
+            var status = JsonConvert.DeserializeObject<SampleStatus>(nullSerialized);
+            Assert.IsNull(status);
+        }
+
+        [TestMethod]
+        public void DeserializeFromObjectGivenNumericValuePripertyNotDeclaredInPrimaryType()
+        {
+            var status = JsonConvert.DeserializeObject<SampleStatus>($"{{\"value\" : \"{SampleStatusDeclared.Pending.Value}\"}}");
+            Assert.AreEqual(SampleStatusDeclared.Pending, status);
+        }
+
+        [TestMethod]
         public void DeserializeFromObjectWithNoValuePropertyToDefaultValue()
         {
             var status = JsonConvert.DeserializeObject<SampleStatus>($"{{\"id\" : \"{SampleStatus.Inactive.Value}\"}}");
@@ -28,13 +43,6 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
         {
             var status = JsonConvert.DeserializeObject<SampleStatusByString>($"{{\"value\" : \"{SampleStatusByString.Inactive.Value}\"}}");
             Assert.AreEqual(SampleStatusByString.Inactive, status);
-        }
-
-        [TestMethod]
-        public void DeserializeFromObjectGivenNumericValuePripertyNotDeclaredInPrimaryType()
-        {
-            var status = JsonConvert.DeserializeObject<SampleStatus>($"{{\"value\" : \"{SampleStatusDeclared.Pending.Value}\"}}");
-            Assert.AreEqual(SampleStatusDeclared.Pending, status);
         }
 
         [TestMethod]
@@ -63,6 +71,14 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
             var serialized = JsonConvert.SerializeObject(status);
 
             Assert.AreEqual($"{status.Value}", serialized);
+        }
+
+        [TestMethod]
+        public void SerializeToNull()
+        {
+            SampleStatus status = null;
+            var serialized = JsonConvert.SerializeObject(status);
+            Assert.AreEqual("null", serialized);
         }
     }
 }
