@@ -7,10 +7,11 @@
 These are the changes to each version that has been released
 on NuGet.org.
 ## 1.8
+**2019-8-26**
 - [x] Fix for deserializing from null.
 
 ## 1.7
-***2019-8-2*
+**2019-8-2**
 - [x] Switched OData.Client registration methods to be extension methods.
 
 ## 1.6
