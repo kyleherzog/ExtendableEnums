@@ -35,19 +35,15 @@ namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests
                 { "status", "2" },
             };
 
-            using (var content = new FormUrlEncodedContent(values))
-            {
-                var targetUrl = new Uri($"{TestingHost.Instance.Address}/samplebooks/edit/1");
-                using (var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true))
-                {
-                    Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            using var content = new FormUrlEncodedContent(values);
+            var targetUrl = new Uri($"{TestingHost.Instance.Address}/samplebooks/edit/1");
+            using var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
-                    var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
-                    var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
+            var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+            var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
 
-                    Assert.AreEqual(SampleStatus.Deleted, book.Status);
-                }
-            }
+            Assert.AreEqual(SampleStatus.Deleted, book.Status);
         }
 
         [TestMethod]
@@ -62,19 +58,15 @@ namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests
                 { "status", "C" },
             };
 
-            using (var content = new FormUrlEncodedContent(values))
-            {
-                var targetUrl = new Uri($"{TestingHost.Instance.Address}/samplebooksbystringstatus/edit/1");
-                using (var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true))
-                {
-                    Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            using var content = new FormUrlEncodedContent(values);
+            var targetUrl = new Uri($"{TestingHost.Instance.Address}/samplebooksbystringstatus/edit/1");
+            using var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
-                    var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
-                    var book = JsonConvert.DeserializeObject<SampleBookByStringStatus>(responseContent);
+            var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+            var book = JsonConvert.DeserializeObject<SampleBookByStringStatus>(responseContent);
 
-                    Assert.AreEqual(SampleStatusByString.Deleted, book.Status);
-                }
-            }
+            Assert.AreEqual(SampleStatusByString.Deleted, book.Status);
         }
 
         // This code added to correctly implement the disposable pattern.
