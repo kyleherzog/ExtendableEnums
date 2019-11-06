@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ExtendableEnums.EntityFrameworkCore</name>
+    </assembly>
+    <members>
+        <member name="T:ExtendableEnums.EntityFrameworkCore.ExtendableEnumValueConverter">
+            <summary>
+            A static class for generating  <see cref="T:Microsoft.EntityFrameworkCore.Storage.ValueConversion.ValueConverter"/> instances that convert <see cref="T:ExtendableEnums.ExtendableEnum`1" /> entity properties.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.EntityFrameworkCore.ExtendableEnumValueConverter.Create(System.Type)">
+            <summary>
+            Creates a <see cref="T:Microsoft.EntityFrameworkCore.Storage.ValueConversion.ValueConverter"/> that converts the given ExtendableEnum type to/from an int.
+            </summary>
+            <param name="type">An <see cref="T:ExtendableEnums.ExtendableEnum`1"/> type for which to convert to/from.</param>
+            <returns>A <see cref="T:Microsoft.EntityFrameworkCore.Storage.ValueConversion.ValueConverter"/> that converts the given ExtendableEnum type to/from an int.</returns>
+        </member>
+        <member name="M:ExtendableEnums.EntityFrameworkCore.ExtendableEnumValueConverter.Create``1">
+            <summary>
+            Creates a <see cref="T:Microsoft.EntityFrameworkCore.Storage.ValueConversion.ValueConverter"/> that converts the given ExtendableEnum type to/from an int.
+            </summary>
+            <typeparam name="T">An <see cref="T:ExtendableEnums.ExtendableEnum`1"/> type for which to convert to/from.</typeparam>
+            <returns>A <see cref="T:Microsoft.EntityFrameworkCore.Storage.ValueConversion.ValueConverter"/> that converts the given ExtendableEnum type to/from an int.</returns>
+        </member>
+        <member name="T:ExtendableEnums.EntityFrameworkCore.ModelBuilderExtensions">
+            <summary>
+            Provides extension method for the <see cref="T:Microsoft.EntityFrameworkCore.ModelBuilder"/>.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.EntityFrameworkCore.ModelBuilderExtensions.ApplyExtendableEnumConversions(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Applies the value conversions for all <see cref="T:ExtendableEnums.ExtendableEnum`1"/> based properties for all entities present on the given <see cref="T:Microsoft.EntityFrameworkCore.ModelBuilder"/>.
+            </summary>
+            <param name="modelBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.ModelBuilder"/> for which to apply the value conversions.</param>
+            <returns>The <see cref="T:Microsoft.EntityFrameworkCore.ModelBuilder"/> passed in.</returns>
+        </member>
+    </members>
+</doc>
