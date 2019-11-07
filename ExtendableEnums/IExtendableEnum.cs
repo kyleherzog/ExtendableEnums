@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ExtendableEnums
+﻿namespace ExtendableEnums
 {
     /// <summary>
     /// Base interface for <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>, providing access to DisplayName.

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using ExtendableEnums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExtendableEnums.Testing.Models
 {

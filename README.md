@@ -75,6 +75,17 @@ By default, ASP.Net will model bind ExtendableEnums by their DisplayName propert
 });
 ```
 
+### Entity Framework Core Support
+ExtendableEnums can be stored by their Value property in Entity Framework Core.  In order to do this, value converters must be registered by calling the `ApplyExtendableEnumConversions` extension method on the ModelBuilder.
+
+```        
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.ApplyExtendableEnumConversions();
+    base.OnModelCreating(modelBuilder);
+}
+```
+
 ### OData Support
 Using ExtendedableEnums in OData requires some modifications.
 
