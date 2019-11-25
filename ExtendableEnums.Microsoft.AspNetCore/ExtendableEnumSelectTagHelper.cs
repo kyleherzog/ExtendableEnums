@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,6 +15,7 @@ namespace ExtendableEnums.Microsoft.AspNetCore
     public class ExtendableEnumSelectTagHelper : SelectTagHelper
     {
         private const string forAttributeName = "extendable-enum-for";
+        private const string isOrderedByValueName = "extendable-enum-order-by-value";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExtendableEnumSelectTagHelper"/> class.
@@ -34,6 +34,15 @@ namespace ExtendableEnums.Microsoft.AspNetCore
         {
             get => For;
             set => For = value;
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether or not the list of options should be sorted by Value.  If not, the items will be sorted by DisplayName.
+        /// </summary>
+        [HtmlAttributeName(isOrderedByValueName)]
+        public bool IsOrderedByValue
+        {
+            get; set;
         }
 
         /// <inheritdoc/>
@@ -57,6 +66,15 @@ namespace ExtendableEnums.Microsoft.AspNetCore
                     var displayName = displayNameProperty.GetValue(item, null);
                     var selectItem = new SelectListItem($"{displayName}", $"{value}");
                     selectItems.Add(selectItem);
+                }
+
+                if (IsOrderedByValue)
+                {
+                    selectItems = selectItems.OrderBy(x => x.Value).ToList();
+                }
+                else
+                {
+                    selectItems = selectItems.OrderBy(x => x.Text).ToList();
                 }
 
                 Items = selectItems;
