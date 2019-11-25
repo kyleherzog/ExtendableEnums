@@ -6,6 +6,10 @@
 
 These are the changes to each version that has been released
 on NuGet.org.
+## 1.10
+**2019-11-25**
+- [x] Added option to order items by value or text for ASP.NET core select tag helper
+
 ## 1.9
 **2019-11-6**
 - [x] Entity Framework Core support added.
@@ -20,7 +24,7 @@ on NuGet.org.
 
 ## 1.6
 **2019-7-29**
-- [x] Added ASP.net core select tag helper.
+- [x] Added ASP.NET core select tag helper.
 
 ## 1.5
 **2019-7-29**
