@@ -64,6 +64,8 @@ Then, just add a select tag to the desired view with the `extendable-enum-for` a
 <select extendable-enum-for="Status" ></select>
 ```
 
+By default the select list options will be sorted by the `DisplayName` property.  To sort by the Value property, add the attribute `extendable-enum-order-by-value` and set the value of the attribute to true.
+
 NOTE: This select tag helper requires the setup of the Model Binding, which is described next.
 
 #### Model Binding
