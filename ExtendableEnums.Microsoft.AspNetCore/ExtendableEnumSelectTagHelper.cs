@@ -83,7 +83,13 @@ namespace ExtendableEnums.Microsoft.AspNetCore
                 if (For?.Model != null)
                 {
                     var modelValue = valueProperty.GetValue(For.Model, null);
-                    ViewContext.ModelState.SetModelValue(For.Name, modelValue, modelValue.ToString());
+                    var forName = For.Name;
+                    if (!string.IsNullOrEmpty(ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix))
+                    {
+                        forName = $"{ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix}.{forName}";
+                    }
+
+                    ViewContext.ModelState.SetModelValue(forName, modelValue, modelValue.ToString());
                 }
             }
 

@@ -6,6 +6,11 @@
 
 These are the changes to each version that has been released
 on NuGet.org.
+
+## 1.11
+**2019-11-27**
+- [x] ASP.NET tag helper HtmlFieldPrefix compatibility support
+
 ## 1.10
 **2019-11-25**
 - [x] Added option to order items by value or text for ASP.NET core select tag helper
