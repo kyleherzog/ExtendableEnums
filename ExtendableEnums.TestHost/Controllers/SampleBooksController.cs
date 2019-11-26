@@ -7,16 +7,6 @@ namespace ExtendableEnums.TestHost.Controllers
 {
     public class SampleBooksController : Controller
     {
-        public IActionResult Index()
-        {
-            var model = new SampleBooksModel
-            {
-                Status = SampleStatus.Inactive,
-            };
-
-            return View(model);
-        }
-
         [HttpPost]
         public IActionResult Edit(int id, SampleBook model)
         {
@@ -29,6 +19,16 @@ namespace ExtendableEnums.TestHost.Controllers
                 Console.WriteLine($"Editing book with id of {id}");
                 return Ok(model);
             }
+        }
+
+        public IActionResult Index()
+        {
+            var model = new SampleBooksModel
+            {
+                Status = SampleStatus.Inactive,
+            };
+
+            return View(model);
         }
     }
 }
