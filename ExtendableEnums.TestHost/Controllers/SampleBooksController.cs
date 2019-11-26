@@ -1,4 +1,5 @@
 ﻿using System;
+using ExtendableEnums.TestHost.Models;
 using ExtendableEnums.Testing.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +9,12 @@ namespace ExtendableEnums.TestHost.Controllers
     {
         public IActionResult Index()
         {
-            return Ok("OK");
+            var model = new SampleBooksModel
+            {
+                Status = SampleStatus.Inactive,
+            };
+
+            return View(model);
         }
 
         [HttpPost]

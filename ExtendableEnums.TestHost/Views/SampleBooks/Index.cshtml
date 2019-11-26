@@ -1,0 +1,11 @@
+﻿@model SampleBooksModel
+@{
+    ViewData["Title"] = "SampleBooks";
+
+    ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = $"Books[{Model.Id}]";
+}
+
+
+<h1>Sample Books</h1>
+
+<select extendable-enum-for="Status"></select>
