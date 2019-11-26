@@ -48,6 +48,11 @@
             Gets or sets an expression to be evaluated against the current model that points to the ExtendableEnum property.
             </summary>
         </member>
+        <member name="P:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumSelectTagHelper.IsOrderedByValue">
+            <summary>
+            Gets or sets a value indicating whether or not the list of options should be sorted by Value.  If not, the items will be sorted by DisplayName.
+            </summary>
+        </member>
         <member name="M:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumSelectTagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)">
             <inheritdoc/>
         </member>

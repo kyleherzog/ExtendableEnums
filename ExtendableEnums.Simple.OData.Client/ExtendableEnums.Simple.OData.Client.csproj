@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <ApplicationVersion>1.10.0</ApplicationVersion>
+    <ApplicationVersion>1.11.0</ApplicationVersion>
     <ApplicationRevision>0</ApplicationRevision>
-    <Version>1.10.0</Version>
+    <Version>1.11.0</Version>
     <PackageLicenseUrl>https://raw.githubusercontent.com/kyleherzog/ExtendableEnums/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/kyleherzog/ExtendableEnums</PackageProjectUrl>
     <PackageTags>Enum Enumeration Extendable Class Simple OData Client</PackageTags>
@@ -21,16 +21,16 @@
     <DocumentationFile>ExtendableEnums.Simple.OData.Client.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.9.7">
+    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NetCore.Analyzers" Version="2.9.7">
+    <PackageReference Include="Microsoft.NetCore.Analyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Simple.OData.Client" Version="5.8.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.7">
+    <PackageReference Include="Simple.OData.Client" Version="5.10.0.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
