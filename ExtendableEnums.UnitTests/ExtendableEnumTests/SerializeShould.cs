@@ -46,6 +46,13 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
         }
 
         [TestMethod]
+        public void DeserializeFromObjectNotDefined()
+        {
+            var status = JsonConvert.DeserializeObject<SampleStatus>("{\"value\" : -123}");
+            Assert.AreEqual(-123, status.Value);
+        }
+
+        [TestMethod]
         public void DeserializeFromSerializedDictionaryGivenExtendedEnumIsKey()
         {
             var dictionary = new Dictionary<SampleStatus, string>();

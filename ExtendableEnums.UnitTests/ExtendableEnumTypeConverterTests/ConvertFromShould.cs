@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Reflection;
 using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -35,12 +37,12 @@ namespace ExtendableEnums.UnitTests.ExtendableEnumTypeConverterTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void ThrowArgumentExceptionGivenNoDisplayNameOrStringValueMatchFound()
         {
+            var value = "unknown-value";
             var converter = new ExtendableEnumTypeConverter(typeof(SampleStatusByString));
-            converter.ConvertFrom("Can't find this either");
-            Assert.Fail("An ArgumentException should have been thrown.");
+            var result = (SampleStatusByString)converter.ConvertFrom(value);
+            Assert.AreEqual(value, result.Value);
         }
     }
 }

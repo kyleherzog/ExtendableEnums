@@ -7,6 +7,9 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 2.0
+- [x] Added ParseValueOrCreate. This is now the default method used when deserializing/converting.
+
 ## 1.11
 **2019-11-27**
 - [x] ASP.NET tag helper HtmlFieldPrefix compatibility support
