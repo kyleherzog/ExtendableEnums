@@ -119,7 +119,7 @@ namespace ExtendableEnums.SimpleOData.Client
             var type = typeof(TValue);
             dynamic typedValue = System.Convert.ChangeType(dictionary["value"], type, CultureInfo.InvariantCulture);
 
-            return ExtendableEnumBase<TEnumeration, TValue>.ParseValue(typedValue);
+            return ExtendableEnumBase<TEnumeration, TValue>.ParseValueOrCreate(typedValue);
         }
 
         private static dynamic Convert(TypeConverterConfiguration config, IDictionary<string, object> dictionary)

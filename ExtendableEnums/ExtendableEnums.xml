@@ -130,6 +130,13 @@
             <param name="value">The value which should be searched for.</param>
             <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
         </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.ParseValueOrCreate(`1)">
+            <summary>
+            Finds the enumeration object with the matching value.  If no match is found, a new object is created with the value and display name set to the specified value.
+            </summary>
+            <param name="value">The value for which to search.</param>
+            <returns>The enumeration object with a matching value, or a new enumeration object if no match exists.</returns>
+        </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.FromTValue(`1)">
             <summary>
             Finds the enumeration object with the matching value.
@@ -284,6 +291,13 @@
             <summary>
             Provides extension method on <see cref="T:System.Type"/> that relate to ExtendableEnums.
             </summary>
+        </member>
+        <member name="M:ExtendableEnums.TypeExtensions.GetDefault(System.Type)">
+            <summary>
+            Gets the default value of the given type.
+            </summary>
+            <param name="type">The type of which to get the default value.</param>
+            <returns>The default value of the given type.</returns>
         </member>
         <member name="M:ExtendableEnums.TypeExtensions.IsExtendableEnum(System.Type)">
             <summary>

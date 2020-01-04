@@ -58,12 +58,12 @@ namespace ExtendableEnums
         /// Gets the core name to be used for display purposes and for identifying this enumeration object.
         /// </summary>
         [NotMapped]
-        public string DisplayName { get; }
+        public string DisplayName { get; private set; }
 
         /// <summary>
         /// Gets the core value that represents this enumeration object.
         /// </summary>
-        public TValue Value { get; }
+        public TValue Value { get; private set; }
 
         /// <summary>
         /// Implicitly converts an object of the value type to a full ExtendableEnum.
@@ -176,6 +176,40 @@ namespace ExtendableEnums
             {
                 var message = $"'{value}' is not a valid value in {typeof(TEnumeration)}";
                 throw new ArgumentException(message, nameof(value));
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Finds the enumeration object with the matching value.  If no match is found, a new object is created with the value and display name set to the specified value.
+        /// </summary>
+        /// <param name="value">The value for which to search.</param>
+        /// <returns>The enumeration object with a matching value, or a new enumeration object if no match exists.</returns>
+        public static TEnumeration ParseValueOrCreate(TValue value)
+        {
+            if (!TryFind(item => item.Value.Equals(value), out var result))
+            {
+                var constructor = typeof(TEnumeration).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).First();
+                var constructorParameters = constructor.GetParameters();
+                var parameters = new List<object>(constructorParameters.Length);
+                foreach (var parameter in constructorParameters)
+                {
+                    if (parameter.ParameterType == typeof(TValue))
+                    {
+                        parameters.Add(value);
+                    }
+                    else if (parameter.ParameterType == typeof(string))
+                    {
+                        parameters.Add(value.ToString());
+                    }
+                    else
+                    {
+                        parameters.Add(parameter.ParameterType.GetDefault());
+                    }
+                }
+
+                result = (TEnumeration)constructor.Invoke(parameters.ToArray());
             }
 
             return result;

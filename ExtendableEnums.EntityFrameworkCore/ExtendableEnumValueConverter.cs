@@ -34,7 +34,7 @@ namespace ExtendableEnums.EntityFrameworkCore
         public static ValueConverter Create<T>()
             where T : ExtendableEnum<T>
         {
-            var parseMethod = typeof(T).GetMethod("ParseValue", BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public);
+            var parseMethod = typeof(T).GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public);
             return new ValueConverter<T, int>(x => x.Value, x => (T)parseMethod.Invoke(null, new object[] { x }));
         }
 
