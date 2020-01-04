@@ -89,7 +89,7 @@ namespace ExtendableEnums
                     {
                         if (valueType == typeof(string))
                         {
-                            var parseValueMethod = ParseValueMethodCache.GetOrAdd(enumerationType, t => t.GetMethod("ParseValue", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy));
+                            var parseValueMethod = ParseValueMethodCache.GetOrAdd(enumerationType, t => t.GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy));
 
                             var result = parseValueMethod.Invoke(null, new object[] { value });
                             return result;

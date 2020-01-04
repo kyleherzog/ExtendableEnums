@@ -108,7 +108,7 @@ namespace ExtendableEnums
 
         private static MethodInfo GetParseValueMethod(Type type)
         {
-            return parseValueMethodCache.GetOrAdd(type, _ => type.GetMethod("ParseValue", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
+            return parseValueMethodCache.GetOrAdd(type, _ => type.GetMethod("ParseValueOrCreate", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
         }
 
         private Type GetTypeOfValueParameter(Type type)

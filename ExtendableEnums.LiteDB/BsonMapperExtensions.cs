@@ -129,7 +129,7 @@ namespace ExtendableEnums.LiteDB
                 throw new ArgumentException("The ExtendableEnum type must have a value type of int.", nameof(type));
             }
 
-            var parseMethod = type.GetMethod("ParseValue", BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public);
+            var parseMethod = type.GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public);
             mapper.RegisterType(type, s => ((IExtendableEnum<int>)s).Value, b => parseMethod.Invoke(null, new object[] { b.AsInt32 }));
         }
 
@@ -161,7 +161,7 @@ namespace ExtendableEnums.LiteDB
                 throw new ArgumentException("The ExtendableEnum type must have a value type of string.", nameof(type));
             }
 
-            var parseMethod = type.GetMethod("ParseValue", BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public);
+            var parseMethod = type.GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public);
             mapper.RegisterType(type, s => ((IExtendableEnum<string>)s).Value, b => parseMethod.Invoke(null, new object[] { b.AsString }));
         }
     }
