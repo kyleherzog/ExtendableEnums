@@ -17,7 +17,7 @@
              <returns>
                  A <see cref="T:System.Threading.Tasks.Task"/> which will complete when the model binding process completes.
             
-                 If model binding was successful, IsMOdelSet is set to <c>true</c>.
+                 If model binding was successful, IsModelSet is set to <c>true</c>.
              </returns>
         </member>
         <member name="T:ExtendableEnums.Microsoft.AspNetCore.ExtendableEnumModelBinderProvider">
