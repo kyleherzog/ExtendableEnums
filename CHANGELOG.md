@@ -7,17 +7,21 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 2.1
+**2020-1-25**
+- [x] Fix for ASP.NET model binding nulls. 
+
 ## 2.0
 **2020-1-4**
 - [x] Added ParseValueOrCreate. This is now the default method used when deserializing/converting.
 
 ## 1.11
 **2019-11-27**
-- [x] ASP.NET tag helper HtmlFieldPrefix compatibility support
+- [x] ASP.NET tag helper HtmlFieldPrefix compatibility support.
 
 ## 1.10
 **2019-11-25**
-- [x] Added option to order items by value or text for ASP.NET core select tag helper
+- [x] Added option to order items by value or text for ASP.NET core select tag helper.
 
 ## 1.9
 **2019-11-6**

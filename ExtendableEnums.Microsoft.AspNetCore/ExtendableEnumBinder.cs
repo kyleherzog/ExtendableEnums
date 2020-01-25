@@ -17,7 +17,7 @@ namespace ExtendableEnums.Microsoft.AspNetCore
         /// <returns>
         ///     A <see cref="Task"/> which will complete when the model binding process completes.
         ///
-        ///     If model binding was successful, IsMOdelSet is set to <c>true</c>.
+        ///     If model binding was successful, IsModelSet is set to <c>true</c>.
         /// </returns>
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
@@ -31,8 +31,9 @@ namespace ExtendableEnums.Microsoft.AspNetCore
             // Try to fetch the value of the argument by name
             var valueProviderResult = bindingContext.ValueProvider.GetValue(modelName);
 
-            if (valueProviderResult == ValueProviderResult.None)
+            if (valueProviderResult == ValueProviderResult.None || string.IsNullOrEmpty(valueProviderResult.FirstValue))
             {
+                bindingContext.Result = ModelBindingResult.Success(null);
                 return Task.CompletedTask;
             }
 
