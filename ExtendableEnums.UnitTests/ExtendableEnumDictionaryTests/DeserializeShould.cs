@@ -23,5 +23,21 @@ namespace ExtendableEnums.UnitTests.ExtendableEnumDictionaryTests
 
             result.Should().BeEquivalentTo(expected);
         }
+
+        [TestMethod]
+        public void DeserializeGivenDescriptionSerialized()
+        {
+            var serialized = "{ \"Active\":\"Active\",\"Deleted\":\"Deleted\"}";
+
+            var expected = new ExtendableEnumDictionary<SampleStatus, string>
+            {
+                { SampleStatus.Active, nameof(SampleStatus.Active) },
+                { SampleStatus.Deleted, nameof(SampleStatus.Deleted) },
+            };
+
+            var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatus, string>>(serialized);
+
+            result.Should().BeEquivalentTo(expected);
+        }
     }
 }

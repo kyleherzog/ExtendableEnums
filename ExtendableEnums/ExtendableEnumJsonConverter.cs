@@ -12,6 +12,7 @@ namespace ExtendableEnums
     public class ExtendableEnumJsonConverter : JsonConverter
     {
         private static readonly ConcurrentDictionary<Type, MethodInfo> parseValueMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
+        private static readonly ConcurrentDictionary<Type, MethodInfo> parseMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
 
         /// <summary>
         /// Determines whether this instance can convert the specified object type.
@@ -49,7 +50,7 @@ namespace ExtendableEnums
             }
 
             var valueType = GetTypeOfValueParameter(objectType);
-            var method = GetParseValueMethod(objectType);
+            var parseValueMethod = GetParseValueMethod(objectType);
 
             var rawValue = reader.Value;
             if (rawValue == null)
@@ -66,14 +67,24 @@ namespace ExtendableEnums
             if (rawValue == null)
             {
                 var value = GetDefault(valueType);
-                var result = method.Invoke(null, new object[] { value });
-                return result;
+                return parseValueMethod.Invoke(null, new object[] { value });
             }
             else
             {
-                var value = Convert.ChangeType(rawValue, valueType, CultureInfo.InvariantCulture);
-                var result = method.Invoke(null, new object[] { value });
-                return result;
+                try
+                {
+                    var value = Convert.ChangeType(rawValue, valueType, CultureInfo.InvariantCulture);
+                    var result = parseValueMethod.Invoke(null, new object[] { value });
+                    return result;
+                }
+                catch (FormatException)
+                {
+                    var parseMethod = GetParseMethod(objectType);
+                    var result = parseMethod.Invoke(null, new object[] { rawValue });
+                    return result;
+                }
+
+                
             }
         }
 
@@ -109,6 +120,11 @@ namespace ExtendableEnums
         private static MethodInfo GetParseValueMethod(Type type)
         {
             return parseValueMethodCache.GetOrAdd(type, _ => type.GetMethod("ParseValueOrCreate", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
+        }
+
+        private static MethodInfo GetParseMethod(Type type)
+        {
+            return parseMethodCache.GetOrAdd(type, _ => type.GetMethod("Parse", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
         }
 
         private Type GetTypeOfValueParameter(Type type)
