@@ -83,8 +83,6 @@ namespace ExtendableEnums
                     var result = parseMethod.Invoke(null, new object[] { rawValue });
                     return result;
                 }
-
-                
             }
         }
 
