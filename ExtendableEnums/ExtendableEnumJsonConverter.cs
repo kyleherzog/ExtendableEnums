@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace ExtendableEnums
 {
     /// <summary>
-    /// Converts ExtendableEnum obects to and from JSON.
+    /// Converts ExtendableEnum objects to and from JSON.
     /// </summary>
     public class ExtendableEnumJsonConverter : JsonConverter
     {

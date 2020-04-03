@@ -301,10 +301,17 @@
         </member>
         <member name="M:ExtendableEnums.TypeExtensions.IsExtendableEnum(System.Type)">
             <summary>
-            Checks to see if the the given type is derived from <see cref="T:ExtendableEnums.ExtendableEnumBase`2" />.
+            Checks to see if the given type is derived from <see cref="T:ExtendableEnums.ExtendableEnumBase`2" />.
             </summary>
             <param name="type">The <see cref="T:System.Type" /> to check to see if it is an <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> decendant.</param>
             <returns><c>true</c> if the type inherits from <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:ExtendableEnums.TypeExtensions.IsExtendableEnumDictionary(System.Type)">
+            <summary>
+            Checks to see if the given type is derived from <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to check.</param>
+            <returns><c>true</c> if the type inherits from <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/>, otherwise <c>false</c>.</returns>
         </member>
     </members>
 </doc>

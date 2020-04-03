@@ -5,7 +5,7 @@ This library is available from [NuGet.org](https://www.nuget.org/packages/Extend
 
 --------------------------
 
-A .NET Standard class library that provides base classes for creating enumerations that can be extended with additional class memebers. 
+A .NET Standard class library that provides base classes for creating enumerations that can be extended with additional class members. 
 
 See the [changelog](CHANGELOG.md) for changes and roadmap.
 
@@ -50,6 +50,9 @@ MyEnum.DeclaringTypes.Add(typeof(MyEnumExtraValuesClass));
 
 ### Min/Max Values
 The minimum or maximum values in an enumeration can be retrieved by calling the static `Min` and `Max` properties.
+
+### As an IDictionary Key
+When it is desired to use an ExtendableEnum as a key in a generic dictionary, `ExtendableEnumDictionary{TKey, TValue}` should be used in order to ensure proper serialization. 
 
 ### ASP.net Core Support
 
