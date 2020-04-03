@@ -25,7 +25,7 @@ namespace ExtendableEnums.UnitTests.ExtendableEnumDictionaryTests
         }
 
         [TestMethod]
-        public void DeserializeGivenDescriptionSerialized()
+        public void DeserializeGivenDisplayNameSerialized()
         {
             var serialized = "{ \"Active\":\"Active\",\"Deleted\":\"Deleted\"}";
 
