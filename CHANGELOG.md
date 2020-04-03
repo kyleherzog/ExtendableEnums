@@ -10,6 +10,7 @@ on NuGet.org.
 ## 2.2
 **2020-4-3**
 - [x] Added ExtendableEnumDictionary{TKey, TValue}
+- [x] Falling back to deserializing from DisplayName if cannot deserialize from Value 
 
 ## 2.1
 **2020-1-25**
