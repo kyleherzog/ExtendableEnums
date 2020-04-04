@@ -261,7 +261,7 @@ namespace ExtendableEnums
         /// Compares this instance with another to see if they have the same value.
         /// </summary>
         /// <param name="obj">The other object with which to compare.</param>
-        /// <returns>True if this instance and the the other have the same value, otherwise false.</returns>
+        /// <returns>True if this instance and the other have the same value, otherwise false.</returns>
         public override bool Equals(object obj)
         {
             return Equals(obj as TEnumeration);
