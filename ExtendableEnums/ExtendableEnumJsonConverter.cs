@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -11,8 +12,10 @@ namespace ExtendableEnums
     /// </summary>
     public class ExtendableEnumJsonConverter : JsonConverter
     {
-        private static readonly ConcurrentDictionary<Type, MethodInfo> parseValueMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
-        private static readonly ConcurrentDictionary<Type, MethodInfo> parseMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
+        private static readonly ConcurrentDictionary<Type, MethodInfo> tryParseValueMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
+
+        private static readonly ConcurrentDictionary<Type, MethodInfo> parseValueOrCreateMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
+        private static readonly ConcurrentDictionary<Type, MethodInfo> tryParseMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
 
         /// <summary>
         /// Determines whether this instance can convert the specified object type.
@@ -50,7 +53,6 @@ namespace ExtendableEnums
             }
 
             var valueType = GetTypeOfValueParameter(objectType);
-            var parseValueMethod = GetParseValueMethod(objectType);
 
             var rawValue = reader.Value;
             if (rawValue == null)
@@ -64,25 +66,45 @@ namespace ExtendableEnums
                 rawValue = dynamicObject.value?.Value;
             }
 
+            var parseValueOrCreateMethod = GetParseValueOrCreateMethod(objectType);
+
             if (rawValue == null)
             {
                 var value = GetDefault(valueType);
-                return parseValueMethod.Invoke(null, new object[] { value });
+                return parseValueOrCreateMethod.Invoke(null, new object[] { value });
             }
             else
             {
                 try
                 {
                     var value = Convert.ChangeType(rawValue, valueType, CultureInfo.InvariantCulture);
-                    var result = parseValueMethod.Invoke(null, new object[] { value });
-                    return result;
+
+                    var tryParseValueMethod = GetTryParseValueMethod(objectType);
+
+                    var parameters = new object[] { value, null };
+                    if ((bool)tryParseValueMethod.Invoke(null, parameters))
+                    {
+                        return parameters[1];
+                    }
                 }
                 catch (FormatException)
                 {
-                    var parseMethod = GetParseMethod(objectType);
-                    var result = parseMethod.Invoke(null, new object[] { rawValue });
-                    return result;
+                    Debug.WriteLine("FormatException caught.");
                 }
+
+                if (rawValue.GetType() == typeof(string))
+                {
+                    var rawParameters = new object[] { rawValue, null };
+                    var tryParseMethod = GetTryParseMethod(objectType);
+                    if ((bool)tryParseMethod.Invoke(null, rawParameters))
+                    {
+                        return rawParameters[1];
+                    }
+                }
+
+                var convertedValue = Convert.ChangeType(rawValue, valueType, CultureInfo.InvariantCulture);
+                var result = parseValueOrCreateMethod.Invoke(null, new object[] { convertedValue });
+                return result;
             }
         }
 
@@ -115,14 +137,19 @@ namespace ExtendableEnums
             }
         }
 
-        private static MethodInfo GetParseValueMethod(Type type)
+        private static MethodInfo GetTryParseValueMethod(Type type)
         {
-            return parseValueMethodCache.GetOrAdd(type, _ => type.GetMethod("ParseValueOrCreate", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
+            return tryParseValueMethodCache.GetOrAdd(type, _ => type.GetMethod("TryParseValue", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
         }
 
-        private static MethodInfo GetParseMethod(Type type)
+        private static MethodInfo GetParseValueOrCreateMethod(Type type)
         {
-            return parseMethodCache.GetOrAdd(type, _ => type.GetMethod("Parse", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
+            return parseValueOrCreateMethodCache.GetOrAdd(type, _ => type.GetMethod("ParseValueOrCreate", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
+        }
+
+        private static MethodInfo GetTryParseMethod(Type type)
+        {
+            return tryParseMethodCache.GetOrAdd(type, _ => type.GetMethod("TryParse", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
         }
 
         private Type GetTypeOfValueParameter(Type type)

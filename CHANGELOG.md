@@ -7,10 +7,10 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
-## 2.2
-**2020-4-3**
+## 3.0
+**2020-4-4**
 - [x] Added ExtendableEnumDictionary{TKey, TValue}
-- [x] Falling back to deserializing from DisplayName if cannot deserialize from Value 
+- [x] Falling back to trying to deserialize from DisplayName if cannot deserialize from Value before creating a new value 
 
 ## 2.1
 **2020-1-25**
