@@ -9,7 +9,7 @@ namespace ExtendableEnums.UnitTests.ExtendableEnumDictionaryTests
     public class SerializeShould
     {
         [TestMethod]
-        public void SerializeKeyAsValueOnly()
+        public void SerializeKeyAsValueOnlyGivenIntValue()
         {
             var items = new ExtendableEnumDictionary<SampleStatus, string>
             {
@@ -19,6 +19,19 @@ namespace ExtendableEnums.UnitTests.ExtendableEnumDictionaryTests
 
             var serialized = JsonConvert.SerializeObject(items);
             Assert.AreEqual("{\"1\":\"Active\",\"2\":\"Deleted\"}", serialized);
+        }
+
+        [TestMethod]
+        public void SerializeKeyAsValueOnlyGivenStringValue()
+        {
+            var items = new ExtendableEnumDictionary<SampleStatusByString, string>
+            {
+                { SampleStatusByString.Active, nameof(SampleStatusByString.Active) },
+                { SampleStatusByString.Deleted, nameof(SampleStatusByString.Deleted) },
+            };
+
+            var serialized = JsonConvert.SerializeObject(items);
+            Assert.AreEqual("{\"B\":\"Active\",\"C\":\"Deleted\"}", serialized);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ExtendableEnums.Testing.Models;
+﻿using System;
+using ExtendableEnums.Testing.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -27,6 +28,7 @@ namespace ExtendableEnums.UnitTests.ExtendableEnumDictionaryTests
         [TestMethod]
         public void DeserializeGivenDisplayNameSerialized()
         {
+            Console.WriteLine(JsonConvert.SerializeObject(SampleStatus.Active));
             var serialized = "{ \"Active\":\"Active\",\"Deleted\":\"Deleted\"}";
 
             var expected = new ExtendableEnumDictionary<SampleStatus, string>

@@ -86,8 +86,15 @@ namespace ExtendableEnums
             writer.WriteStartObject();
             foreach (var key in dictionary.Keys)
             {
-                var keySerialized = JsonConvert.SerializeObject(key);
-                writer.WritePropertyName(keySerialized);
+                if (key is IExtendableEnum<string> stringEnum)
+                {
+                    writer.WritePropertyName(stringEnum.Value);
+                }
+                else
+                {
+                    var keySerialized = JsonConvert.SerializeObject(key);
+                    writer.WritePropertyName(keySerialized);
+                }
 
                 serializer.Serialize(writer, dictionary[key]);
             }
