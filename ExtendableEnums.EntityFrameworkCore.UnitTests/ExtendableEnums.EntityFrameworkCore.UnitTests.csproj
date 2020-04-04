@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="28.4.1" />
+    <PackageReference Include="Bogus" Version="29.0.1" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
