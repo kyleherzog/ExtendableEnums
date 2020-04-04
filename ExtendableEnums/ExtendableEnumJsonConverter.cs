@@ -92,7 +92,7 @@ namespace ExtendableEnums
                     Debug.WriteLine("FormatException caught.");
                 }
 
-                if (rawValue.GetType() == typeof(string))
+                if (rawValue is string)
                 {
                     var rawParameters = new object[] { rawValue, null };
                     var tryParseMethod = GetTryParseMethod(objectType);
