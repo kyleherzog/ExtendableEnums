@@ -7,6 +7,11 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 3.0
+**2020-4-5**
+- [x] Added ExtendableEnumDictionary{TKey, TValue}
+- [x] Falling back to trying to deserialize from DisplayName if cannot deserialize from Value before creating a new value 
+
 ## 2.1
 **2020-1-25**
 - [x] Fix for ASP.NET model binding nulls. 
@@ -47,7 +52,7 @@ on NuGet.org.
 **2019-7-26**
 - [x] Added AspNetCore model binding support.
 - [x] Added IsExtendableEnum extension method to `Type` class
-- [x] Added `AddAllExtendableEnums` method to ExtendableEnums.Microsoft.AspNetCore.OData libary to allow bulk registration of ExtendableEnum types.
+- [x] Added `AddAllExtendableEnums` method to ExtendableEnums.Microsoft.AspNetCore.OData library to allow bulk registration of ExtendableEnum types.
 - [x] Added `RegisterAll` to ExtendableEnums.Simple.OData.Client.ExtendableEnumConverter to allow for bulk registration of ExtendableEnum types.
 
 

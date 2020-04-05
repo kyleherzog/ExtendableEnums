@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace ExtendableEnums
 {
     /// <summary>
-    /// An abastract base class providing extendedable enumeration support.
+    /// An abstract base class providing extendable enumeration support.
     /// </summary>
     /// <typeparam name="TEnumeration">The <see cref="Type"/> of this enumeration (itself).</typeparam>
     /// <typeparam name="TValue">The <see cref="Type"/> of the value property.</typeparam>
@@ -218,7 +218,7 @@ namespace ExtendableEnums
         /// <summary>
         /// Finds the enumeration object with the matching value.
         /// </summary>
-        /// <param name="value">The value which should be seached for.</param>
+        /// <param name="value">The value which should be searched for.</param>
         /// <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
         public static ExtendableEnumBase<TEnumeration, TValue> FromTValue(TValue value)
         {
@@ -240,7 +240,7 @@ namespace ExtendableEnums
         /// Tries to find an enumeration object with the specified value.
         /// </summary>
         /// <param name="value">The value which should be searched for.</param>
-        /// <param name="result">An ouput variable that will be populated with an enumeration object if a match is found.</param>
+        /// <param name="result">An output variable that will be populated with an enumeration object if a match is found.</param>
         /// <returns>True if an enumeration object with a matching value is found, otherwise false.</returns>
         public static bool TryParseValue(TValue value, out TEnumeration result)
         {
@@ -251,7 +251,7 @@ namespace ExtendableEnums
         /// Compares the value of this object with another enumeration object value to check for equality.
         /// </summary>
         /// <param name="other">The other enumeration object with which to compare.</param>
-        /// <returns>Zero if the enumeration objects have matching values. Less than zero if this instance preceeds the other. More than zero if the other value preceeds this instance.</returns>
+        /// <returns>Zero if the enumeration objects have matching values. Less than zero if this instance precedes the other. More than zero if the other value preceeds this instance.</returns>
         public int CompareTo(TEnumeration other)
         {
             return Value.CompareTo(other == default(TEnumeration) ? default(TValue) : other.Value);
@@ -261,7 +261,7 @@ namespace ExtendableEnums
         /// Compares this instance with another to see if they have the same value.
         /// </summary>
         /// <param name="obj">The other object with which to compare.</param>
-        /// <returns>True if this instance and the the other have the same value, otherwise false.</returns>
+        /// <returns>True if this instance and the other have the same value, otherwise false.</returns>
         public override bool Equals(object obj)
         {
             return Equals(obj as TEnumeration);
@@ -271,7 +271,7 @@ namespace ExtendableEnums
         /// Compares this instance with another to see if they have the same value.
         /// </summary>
         /// <param name="other">The other enumeration object with which to compare.</param>
-        /// <returns>True if this instance and the the other have the same value, otherwise false.</returns>
+        /// <returns>True if this instance and the other have the same value, otherwise false.</returns>
         public bool Equals(TEnumeration other)
         {
             return other != null && ValueEquals(other.Value);
