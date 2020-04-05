@@ -19,7 +19,7 @@
         </member>
         <member name="T:ExtendableEnums.ExtendableEnumBase`2">
             <summary>
-            An abastract base class providing extendedable enumeration support.
+            An abstract base class providing extendable enumeration support.
             </summary>
             <typeparam name="TEnumeration">The <see cref="T:System.Type"/> of this enumeration (itself).</typeparam>
             <typeparam name="TValue">The <see cref="T:System.Type"/> of the value property.</typeparam>
@@ -141,7 +141,7 @@
             <summary>
             Finds the enumeration object with the matching value.
             </summary>
-            <param name="value">The value which should be seached for.</param>
+            <param name="value">The value which should be searched for.</param>
             <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
         </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.TryParse(System.String,`0@)">
@@ -157,7 +157,7 @@
             Tries to find an enumeration object with the specified value.
             </summary>
             <param name="value">The value which should be searched for.</param>
-            <param name="result">An ouput variable that will be populated with an enumeration object if a match is found.</param>
+            <param name="result">An output variable that will be populated with an enumeration object if a match is found.</param>
             <returns>True if an enumeration object with a matching value is found, otherwise false.</returns>
         </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.CompareTo(`0)">
@@ -165,21 +165,21 @@
             Compares the value of this object with another enumeration object value to check for equality.
             </summary>
             <param name="other">The other enumeration object with which to compare.</param>
-            <returns>Zero if the enumeration objects have matching values. Less than zero if this instance preceeds the other. More than zero if the other value preceeds this instance.</returns>
+            <returns>Zero if the enumeration objects have matching values. Less than zero if this instance precedes the other. More than zero if the other value preceeds this instance.</returns>
         </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.Equals(System.Object)">
             <summary>
             Compares this instance with another to see if they have the same value.
             </summary>
             <param name="obj">The other object with which to compare.</param>
-            <returns>True if this instance and the the other have the same value, otherwise false.</returns>
+            <returns>True if this instance and the other have the same value, otherwise false.</returns>
         </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.Equals(`0)">
             <summary>
             Compares this instance with another to see if they have the same value.
             </summary>
             <param name="other">The other enumeration object with which to compare.</param>
-            <returns>True if this instance and the the other have the same value, otherwise false.</returns>
+            <returns>True if this instance and the other have the same value, otherwise false.</returns>
         </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.GetHashCode">
             <summary>
@@ -200,9 +200,108 @@
             <param name="value">The value with which to compare.</param>
             <returns>True if this values match, otherwise false.</returns>
         </member>
+        <member name="T:ExtendableEnums.ExtendableEnumDictionary`2">
+            <summary>
+            A specialized dictionary to ensure proper serialization when an <see cref="T:ExtendableEnums.ExtendableEnumBase`2" />
+            type object is the key type.
+            </summary>
+            <typeparam name="TKey">The type of the key.</typeparam>
+            <typeparam name="TValue">The type of the value.</typeparam>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumDictionary`2.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/> class.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumDictionary`2.#ctor(System.Collections.Generic.IDictionary{`0,`1},System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/> class.
+            </summary>
+            <param name="dictionary">
+            The <see cref="T:System.Collections.Generic.IDictionary`2"/> whose elements are copied to the
+            new <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/>.
+            </param>
+            <param name="comparer">
+            The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation to use when
+            comparing keys, or null to use the default <see cref="T:System.Collections.Generic.IEqualityComparer`1"/>
+            for the type of the key.
+            </param>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumDictionary`2.#ctor(System.Int32,System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/> class.
+            </summary>
+            <param name="capacity">
+            The initial number of elements that the <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/>
+            can contain.
+            </param>
+            <param name="comparer">
+            The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation to use when
+            comparing keys, or null to use the default <see cref="T:System.Collections.Generic.IEqualityComparer`1"/>
+            for the type of the key.
+            </param>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumDictionary`2.#ctor(System.Collections.Generic.IDictionary{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/> class.
+            </summary>
+            <param name="dictionary">
+            The <see cref="T:System.Collections.Generic.IDictionary`2"/> whose elements are copied to the
+            new <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/>.
+            </param>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumDictionary`2.#ctor(System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/> class.
+            </summary>
+            <param name="comparer">
+            The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation to use when
+            comparing keys, or null to use the default <see cref="T:System.Collections.Generic.IEqualityComparer`1"/>
+            for the type of the key.
+            </param>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumDictionary`2.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/> class.
+            </summary>
+            <param name="capacity">
+            The initial number of elements that the <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/>
+            can contain.
+            </param>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumDictionary`2.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/> class.
+            </summary>
+            <param name="info">
+            A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object containing the information.
+            </param>
+            <param name="context">
+            A <see cref="T:System.Runtime.Serialization.StreamingContext"/> structure containing the source
+            and destination of the serialized stream associated with
+            the <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/>.
+            </param>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumDictionary`2.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ExtendableEnums.ExtendableEnumDictionaryJsonConverter">
+            <summary>
+            Converts <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/> objects to and from JSON.
+            </summary>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumDictionaryJsonConverter.CanConvert(System.Type)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumDictionaryJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumDictionaryJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc/>
+        </member>
         <member name="T:ExtendableEnums.ExtendableEnumJsonConverter">
             <summary>
-            Converts ExtendableEnum obects to and from JSON.
+            Converts ExtendableEnum objects to and from JSON.
             </summary>
         </member>
         <member name="M:ExtendableEnums.ExtendableEnumJsonConverter.CanConvert(System.Type)">
@@ -301,10 +400,17 @@
         </member>
         <member name="M:ExtendableEnums.TypeExtensions.IsExtendableEnum(System.Type)">
             <summary>
-            Checks to see if the the given type is derived from <see cref="T:ExtendableEnums.ExtendableEnumBase`2" />.
+            Checks to see if the given type is derived from <see cref="T:ExtendableEnums.ExtendableEnumBase`2" />.
             </summary>
             <param name="type">The <see cref="T:System.Type" /> to check to see if it is an <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> decendant.</param>
             <returns><c>true</c> if the type inherits from <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:ExtendableEnums.TypeExtensions.IsExtendableEnumDictionary(System.Type)">
+            <summary>
+            Checks to see if the given type is derived from <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to check.</param>
+            <returns><c>true</c> if the type inherits from <see cref="T:ExtendableEnums.ExtendableEnumDictionary`2"/>, otherwise <c>false</c>.</returns>
         </member>
     </members>
 </doc>

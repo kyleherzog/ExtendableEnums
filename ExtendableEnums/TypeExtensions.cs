@@ -30,13 +30,23 @@ namespace ExtendableEnums
         }
 
         /// <summary>
-        /// Checks to see if the the given type is derived from <see cref="ExtendableEnumBase{TEnumeration, TValue}" />.
+        /// Checks to see if the given type is derived from <see cref="ExtendableEnumBase{TEnumeration, TValue}" />.
         /// </summary>
         /// <param name="type">The <see cref="Type" /> to check to see if it is an <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> decendant.</param>
         /// <returns><c>true</c> if the type inherits from <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>, otherwise <c>false</c>.</returns>
         public static bool IsExtendableEnum(this Type type)
         {
             return IsTypeDerivedFromGenericType(type, typeof(ExtendableEnumBase<,>));
+        }
+
+        /// <summary>
+        /// Checks to see if the given type is derived from <see cref="ExtendableEnumDictionary{TKey, TValue}"/>.
+        /// </summary>
+        /// <param name="type">The <see cref="Type"/> to check.</param>
+        /// <returns><c>true</c> if the type inherits from <see cref="ExtendableEnumDictionary{TKey, TValue}"/>, otherwise <c>false</c>.</returns>
+        public static bool IsExtendableEnumDictionary(this Type type)
+        {
+            return IsTypeDerivedFromGenericType(type, typeof(ExtendableEnumDictionary<,>));
         }
 
         private static bool IsTypeDerivedFromGenericType(Type typeToCheck, Type genericType)
