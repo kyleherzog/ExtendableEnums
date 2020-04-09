@@ -7,6 +7,10 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 3.1
+**2020-4-9**
+- [x] IComparable interface implemented
+
 ## 3.0
 **2020-4-5**
 - [x] Added ExtendableEnumDictionary{TKey, TValue}

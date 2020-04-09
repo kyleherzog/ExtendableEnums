@@ -31,6 +31,11 @@
             <param name="value">The core value with which to create this instance.</param>
             <param name="displayName">The core name with which to identify this instance.</param>
         </member>
+        <member name="P:ExtendableEnums.ExtendableEnumBase`2.DeclaringTypes">
+            <summary>
+            Gets a list of types other than itself that declare static extendable enums of this type.
+            </summary>
+        </member>
         <member name="P:ExtendableEnums.ExtendableEnumBase`2.Max">
             <summary>
             Gets the enumeration object with the highest Value property.
@@ -39,11 +44,6 @@
         <member name="P:ExtendableEnums.ExtendableEnumBase`2.Min">
             <summary>
             Gets the enumeration object with the lowest Value property.
-            </summary>
-        </member>
-        <member name="P:ExtendableEnums.ExtendableEnumBase`2.DeclaringTypes">
-            <summary>
-            Gets a list of types other than itself that declare static extendable enums of this type.
             </summary>
         </member>
         <member name="P:ExtendableEnums.ExtendableEnumBase`2.DisplayName">
@@ -55,6 +55,19 @@
             <summary>
             Gets the core value that represents this enumeration object.
             </summary>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.FromTValue(`1)">
+            <summary>
+            Finds the enumeration object with the matching value.
+            </summary>
+            <param name="value">The value which should be searched for.</param>
+            <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.GetAll">
+            <summary>
+            Get all the enumeration objects that have been defined for this type of enumeration.
+            </summary>
+            <returns>An array of all enumeration objects defined for this type of enumeration.</returns>
         </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.op_Implicit(`1)~ExtendableEnums.ExtendableEnumBase{`0,`1}">
             <summary>
@@ -110,12 +123,6 @@
             <param name="right">The second <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
             <returns><c>true</c> if the first parameter value property is greater than or equal to the other.</returns>
         </member>
-        <member name="M:ExtendableEnums.ExtendableEnumBase`2.GetAll">
-            <summary>
-            Get all the enumeration objects that have been defined for this type of enumeration.
-            </summary>
-            <returns>An array of all enumeration objects defined for this type of enumeration.</returns>
-        </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.Parse(System.String)">
             <summary>
             Finds the enumeration object with the matching DisplayName property.
@@ -137,13 +144,6 @@
             <param name="value">The value for which to search.</param>
             <returns>The enumeration object with a matching value, or a new enumeration object if no match exists.</returns>
         </member>
-        <member name="M:ExtendableEnums.ExtendableEnumBase`2.FromTValue(`1)">
-            <summary>
-            Finds the enumeration object with the matching value.
-            </summary>
-            <param name="value">The value which should be searched for.</param>
-            <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
-        </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.TryParse(System.String,`0@)">
             <summary>
             Tries to find an enumeration object with the specified display name.
@@ -161,11 +161,10 @@
             <returns>True if an enumeration object with a matching value is found, otherwise false.</returns>
         </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.CompareTo(`0)">
-            <summary>
-            Compares the value of this object with another enumeration object value to check for equality.
-            </summary>
-            <param name="other">The other enumeration object with which to compare.</param>
-            <returns>Zero if the enumeration objects have matching values. Less than zero if this instance precedes the other. More than zero if the other value preceeds this instance.</returns>
+            <inheritdoc/>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.CompareTo(System.Object)">
+            <inheritdoc/>
         </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.Equals(System.Object)">
             <summary>

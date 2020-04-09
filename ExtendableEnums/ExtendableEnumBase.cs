@@ -15,7 +15,7 @@ namespace ExtendableEnums
     /// <typeparam name="TValue">The <see cref="Type"/> of the value property.</typeparam>
     [JsonConverter(typeof(ExtendableEnumJsonConverter))]
     [TypeConverter(typeof(ExtendableEnumTypeConverter))]
-    public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum<TValue>, IComparable<TEnumeration>, IEquatable<TEnumeration>
+    public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum<TValue>, IComparable<TEnumeration>, IComparable, IEquatable<TEnumeration>
             where TEnumeration : ExtendableEnumBase<TEnumeration, TValue>
             where TValue : IComparable
     {
@@ -40,6 +40,11 @@ namespace ExtendableEnums
         }
 
         /// <summary>
+        /// Gets a list of types other than itself that declare static extendable enums of this type.
+        /// </summary>
+        public static IList<Type> DeclaringTypes { get; } = new List<Type>();
+
+        /// <summary>
         /// Gets the enumeration object with the highest Value property.
         /// </summary>
         public static TEnumeration Max => maximum.Value;
@@ -48,11 +53,6 @@ namespace ExtendableEnums
         /// Gets the enumeration object with the lowest Value property.
         /// </summary>
         public static TEnumeration Min => minimum.Value;
-
-        /// <summary>
-        /// Gets a list of types other than itself that declare static extendable enums of this type.
-        /// </summary>
-        public static IList<Type> DeclaringTypes { get; } = new List<Type>();
 
         /// <summary>
         /// Gets the core name to be used for display purposes and for identifying this enumeration object.
@@ -141,6 +141,16 @@ namespace ExtendableEnums
         }
 
         /// <summary>
+        /// Finds the enumeration object with the matching value.
+        /// </summary>
+        /// <param name="value">The value which should be searched for.</param>
+        /// <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
+        public static ExtendableEnumBase<TEnumeration, TValue> FromTValue(TValue value)
+        {
+            return ParseValue(value);
+        }
+
+        /// <summary>
         /// Get all the enumeration objects that have been defined for this type of enumeration.
         /// </summary>
         /// <returns>An array of all enumeration objects defined for this type of enumeration.</returns>
@@ -216,16 +226,6 @@ namespace ExtendableEnums
         }
 
         /// <summary>
-        /// Finds the enumeration object with the matching value.
-        /// </summary>
-        /// <param name="value">The value which should be searched for.</param>
-        /// <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
-        public static ExtendableEnumBase<TEnumeration, TValue> FromTValue(TValue value)
-        {
-            return ParseValue(value);
-        }
-
-        /// <summary>
         /// Tries to find an enumeration object with the specified display name.
         /// </summary>
         /// <param name="displayName">The display name which should be searched for.</param>
@@ -247,14 +247,31 @@ namespace ExtendableEnums
             return TryFind(e => e.ValueEquals(value), out result);
         }
 
-        /// <summary>
-        /// Compares the value of this object with another enumeration object value to check for equality.
-        /// </summary>
-        /// <param name="other">The other enumeration object with which to compare.</param>
-        /// <returns>Zero if the enumeration objects have matching values. Less than zero if this instance precedes the other. More than zero if the other value preceeds this instance.</returns>
+        /// <inheritdoc/>
         public int CompareTo(TEnumeration other)
         {
             return Value.CompareTo(other == default(TEnumeration) ? default(TValue) : other.Value);
+        }
+
+        /// <inheritdoc/>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            if (obj is IExtendableEnum<TValue> enumeration)
+            {
+                return Value.CompareTo(enumeration.Value);
+            }
+
+            if (obj is TValue)
+            {
+                return Value.CompareTo(obj);
+            }
+
+            throw new ArgumentException($"Cannot compare {typeof(TEnumeration)} with a {obj.GetType()}", nameof(obj));
         }
 
         /// <summary>
