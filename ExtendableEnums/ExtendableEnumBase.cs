@@ -66,25 +66,6 @@ namespace ExtendableEnums
         public TValue Value { get; private set; }
 
         /// <summary>
-        /// Finds the enumeration object with the matching value.
-        /// </summary>
-        /// <param name="value">The value which should be searched for.</param>
-        /// <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
-        public static ExtendableEnumBase<TEnumeration, TValue> FromTValue(TValue value)
-        {
-            return ParseValue(value);
-        }
-
-        /// <summary>
-        /// Get all the enumeration objects that have been defined for this type of enumeration.
-        /// </summary>
-        /// <returns>An array of all enumeration objects defined for this type of enumeration.</returns>
-        public static TEnumeration[] GetAll()
-        {
-            return enumerations.Value;
-        }
-
-        /// <summary>
         /// Implicitly converts an object of the value type to a full ExtendableEnum.
         /// </summary>
         /// <param name="value">The value of the Value property of the ExtendableEnum entry to parse.</param>
@@ -157,6 +138,25 @@ namespace ExtendableEnums
         public static bool operator >=(ExtendableEnumBase<TEnumeration, TValue> left, ExtendableEnumBase<TEnumeration, TValue> right)
         {
             return left != null && left.CompareTo((TEnumeration)right) >= 0;
+        }
+
+        /// <summary>
+        /// Finds the enumeration object with the matching value.
+        /// </summary>
+        /// <param name="value">The value which should be searched for.</param>
+        /// <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
+        public static ExtendableEnumBase<TEnumeration, TValue> FromTValue(TValue value)
+        {
+            return ParseValue(value);
+        }
+
+        /// <summary>
+        /// Get all the enumeration objects that have been defined for this type of enumeration.
+        /// </summary>
+        /// <returns>An array of all enumeration objects defined for this type of enumeration.</returns>
+        public static TEnumeration[] GetAll()
+        {
+            return enumerations.Value;
         }
 
         /// <summary>

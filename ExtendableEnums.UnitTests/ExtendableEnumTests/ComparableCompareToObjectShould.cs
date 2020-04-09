@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
 {
     [TestClass]
-    public class IComparableCompareToShould
+    public class ComparableCompareToObjectShould
     {
         [TestMethod]
         public void ReturnPositiveNumberGivenComparedWithNull()
