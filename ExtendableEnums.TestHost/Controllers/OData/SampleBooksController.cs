@@ -6,7 +6,6 @@ using ExtendableEnums.Testing.Models;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace ExtendableEnums.TestHost.Controllers.OData
 {

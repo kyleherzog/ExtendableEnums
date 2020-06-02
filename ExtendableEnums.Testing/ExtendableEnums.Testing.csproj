@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
     <NoWarn>SA0001,SA1600</NoWarn>
   </PropertyGroup>
 

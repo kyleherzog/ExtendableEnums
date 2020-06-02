@@ -6,7 +6,6 @@ using ExtendableEnums.TestHost;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace ExtendableEnums.Testing
