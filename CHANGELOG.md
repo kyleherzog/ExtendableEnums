@@ -7,6 +7,10 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 4.0
+**2020-6-2**
+- [x] ASP.NET Core 3.x compatibility
+
 ## 3.1
 **2020-4-9**
 - [x] IComparable interface implemented

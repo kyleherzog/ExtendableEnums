@@ -250,7 +250,7 @@ namespace ExtendableEnums
         /// <inheritdoc/>
         public int CompareTo(TEnumeration other)
         {
-            return Value.CompareTo(other == default(TEnumeration) ? default(TValue) : other.Value);
+            return Value.CompareTo(other == default(TEnumeration) ? default : other.Value);
         }
 
         /// <inheritdoc/>

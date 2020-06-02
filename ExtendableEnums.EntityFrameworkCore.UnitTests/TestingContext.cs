@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using EnsureThat;
 using ExtendableEnums.EntityFrameworkCore.UnitTests.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -27,7 +27,10 @@ namespace ExtendableEnums.EntityFrameworkCore.UnitTests
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            EnsureArg.IsNotNull(optionsBuilder, nameof(optionsBuilder));
+            if (optionsBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(optionsBuilder));
+            }
 
             optionsBuilder.UseSqlServer(ConnectionString);
 
@@ -47,7 +50,10 @@ namespace ExtendableEnums.EntityFrameworkCore.UnitTests
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            EnsureArg.IsNotNull(modelBuilder, nameof(modelBuilder));
+            if (modelBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(modelBuilder));
+            }
 
             if (SeedData != null)
             {

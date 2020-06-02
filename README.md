@@ -139,12 +139,12 @@ If desired, ExtendableEnum types can be registered individually as well, by call
 builder.AddExtendableEnum<SampleStatus>();
 ```
 
-Any POST methods for objects that have a property that includes an ExtendableEnum type can not have the parameter be the object type directly, but rather a `JObject` that is then converted to the actual object in the controller method.  This can be seen in the following example.
+Any POST methods for objects that have a property that includes an ExtendableEnum type can not have the parameter be the object type directly, but rather a `JsonElement` that is then converted to the actual object in the controller method.  This can be seen in the following example.
 ```        
 [EnableQuery]
-public IActionResult Post([FromBody] JObject json)
+public IActionResult Post([FromBody] JsonElement json)
 {
-    var book = json.ToObject<SampleBook>();
+    var book = JsonConvert.DeserializeObject<SampleBook>(json.GetRawText());
     var matchingBook = books.FirstOrDefault(b => b.Id == book.Id);
     if (matchingBook == null)
     {

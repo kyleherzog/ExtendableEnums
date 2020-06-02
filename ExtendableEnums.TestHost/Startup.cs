@@ -4,7 +4,6 @@ using ExtendableEnums.Testing.Models;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,24 +21,21 @@ namespace ExtendableEnums.TestHost
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public static void Configure(IApplicationBuilder app)
         {
             DataContext.ResetData();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
+            app.UseDeveloperExceptionPage();
 
-            app.UseMvc(routebuilder =>
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                routebuilder.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                routebuilder.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
-                routebuilder.MapODataServiceRoute("odata", "odata", GetEdmModel());
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
+                endpoints.MapODataRoute("odata", "odata", GetEdmModel());
             });
         }
 
@@ -50,7 +46,7 @@ namespace ExtendableEnums.TestHost
             services.AddMvc(options =>
             {
                 options.UseExtendableEnumModelBinding();
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         private static IEdmModel GetEdmModel()
