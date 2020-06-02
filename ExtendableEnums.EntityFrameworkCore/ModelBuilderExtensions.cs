@@ -1,4 +1,4 @@
-﻿using EnsureThat;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExtendableEnums.EntityFrameworkCore
@@ -15,7 +15,10 @@ namespace ExtendableEnums.EntityFrameworkCore
         /// <returns>The <see cref="ModelBuilder"/> passed in.</returns>
         public static ModelBuilder ApplyExtendableEnumConversions(this ModelBuilder modelBuilder)
         {
-            EnsureArg.IsNotNull(modelBuilder, nameof(modelBuilder));
+            if (modelBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(modelBuilder));
+            }
 
             var entityTypes = modelBuilder.Model.GetEntityTypes();
             foreach (var entityType in entityTypes)

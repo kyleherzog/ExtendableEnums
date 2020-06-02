@@ -9,14 +9,14 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
         [TestMethod]
         public void ReturnFalseGivenDisplayNameMatchDoesNotExist()
         {
-            var result = SampleStatus.TryParse(System.Guid.NewGuid().ToString(), out SampleStatus status);
+            var result = SampleStatus.TryParse(System.Guid.NewGuid().ToString(), out var status);
             Assert.IsFalse(result);
         }
 
         [TestMethod]
         public void ReturnTrueAndPopulateResultGivenDisplayNameMatchExists()
         {
-            var result = SampleStatus.TryParse("Inactive", out SampleStatus status);
+            var result = SampleStatus.TryParse("Inactive", out var status);
             Assert.IsTrue(result);
             Assert.AreEqual(SampleStatus.Inactive, status);
         }

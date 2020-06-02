@@ -19,22 +19,20 @@ namespace ExtendableEnums.LiteDB.UnitTests.BsonMapperExtensions
             var fileName = Path.GetTempFileName();
             try
             {
-                using (var db = new LiteDatabase($"Filename={fileName}", mapper))
+                using var db = new LiteDatabase($"Filename={fileName}", mapper);
+                var book = new SampleBookByStringStatus
                 {
-                    var book = new SampleBookByStringStatus
-                    {
-                        Status = SampleStatusByString.Deleted,
-                        Id = Guid.NewGuid().ToString(),
-                        Title = "The Greatest Book in the World",
-                    };
+                    Status = SampleStatusByString.Deleted,
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "The Greatest Book in the World",
+                };
 
-                    var collection = db.GetCollection<SampleBookByStringStatus>();
-                    collection.Insert(book);
+                var collection = db.GetCollection<SampleBookByStringStatus>();
+                collection.Insert(book);
 
-                    var bookFromDb = collection.FindOne(x => x.Id == book.Id);
+                var bookFromDb = collection.FindOne(x => x.Id == book.Id);
 
-                    bookFromDb.Should().BeEquivalentTo(book);
-                }
+                bookFromDb.Should().BeEquivalentTo(book);
             }
             finally
             {

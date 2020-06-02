@@ -56,19 +56,6 @@
             Gets the core value that represents this enumeration object.
             </summary>
         </member>
-        <member name="M:ExtendableEnums.ExtendableEnumBase`2.FromTValue(`1)">
-            <summary>
-            Finds the enumeration object with the matching value.
-            </summary>
-            <param name="value">The value which should be searched for.</param>
-            <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
-        </member>
-        <member name="M:ExtendableEnums.ExtendableEnumBase`2.GetAll">
-            <summary>
-            Get all the enumeration objects that have been defined for this type of enumeration.
-            </summary>
-            <returns>An array of all enumeration objects defined for this type of enumeration.</returns>
-        </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.op_Implicit(`1)~ExtendableEnums.ExtendableEnumBase{`0,`1}">
             <summary>
             Implicitly converts an object of the value type to a full ExtendableEnum.
@@ -122,6 +109,19 @@
             <param name="left">The first <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
             <param name="right">The second <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/>.</param>
             <returns><c>true</c> if the first parameter value property is greater than or equal to the other.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.FromTValue(`1)">
+            <summary>
+            Finds the enumeration object with the matching value.
+            </summary>
+            <param name="value">The value which should be searched for.</param>
+            <returns>The enumeration object with a matching value.  Throws an ArgumentException if no match exists.</returns>
+        </member>
+        <member name="M:ExtendableEnums.ExtendableEnumBase`2.GetAll">
+            <summary>
+            Get all the enumeration objects that have been defined for this type of enumeration.
+            </summary>
+            <returns>An array of all enumeration objects defined for this type of enumeration.</returns>
         </member>
         <member name="M:ExtendableEnums.ExtendableEnumBase`2.Parse(System.String)">
             <summary>
