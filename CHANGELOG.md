@@ -7,6 +7,10 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 4.1
+**2020-9-8**
+- [x] Updated Simple.OData.Client to v5.14.0
+
 ## 4.0
 **2020-6-2**
 - [x] ASP.NET Core 3.x compatibility
