@@ -1,11 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using ExtendableEnums.TestHost;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace ExtendableEnums.Testing
@@ -13,7 +17,7 @@ namespace ExtendableEnums.Testing
     public class TestingHost : IDisposable
     {
         private bool hasDisposed;
-        private IWebHost host;
+        private IHost host;
 
         public TestingHost(Type startupType, string solutionRelativeRootPath, bool deferWebHostCreation = false)
         {
@@ -36,7 +40,14 @@ namespace ExtendableEnums.Testing
         {
             get
             {
-                return host.ServerFeatures.Get<IServerAddressesFeature>().Addresses.First();
+                if (host == null)
+                {
+                    return string.Empty;
+                }
+
+                var server = host.Services.GetService<IServer>();
+                var feature = server.Features.Get<IServerAddressesFeature>();
+                return feature.Addresses.First();
             }
         }
 
@@ -100,15 +111,22 @@ namespace ExtendableEnums.Testing
 
         private void GetNewWebHostInternal()
         {
-            host = new WebHostBuilder()
-                .ConfigureAppConfiguration((webHostBuilderContext, configurationBuilder) =>
+            host = Host.CreateDefaultBuilder()
+                .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    configurationBuilder.AddJsonFile("appsettings.json", optional: true);
-                    configurationBuilder.AddEnvironmentVariables();
+                    webBuilder.ConfigureAppConfiguration((webHostBuilderContext, configurationBuilder) =>
+                    {
+                        configurationBuilder.AddJsonFile("appsettings.json", optional: true);
+                        configurationBuilder.AddEnvironmentVariables();
+                    })
+                    .ConfigureKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Loopback, 0);
+                    })
+                    .UseContentRoot(GetSolutionRelativeContentRoot(SolutionRelativeRootPath))
+                    .UseStartup(StartupType);
                 })
-                .UseKestrel()
-                .UseContentRoot(GetSolutionRelativeContentRoot(SolutionRelativeRootPath))
-                .UseStartup(StartupType)
+
                 .Build();
 
             host.Start();
