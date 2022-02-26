@@ -37,17 +37,17 @@ public class ExtendableEnumJsonConverter : JsonConverter
     /// <returns>The object value.</returns>
     public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
-        if (reader == null)
+        if (reader is null)
         {
             throw new ArgumentNullException(nameof(reader));
         }
 
-        if (objectType == null)
+        if (objectType is null)
         {
             throw new ArgumentNullException(nameof(objectType));
         }
 
-        if (serializer == null)
+        if (serializer is null)
         {
             throw new ArgumentNullException(nameof(serializer));
         }
@@ -55,10 +55,10 @@ public class ExtendableEnumJsonConverter : JsonConverter
         var valueType = GetTypeOfValueParameter(objectType);
 
         var rawValue = reader.Value;
-        if (rawValue == null)
+        if (rawValue is null)
         {
             var dynamicObject = serializer.Deserialize<dynamic>(reader);
-            if (dynamicObject == null)
+            if (dynamicObject is null)
             {
                 return null;
             }
@@ -68,7 +68,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
 
         var parseValueOrCreateMethod = GetParseValueOrCreateMethod(objectType);
 
-        if (rawValue == null)
+        if (rawValue is null)
         {
             var value = GetDefault(valueType);
             return parseValueOrCreateMethod.Invoke(null, new object?[] { value });
@@ -122,12 +122,12 @@ public class ExtendableEnumJsonConverter : JsonConverter
 
     private static object? GetDefault(Type t)
     {
-        if (t == null)
+        if (t is null)
         {
             throw new ArgumentNullException(nameof(t));
         }
 
-        if (t.IsValueType && Nullable.GetUnderlyingType(t) == null)
+        if (t.IsValueType && Nullable.GetUnderlyingType(t) is null)
         {
             return Activator.CreateInstance(t);
         }

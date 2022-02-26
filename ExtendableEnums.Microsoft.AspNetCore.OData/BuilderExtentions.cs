@@ -19,7 +19,7 @@ public static class BuilderExtentions
     /// <returns>The original <see cref="ODataConventionModelBuilder"/> which was passed in as a parameter.</returns>
     public static ODataConventionModelBuilder AddAllExtendableEnums(this ODataConventionModelBuilder builder, Type assemblyMarkerType)
     {
-        if (assemblyMarkerType == null)
+        if (assemblyMarkerType is null)
         {
             throw new ArgumentNullException(nameof(assemblyMarkerType));
         }
@@ -35,7 +35,7 @@ public static class BuilderExtentions
     /// <returns>The original <see cref="ODataConventionModelBuilder"/> which was passed in as a parameter.</returns>
     public static ODataConventionModelBuilder AddAllExtendableEnums(this ODataConventionModelBuilder builder, Assembly assembly)
     {
-        if (assembly == null)
+        if (assembly is null)
         {
             throw new ArgumentNullException(nameof(assembly));
         }
@@ -69,7 +69,7 @@ public static class BuilderExtentions
     /// <returns>The <see cref="ComplexTypeConfiguration"/> that the ExtendableEnum gets registered as.</returns>
     public static ComplexTypeConfiguration AddExtendableEnum(this ODataConventionModelBuilder builder, Type enumerationType)
     {
-        if (builder == null)
+        if (builder is null)
         {
             throw new ArgumentNullException(nameof(builder));
         }
@@ -86,7 +86,7 @@ public static class BuilderExtentions
 
         var attribute = propertyInfo.GetCustomAttribute<DataMemberAttribute>(inherit: false);
 
-        if (attribute != null && !String.IsNullOrWhiteSpace(attribute.Name))
+        if (attribute is not null && !String.IsNullOrWhiteSpace(attribute.Name))
         {
             property.Name = attribute.Name;
         }

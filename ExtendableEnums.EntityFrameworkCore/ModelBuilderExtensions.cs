@@ -16,7 +16,7 @@ public static class ModelBuilderExtensions
     /// <returns>The <see cref="ModelBuilder"/> passed in.</returns>
     public static ModelBuilder ApplyExtendableEnumConversions(this ModelBuilder modelBuilder)
     {
-        if (modelBuilder == null)
+        if (modelBuilder is null)
         {
             throw new ArgumentNullException(nameof(modelBuilder));
         }

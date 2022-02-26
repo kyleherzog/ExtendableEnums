@@ -11,13 +11,13 @@ public static class AssemblyInitializer
     [AssemblyCleanup]
     public static void CleanUp()
     {
-        TestingHost.Instance.Dispose();
+        TestingHost.Instance?.Dispose();
     }
 
     [AssemblyInitialize]
     public static void Initialize(TestContext context)
     {
-        if (context == null)
+        if (context is null)
         {
             throw new ArgumentNullException(nameof(context));
         }

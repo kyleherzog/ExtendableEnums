@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
     <ApplicationVersion>4.1</ApplicationVersion>
     <ApplicationRevision>0</ApplicationRevision>
     <Version>4.1</Version>

@@ -39,7 +39,7 @@ public class ConvertFromShould
     {
         var value = "unknown-value";
         var converter = new ExtendableEnumTypeConverter(typeof(SampleStatusByString));
-        var result = (SampleStatusByString)converter.ConvertFrom(value);
-        Assert.AreEqual(value, result.Value);
+        var result = (SampleStatusByString?)converter.ConvertFrom(value);
+        Assert.AreEqual(value, result?.Value);
     }
 }

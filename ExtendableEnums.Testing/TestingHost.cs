@@ -17,7 +17,7 @@ namespace ExtendableEnums.Testing;
 public class TestingHost : IDisposable
 {
     private bool hasDisposed;
-    private IHost host;
+    private IHost? host;
 
     public TestingHost(Type startupType, string solutionRelativeRootPath, bool deferWebHostCreation = false)
     {
@@ -34,19 +34,25 @@ public class TestingHost : IDisposable
         Dispose(false);
     }
 
-    public static TestingHost Instance { get; set; }
+    public static TestingHost? Instance { get; set; }
 
     public string Address
     {
         get
         {
-            if (host == null)
+            if (host is null)
             {
                 return string.Empty;
             }
 
-            var server = host.Services.GetService<IServer>();
+            var server = host.Services.GetRequiredService<IServer>();
+
             var feature = server.Features.Get<IServerAddressesFeature>();
+            if (feature is null)
+            {
+                throw new InvalidOperationException("Unable to find the 'IServerAddressFeature' to read the address.");
+            }
+
             return feature.Addresses.First();
         }
     }
@@ -63,6 +69,16 @@ public class TestingHost : IDisposable
 
     public Type StartupType { get; }
 
+    public static TestingHost GetRequiredInstance()
+    {
+        if (Instance is null)
+        {
+            throw new InvalidOperationException("The TestingHost Instance must be set first.");
+        }
+
+        return Instance;
+    }
+
     public void Dispose()
     {
         Dispose(true);
@@ -71,10 +87,10 @@ public class TestingHost : IDisposable
 
     public async Task GetNewWebHost()
     {
-        if (host != null)
+        if (host is not null)
         {
             await host.StopAsync().ConfigureAwait(false);
-            if (host != null)
+            if (host is not null)
             {
                 host.Dispose();
             }
@@ -100,10 +116,15 @@ public class TestingHost : IDisposable
     private static string GetSolutionRelativeContentRoot(string path)
     {
         var solutionRoot = new DirectoryInfo(PlatformServices.Default.Application.ApplicationBasePath) // netcoreapp#.# folder
-            .Parent // Debug or Release folder
-            .Parent // bin folder
-            .Parent // project folder
-            .Parent.FullName;  // solution folder
+            ?.Parent // Debug or Release folder
+            ?.Parent // bin folder
+            ?.Parent // project folder
+            ?.Parent?.FullName;  // solution folder
+
+        if (solutionRoot is null)
+        {
+            throw new FileNotFoundException("Unable to find the solution root.");
+        }
 
         var result = Path.GetFullPath(Path.Combine(solutionRoot, path));
         return result;

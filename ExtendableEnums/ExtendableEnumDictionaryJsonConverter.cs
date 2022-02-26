@@ -18,17 +18,17 @@ public class ExtendableEnumDictionaryJsonConverter : JsonConverter
     /// <inheritdoc/>
     public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
-        if (objectType == null)
+        if (objectType is null)
         {
             throw new ArgumentNullException(nameof(objectType));
         }
 
-        if (reader == null)
+        if (reader is null)
         {
             throw new ArgumentNullException(nameof(reader));
         }
 
-        if (serializer == null)
+        if (serializer is null)
         {
             throw new ArgumentNullException(nameof(serializer));
         }
@@ -66,17 +66,17 @@ public class ExtendableEnumDictionaryJsonConverter : JsonConverter
     /// <inheritdoc/>
     public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
-        if (writer == null)
+        if (writer is null)
         {
             throw new ArgumentNullException(nameof(writer));
         }
 
-        if (serializer == null)
+        if (serializer is null)
         {
             throw new ArgumentNullException(nameof(serializer));
         }
 
-        if (value == null)
+        if (value is null)
         {
             throw new ArgumentNullException(nameof(value));
         }

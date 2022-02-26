@@ -14,7 +14,7 @@ public static class TypeExtensions
     /// <returns>The default value of the given type.</returns>
     public static object? GetDefault(this Type type)
     {
-        if (type == null)
+        if (type is null)
         {
             throw new ArgumentNullException(nameof(type));
         }
@@ -55,7 +55,7 @@ public static class TypeExtensions
         {
             return false;
         }
-        else if (typeToCheck == null)
+        else if (typeToCheck is null)
         {
             return false;
         }

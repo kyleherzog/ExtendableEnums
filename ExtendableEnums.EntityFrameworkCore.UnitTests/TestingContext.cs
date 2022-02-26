@@ -19,22 +19,22 @@ public class TestingContext : DbContext
 
     public bool IsLoggingSensitiveData { get; set; }
 
-    public ILoggerFactory LoggerFactory { get; set; }
+    public ILoggerFactory? LoggerFactory { get; set; }
 
-    public DbSet<SamplePersonEntity> People { get; set; }
+    public DbSet<SamplePersonEntity>? People { get; set; }
 
-    public IEnumerable<object> SeedData { get; set; }
+    public IEnumerable<object>? SeedData { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (optionsBuilder == null)
+        if (optionsBuilder is null)
         {
             throw new ArgumentNullException(nameof(optionsBuilder));
         }
 
         optionsBuilder.UseSqlServer(ConnectionString);
 
-        if (SeedData != null)
+        if (SeedData is not null)
         {
             optionsBuilder.ReplaceService<IModelCacheKeyFactory, NoModelCacheKeyFactory>();
         }
@@ -50,12 +50,12 @@ public class TestingContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        if (modelBuilder == null)
+        if (modelBuilder is null)
         {
             throw new ArgumentNullException(nameof(modelBuilder));
         }
 
-        if (SeedData != null)
+        if (SeedData is not null)
         {
             var types = SeedData.Select(x => x.GetType()).Distinct();
             foreach (var type in types)

@@ -16,10 +16,10 @@ public class RegisterShould
     [TestMethod]
     public async Task RegisterConverterGivenGenericMethodCalled()
     {
-        await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
+        await TestingHost.GetRequiredInstance().GetNewWebHost().ConfigureAwait(true);
         var settings = new ODataClientSettings
         {
-            BaseUri = TestingHost.Instance.BaseODataUrl,
+            BaseUri = TestingHost.GetRequiredInstance().BaseODataUrl,
         };
 
         settings.RegisterExtendableEnum<SampleStatus>();
@@ -39,10 +39,10 @@ public class RegisterShould
     [TestMethod]
     public async Task RegisterConverterGivenGenericMethodCalledAndPosted()
     {
-        await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
+        await TestingHost.GetRequiredInstance().GetNewWebHost().ConfigureAwait(true);
         var settings = new ODataClientSettings
         {
-            BaseUri = TestingHost.Instance.BaseODataUrl,
+            BaseUri = TestingHost.GetRequiredInstance().BaseODataUrl,
             IgnoreUnmappedProperties = true,
         };
 
@@ -70,10 +70,10 @@ public class RegisterShould
     [TestMethod]
     public async Task RegisterConverterGivenNonGenericMethodCalled()
     {
-        await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
+        await TestingHost.GetRequiredInstance().GetNewWebHost().ConfigureAwait(true);
         var settings = new ODataClientSettings
         {
-            BaseUri = TestingHost.Instance.BaseODataUrl,
+            BaseUri = TestingHost.GetRequiredInstance().BaseODataUrl,
         };
         settings.RegisterExtendableEnum(typeof(SampleStatus));
         var client = new ODataClient(settings);
@@ -93,10 +93,10 @@ public class RegisterShould
     [ExpectedException(typeof(ArgumentException))]
     public async Task ThrowArgumentExceptionGivenTypeIsNotExtendableEnumDescendant()
     {
-        await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
+        await TestingHost.GetRequiredInstance().GetNewWebHost().ConfigureAwait(true);
         var settings = new ODataClientSettings
         {
-            BaseUri = TestingHost.Instance.BaseODataUrl,
+            BaseUri = TestingHost.GetRequiredInstance().BaseODataUrl,
         };
 
         settings.RegisterExtendableEnum(typeof(string));

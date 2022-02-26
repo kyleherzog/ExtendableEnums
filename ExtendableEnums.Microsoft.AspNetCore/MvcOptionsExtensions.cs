@@ -14,7 +14,7 @@ public static class MvcOptionsExtensions
     /// <param name="options">The <see cref="MvcOptions"/> for which to add the model binding provider.</param>
     public static void UseExtendableEnumModelBinding(this MvcOptions options)
     {
-        if (options == null)
+        if (options is null)
         {
             throw new ArgumentNullException(nameof(options));
         }

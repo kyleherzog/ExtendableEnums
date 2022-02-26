@@ -10,7 +10,7 @@ public static class Initializer
     [AssemblyInitialize]
     public static void Initialize(TestContext context)
     {
-        if (context == null)
+        if (context is null)
         {
             throw new ArgumentNullException(nameof(context));
         }

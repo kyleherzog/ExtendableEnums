@@ -26,7 +26,7 @@ public class ModelBindingTests : IDisposable
     [TestMethod]
     public async Task BindTheExtendableEnumCorrectlyGivenIntBasedValue()
     {
-        await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
+        await TestingHost.GetRequiredInstance().GetNewWebHost().ConfigureAwait(true);
 
         var values = new Dictionary<string, string>()
         {
@@ -36,7 +36,7 @@ public class ModelBindingTests : IDisposable
         };
 
         using var content = new FormUrlEncodedContent(values);
-        var targetUrl = new Uri($"{TestingHost.Instance.Address}/samplebooks/edit/1");
+        var targetUrl = new Uri($"{TestingHost.GetRequiredInstance().Address}/samplebooks/edit/1");
         using var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true);
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
@@ -49,7 +49,7 @@ public class ModelBindingTests : IDisposable
     [TestMethod]
     public async Task BindTheExtendableEnumCorrectlyGivenNonExistentIntBasedValue()
     {
-        await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
+        await TestingHost.GetRequiredInstance().GetNewWebHost().ConfigureAwait(true);
 
         var values = new Dictionary<string, string>()
         {
@@ -58,7 +58,7 @@ public class ModelBindingTests : IDisposable
         };
 
         using var content = new FormUrlEncodedContent(values);
-        var targetUrl = new Uri($"{TestingHost.Instance.Address}/samplebooks/edit/1");
+        var targetUrl = new Uri($"{TestingHost.GetRequiredInstance().Address}/samplebooks/edit/1");
         using var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true);
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
@@ -71,9 +71,9 @@ public class ModelBindingTests : IDisposable
     [TestMethod]
     public async Task BindTheExtendableEnumCorrectlyGivenNullIntBasedValue()
     {
-        await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
+        await TestingHost.GetRequiredInstance().GetNewWebHost().ConfigureAwait(true);
 
-        var values = new Dictionary<string, string>()
+        var values = new Dictionary<string, string?>()
         {
             { "id", "4" },
             { "title", "My Title" },
@@ -81,7 +81,7 @@ public class ModelBindingTests : IDisposable
         };
 
         using var content = new FormUrlEncodedContent(values);
-        var targetUrl = new Uri($"{TestingHost.Instance.Address}/samplebooks/edit/1");
+        var targetUrl = new Uri($"{TestingHost.GetRequiredInstance().Address}/samplebooks/edit/1");
         using var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true);
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
@@ -94,7 +94,7 @@ public class ModelBindingTests : IDisposable
     [TestMethod]
     public async Task BindTheExtendableEnumCorrectlyGivenStringBasedValue()
     {
-        await TestingHost.Instance.GetNewWebHost().ConfigureAwait(true);
+        await TestingHost.GetRequiredInstance().GetNewWebHost().ConfigureAwait(true);
 
         var values = new Dictionary<string, string>()
         {
@@ -104,7 +104,7 @@ public class ModelBindingTests : IDisposable
         };
 
         using var content = new FormUrlEncodedContent(values);
-        var targetUrl = new Uri($"{TestingHost.Instance.Address}/samplebooksbystringstatus/edit/1");
+        var targetUrl = new Uri($"{TestingHost.GetRequiredInstance().Address}/samplebooksbystringstatus/edit/1");
         using var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true);
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 

@@ -22,7 +22,8 @@ public class ParseValueOrCreateShould
         var value = -123;
         var result = SampleStatus.ParseValueOrCreate(value);
         var constructor = typeof(SampleStatus).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { typeof(int), typeof(string), typeof(string) }, null);
-        var expected = constructor.Invoke(new object[] { value, value.ToString(CultureInfo.CurrentCulture), null });
+        Assert.IsNotNull(constructor);
+        var expected = constructor.Invoke(new object?[] { value, value.ToString(CultureInfo.CurrentCulture), null });
         Assert.AreEqual(expected, result);
     }
 }

@@ -22,7 +22,7 @@ public class ExtendableEnumTypeConverter : TypeConverter
     /// <param name="type">A type that extends ExtendableEnumBase.</param>
     public ExtendableEnumTypeConverter(Type type)
     {
-        if (type == null)
+        if (type is null)
         {
             throw new ArgumentNullException(nameof(type));
         }

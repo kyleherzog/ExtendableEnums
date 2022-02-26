@@ -13,9 +13,9 @@ public class ExtendableEnumModelBinderProvider : IModelBinderProvider
     /// </summary>
     /// <param name="context">The current <see cref="ModelBinderProviderContext"/>.</param>
     /// <returns>An <see cref="ExtendableEnumBinder"/> if the model type derives from <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>, otherwise null.</returns>
-    public IModelBinder GetBinder(ModelBinderProviderContext context)
+    public IModelBinder? GetBinder(ModelBinderProviderContext context)
     {
-        if (context == null)
+        if (context is null)
         {
             throw new ArgumentNullException(nameof(context));
         }

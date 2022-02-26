@@ -17,7 +17,7 @@ public static class ExtendableEnumConverter
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3011:Reflection should not be used to increase accessibility of classes, methods, or fields", Justification = "Getting convert method in this class.")]
     private static readonly Lazy<MethodInfo> primaryConvertMethod = new(() => typeof(ExtendableEnumConverter).GetMethod(nameof(Convert), BindingFlags.NonPublic | BindingFlags.Static, null, new Type[] { typeof(IDictionary<string, object>) }, null));
-    private static readonly ConcurrentDictionary<Type, TypeConverterConfiguration> typeConfigurationCache = new();
+    private static readonly ConcurrentDictionary<Type, TypeConverterConfiguration?> typeConfigurationCache = new();
 
     /// <summary>
     /// Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums in the <see cref="Assembly"/> that contais the given <see cref="Type"/>.
@@ -26,7 +26,7 @@ public static class ExtendableEnumConverter
     /// <param name="assemblyMarkerType">The <see cref="Type"/> to use as a reference to find the containing <see cref="Assembly"/> that will be searched for ExtendableEnums to be registered.</param>
     public static void RegisterAllExtendableEnums(this ODataClientSettings settings, Type assemblyMarkerType)
     {
-        if (assemblyMarkerType == null)
+        if (assemblyMarkerType is null)
         {
             throw new ArgumentNullException(nameof(assemblyMarkerType));
         }
@@ -41,7 +41,7 @@ public static class ExtendableEnumConverter
     /// <param name="assembly">The <see cref="Assembly "/> in which to search for ExtendableEnums to register.</param>
     public static void RegisterAllExtendableEnums(this ODataClientSettings settings, Assembly assembly)
     {
-        if (assembly == null)
+        if (assembly is null)
         {
             throw new ArgumentNullException(nameof(assembly));
         }
@@ -71,18 +71,18 @@ public static class ExtendableEnumConverter
     /// <param name="enumDescendant">The <see cref="Type" /> to be registered as an ExtenableEnum.</param>
     public static void RegisterExtendableEnum(this ODataClientSettings settings, Type enumDescendant)
     {
-        if (enumDescendant == null)
+        if (enumDescendant is null)
         {
             throw new ArgumentNullException(nameof(enumDescendant));
         }
 
         var config = typeConfigurationCache.GetOrAdd(enumDescendant, GetTypeConverterConfiguration(enumDescendant));
-        if (config == null)
+        if (config is null)
         {
             throw new ArgumentException($"The type argument must inherit from ExtendableEnumBase.", nameof(enumDescendant));
         }
 
-        if (settings == null)
+        if (settings is null)
         {
             throw new ArgumentNullException(nameof(settings));
         }
@@ -111,7 +111,7 @@ public static class ExtendableEnumConverter
                                 where TEnumeration : ExtendableEnumBase<TEnumeration, TValue>
                                 where TValue : IComparable
     {
-        if (dictionary == null)
+        if (dictionary is null)
         {
             throw new ArgumentNullException(nameof(dictionary));
         }
@@ -127,16 +127,12 @@ public static class ExtendableEnumConverter
         return Convert(config.EnumerationType, config.ValueType, dictionary);
     }
 
-    private static TypeConverterConfiguration GetTypeConverterConfiguration(Type type)
+    private static TypeConverterConfiguration? GetTypeConverterConfiguration(Type type)
     {
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ExtendableEnumBase<,>))
         {
             var args = type.GetGenericArguments();
-            return new TypeConverterConfiguration
-            {
-                EnumerationType = args[0],
-                ValueType = args[1],
-            };
+            return new TypeConverterConfiguration(args[0], args[1]);
         }
 
         if (type.BaseType != typeof(object))
@@ -149,6 +145,12 @@ public static class ExtendableEnumConverter
 
     private sealed class TypeConverterConfiguration
     {
+        public TypeConverterConfiguration(Type enumerationType, Type valueType)
+        {
+            EnumerationType = enumerationType;
+            ValueType = valueType;
+        }
+
         public Type EnumerationType { get; set; }
 
         public Type ValueType { get; set; }

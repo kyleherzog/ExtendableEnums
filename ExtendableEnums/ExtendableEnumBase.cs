@@ -30,7 +30,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// <param name="displayName">The core name with which to identify this instance.</param>
     protected ExtendableEnumBase(TValue value, string displayName)
     {
-        if (value == null)
+        if (value is null)
         {
             throw new ArgumentNullException(nameof(value));
         }
@@ -249,7 +249,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     }
 
     /// <inheritdoc/>
-    public int CompareTo(TEnumeration other)
+    public int CompareTo(TEnumeration? other)
     {
         return Value.CompareTo(other is null ? default : other.Value);
     }
@@ -257,7 +257,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// <inheritdoc/>
     public int CompareTo(object? obj)
     {
-        if (obj == null)
+        if (obj is null)
         {
             return 1;
         }

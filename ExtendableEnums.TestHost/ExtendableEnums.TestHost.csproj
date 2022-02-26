@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
     <NoWarn>SEC0019,SEC0120,SA1600,SA0001</NoWarn>
   </PropertyGroup>
 

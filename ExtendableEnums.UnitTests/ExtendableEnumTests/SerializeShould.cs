@@ -83,7 +83,7 @@ public class SerializeShould
     [TestMethod]
     public void SerializeToNull()
     {
-        SampleStatus status = null;
+        SampleStatus? status = null;
         var serialized = JsonConvert.SerializeObject(status);
         Assert.AreEqual("null", serialized);
     }

@@ -21,7 +21,7 @@ public class ExtendableEnumBinder : IModelBinder
     /// </returns>
     public Task BindModelAsync(ModelBindingContext bindingContext)
     {
-        if (bindingContext == null)
+        if (bindingContext is null)
         {
             throw new ArgumentNullException(nameof(bindingContext));
         }

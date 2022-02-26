@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -54,11 +55,30 @@ public class ExtendableEnumSelectTagHelper : SelectTagHelper
             var selectItems = new List<SelectListItem>();
 
             var getAllMethod = modelType.GetMethod("GetAll", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+
+            if (getAllMethod is null)
+            {
+                throw new MissingMethodException("The ExtendableEnum 'GetAll' method could not be found.", "GetAll");
+            }
+
             var result = getAllMethod.Invoke(null, null);
 
-            var items = result as IEnumerable<object>;
+            if (result is not IEnumerable<object> items)
+            {
+                throw new InvalidCastException("Unable to cast GetAll result to IEnumberable<object>.");
+            }
+
             var valueProperty = items.First().GetType().GetProperty("Value");
+            if (valueProperty is null)
+            {
+                throw new MissingMemberException("The property 'Value' could not be found.", "Value");
+            }
+
             var displayNameProperty = items.First().GetType().GetProperty("DisplayName");
+            if (displayNameProperty is null)
+            {
+                throw new MissingMemberException("The property 'DisplayName' could not be found.", "DisplayName");
+            }
 
             foreach (var item in items)
             {
@@ -80,7 +100,7 @@ public class ExtendableEnumSelectTagHelper : SelectTagHelper
             Items = selectItems;
 
             // set the current value as selected.
-            if (For?.Model != null)
+            if (For?.Model is not null)
             {
                 var modelValue = valueProperty.GetValue(For.Model, null);
                 var forName = For.Name;
@@ -89,7 +109,7 @@ public class ExtendableEnumSelectTagHelper : SelectTagHelper
                     forName = $"{ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix}.{forName}";
                 }
 
-                ViewContext.ModelState.SetModelValue(forName, modelValue, modelValue.ToString());
+                ViewContext.ModelState.SetModelValue(forName, modelValue, modelValue?.ToString());
             }
         }
 

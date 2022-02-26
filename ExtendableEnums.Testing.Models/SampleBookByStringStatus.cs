@@ -6,11 +6,11 @@ namespace ExtendableEnums.Testing.Models;
 public class SampleBookByStringStatus
 {
     [DataMember(Name = "id")]
-    public string Id { get; set; }
+    public string? Id { get; set; }
 
     [DataMember(Name = "status")]
-    public SampleStatusByString Status { get; set; }
+    public SampleStatusByString? Status { get; set; }
 
     [DataMember(Name = "title")]
-    public string Title { get; set; }
+    public string? Title { get; set; }
 }
