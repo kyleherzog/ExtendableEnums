@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using Simple.OData.Client;
 
@@ -12,9 +13,45 @@ namespace ExtendableEnums.SimpleOData.Client;
 /// </summary>
 public static class ExtendableEnumConverter
 {
-    private static readonly ConcurrentDictionary<Type, MethodInfo> genericConvertMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
-    private static readonly Lazy<MethodInfo> primaryConvertMethod = new Lazy<MethodInfo>(() => typeof(ExtendableEnumConverter).GetMethod(nameof(Convert), BindingFlags.NonPublic | BindingFlags.Static, null, new Type[] { typeof(IDictionary<string, object>) }, null));
-    private static readonly ConcurrentDictionary<Type, TypeConverterConfiguration> typeConfigurationCache = new ConcurrentDictionary<Type, TypeConverterConfiguration>();
+    private static readonly ConcurrentDictionary<Type, MethodInfo> genericConvertMethodCache = new();
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3011:Reflection should not be used to increase accessibility of classes, methods, or fields", Justification = "Getting convert method in this class.")]
+    private static readonly Lazy<MethodInfo> primaryConvertMethod = new(() => typeof(ExtendableEnumConverter).GetMethod(nameof(Convert), BindingFlags.NonPublic | BindingFlags.Static, null, new Type[] { typeof(IDictionary<string, object>) }, null));
+    private static readonly ConcurrentDictionary<Type, TypeConverterConfiguration> typeConfigurationCache = new();
+
+    /// <summary>
+    /// Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums in the <see cref="Assembly"/> that contais the given <see cref="Type"/>.
+    /// </summary>
+    /// <param name="settings">The <see cref="ODataClientSettings" /> with which to register the type converter.</param>
+    /// <param name="assemblyMarkerType">The <see cref="Type"/> to use as a reference to find the containing <see cref="Assembly"/> that will be searched for ExtendableEnums to be registered.</param>
+    public static void RegisterAllExtendableEnums(this ODataClientSettings settings, Type assemblyMarkerType)
+    {
+        if (assemblyMarkerType == null)
+        {
+            throw new ArgumentNullException(nameof(assemblyMarkerType));
+        }
+
+        RegisterAllExtendableEnums(settings, assemblyMarkerType.Assembly);
+    }
+
+    /// <summary>
+    /// Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums in the given <see cref="Assembly"/>.
+    /// </summary>
+    /// <param name="settings">The <see cref="ODataClientSettings" /> with which to register the type converter.</param>
+    /// <param name="assembly">The <see cref="Assembly "/> in which to search for ExtendableEnums to register.</param>
+    public static void RegisterAllExtendableEnums(this ODataClientSettings settings, Assembly assembly)
+    {
+        if (assembly == null)
+        {
+            throw new ArgumentNullException(nameof(assembly));
+        }
+
+        var types = assembly.GetTypes();
+        foreach (var type in types.Where(x => x.IsExtendableEnum()))
+        {
+            RegisterExtendableEnum(settings, type);
+        }
+    }
 
     /// <summary>
     /// Registers type converter with the ODataSettings to be used with an ODataClient.
@@ -54,43 +91,6 @@ public static class ExtendableEnumConverter
         {
             return Convert(config, d);
         });
-    }
-
-    /// <summary>
-    /// Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums in the <see cref="Assembly"/> that contais the given <see cref="Type"/>.
-    /// </summary>
-    /// <param name="settings">The <see cref="ODataClientSettings" /> with which to register the type converter.</param>
-    /// <param name="assemblyMarkerType">The <see cref="Type"/> to use as a reference to find the containing <see cref="Assembly"/> that will be searched for ExtendableEnums to be registered.</param>
-    public static void RegisterAllExtendableEnums(this ODataClientSettings settings, Type assemblyMarkerType)
-    {
-        if (assemblyMarkerType == null)
-        {
-            throw new ArgumentNullException(nameof(assemblyMarkerType));
-        }
-
-        RegisterAllExtendableEnums(settings, assemblyMarkerType.Assembly);
-    }
-
-    /// <summary>
-    /// Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums in the given <see cref="Assembly"/>.
-    /// </summary>
-    /// <param name="settings">The <see cref="ODataClientSettings" /> with which to register the type converter.</param>
-    /// <param name="assembly">The <see cref="Assembly "/> in which to search for ExtendableEnums to register.</param>
-    public static void RegisterAllExtendableEnums(this ODataClientSettings settings, Assembly assembly)
-    {
-        if (assembly == null)
-        {
-            throw new ArgumentNullException(nameof(assembly));
-        }
-
-        var types = assembly.GetTypes();
-        foreach (var type in types)
-        {
-            if (type.IsExtendableEnum())
-            {
-                RegisterExtendableEnum(settings, type);
-            }
-        }
     }
 
     /// <summary>
@@ -147,7 +147,7 @@ public static class ExtendableEnumConverter
         return null;
     }
 
-    private class TypeConverterConfiguration
+    private sealed class TypeConverterConfiguration
     {
         public Type EnumerationType { get; set; }
 

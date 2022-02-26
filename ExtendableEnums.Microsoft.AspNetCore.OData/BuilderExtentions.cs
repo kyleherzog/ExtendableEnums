@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using Microsoft.AspNet.OData.Builder;
@@ -40,12 +41,9 @@ public static class BuilderExtentions
         }
 
         var types = assembly.GetTypes();
-        foreach (var type in types)
+        foreach (var type in types.Where(x => x.IsExtendableEnum()))
         {
-            if (type.IsExtendableEnum())
-            {
-                AddExtendableEnum(builder, type);
-            }
+            AddExtendableEnum(builder, type);
         }
 
         return builder;

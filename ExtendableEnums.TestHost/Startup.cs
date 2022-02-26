@@ -46,7 +46,7 @@ public class Startup
         services.AddMvc(options =>
         {
             options.UseExtendableEnumModelBinding();
-        }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+        });
     }
 
     private static IEdmModel GetEdmModel()

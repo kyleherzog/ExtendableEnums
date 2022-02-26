@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExtendableEnums.EntityFrameworkCore;
@@ -21,15 +22,12 @@ public static class ModelBuilderExtensions
         }
 
         var entityTypes = modelBuilder.Model.GetEntityTypes();
-        foreach (var entityType in entityTypes)
+        foreach (var clrType in entityTypes.Select(x => x.ClrType))
         {
-            var properties = entityType.ClrType.GetProperties();
-            foreach (var property in properties)
+            var properties = clrType.GetProperties();
+            foreach (var property in properties.Where(x => x.PropertyType.IsExtendableEnum()))
             {
-                if (property.PropertyType.IsExtendableEnum())
-                {
-                    modelBuilder.Entity(entityType.ClrType).Property(property.Name).HasConversion(ExtendableEnumValueConverter.Create(property.PropertyType));
-                }
+                modelBuilder.Entity(clrType).Property(property.Name).HasConversion(ExtendableEnumValueConverter.Create(property.PropertyType));
             }
         }
 

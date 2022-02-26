@@ -268,6 +268,9 @@ dotnet_diagnostic.S100.severity = warning
 # S109: Magic numbers should not be used
 dotnet_diagnostic.S109.severity = silent
 
+# S1172: Remove this parameter, whose vaule is ignored in the method
+dotnet_diagnostic.S1172.severity = none
+
 # S121: Control structures should use curly braces
 dotnet_diagnostic.S121.severity = suggestion
 

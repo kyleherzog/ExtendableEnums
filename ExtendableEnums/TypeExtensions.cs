@@ -12,14 +12,14 @@ public static class TypeExtensions
     /// </summary>
     /// <param name="type">The type of which to get the default value.</param>
     /// <returns>The default value of the given type.</returns>
-    public static object GetDefault(this Type type)
+    public static object? GetDefault(this Type type)
     {
         if (type == null)
         {
             throw new ArgumentNullException(nameof(type));
         }
 
-        object output = null;
+        object? output = null;
 
         if (type.IsValueType)
         {

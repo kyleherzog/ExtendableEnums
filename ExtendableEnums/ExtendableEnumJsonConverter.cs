@@ -12,10 +12,10 @@ namespace ExtendableEnums;
 /// </summary>
 public class ExtendableEnumJsonConverter : JsonConverter
 {
-    private static readonly ConcurrentDictionary<Type, MethodInfo> tryParseValueMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
+    private static readonly ConcurrentDictionary<Type, MethodInfo> tryParseValueMethodCache = new();
 
-    private static readonly ConcurrentDictionary<Type, MethodInfo> parseValueOrCreateMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
-    private static readonly ConcurrentDictionary<Type, MethodInfo> tryParseMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
+    private static readonly ConcurrentDictionary<Type, MethodInfo> parseValueOrCreateMethodCache = new();
+    private static readonly ConcurrentDictionary<Type, MethodInfo> tryParseMethodCache = new();
 
     /// <summary>
     /// Determines whether this instance can convert the specified object type.
@@ -35,7 +35,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
     /// <param name="existingValue">The existing value of object being read.</param>
     /// <param name="serializer">The calling serializer.</param>
     /// <returns>The object value.</returns>
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
         if (reader == null)
         {
@@ -71,7 +71,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
         if (rawValue == null)
         {
             var value = GetDefault(valueType);
-            return parseValueOrCreateMethod.Invoke(null, new object[] { value });
+            return parseValueOrCreateMethod.Invoke(null, new object?[] { value });
         }
         else
         {
@@ -81,7 +81,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
 
                 var tryParseValueMethod = GetTryParseValueMethod(objectType);
 
-                var parameters = new object[] { value, null };
+                var parameters = new object?[] { value, null };
                 if ((bool)tryParseValueMethod.Invoke(null, parameters))
                 {
                     return parameters[1];
@@ -94,7 +94,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
 
             if (rawValue is string)
             {
-                var rawParameters = new object[] { rawValue, null };
+                var rawParameters = new object?[] { rawValue, null };
                 var tryParseMethod = GetTryParseMethod(objectType);
                 if ((bool)tryParseMethod.Invoke(null, rawParameters))
                 {
@@ -114,13 +114,13 @@ public class ExtendableEnumJsonConverter : JsonConverter
     /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
     /// <param name="value">The value.</param>
     /// <param name="serializer">The calling serializer.</param>
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
         var dynamicValue = value as dynamic;
-        writer.WriteValue(dynamicValue.Value);
+        writer.WriteValue(dynamicValue?.Value);
     }
 
-    private static object GetDefault(Type t)
+    private static object? GetDefault(Type t)
     {
         if (t == null)
         {

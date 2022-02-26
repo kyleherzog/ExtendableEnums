@@ -11,8 +11,8 @@ namespace ExtendableEnums.EntityFrameworkCore;
 /// </summary>
 public static class ExtendableEnumValueConverter
 {
-    private static readonly ConcurrentDictionary<Type, MethodInfo> genericCreateMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
-    private static readonly Lazy<MethodInfo> lazyCreateMethod = new Lazy<MethodInfo>(() => typeof(ExtendableEnumValueConverter).GetMethods(BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public).First(m => m.Name == nameof(Create) && m.ContainsGenericParameters));
+    private static readonly ConcurrentDictionary<Type, MethodInfo> genericCreateMethodCache = new();
+    private static readonly Lazy<MethodInfo> lazyCreateMethod = new(() => typeof(ExtendableEnumValueConverter).GetMethods(BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public).First(m => m.Name == nameof(Create) && m.ContainsGenericParameters));
 
     /// <summary>
     /// Creates a <see cref="ValueConverter"/> that converts the given ExtendableEnum type to/from an int.

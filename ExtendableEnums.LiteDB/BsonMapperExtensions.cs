@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using LiteDB;
 
@@ -27,15 +28,12 @@ namespace ExtendableEnums.LiteDB
             }
 
             var types = assembly.GetTypes();
-            foreach (var type in types)
+            foreach (var type in types.Where(x => x.IsExtendableEnum()))
             {
-                if (type.IsExtendableEnum())
+                var valueProperty = type.GetProperty("Value");
+                if (valueProperty.PropertyType == typeof(int))
                 {
-                    var valueProperty = type.GetProperty("Value");
-                    if (valueProperty.PropertyType == typeof(int))
-                    {
-                        RegisterExtendableEnumAsInt32(mapper, type);
-                    }
+                    RegisterExtendableEnumAsInt32(mapper, type);
                 }
             }
         }
@@ -73,15 +71,12 @@ namespace ExtendableEnums.LiteDB
             }
 
             var types = assembly.GetTypes();
-            foreach (var type in types)
+            foreach (var type in types.Where(x => x.IsExtendableEnum()))
             {
-                if (type.IsExtendableEnum())
+                var valueProperty = type.GetProperty("Value");
+                if (valueProperty.PropertyType == typeof(string))
                 {
-                    var valueProperty = type.GetProperty("Value");
-                    if (valueProperty.PropertyType == typeof(string))
-                    {
-                        RegisterExtendableEnumAsString(mapper, type);
-                    }
+                    RegisterExtendableEnumAsString(mapper, type);
                 }
             }
         }

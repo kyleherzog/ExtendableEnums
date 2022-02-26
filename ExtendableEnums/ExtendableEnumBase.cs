@@ -19,9 +19,9 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
         where TEnumeration : ExtendableEnumBase<TEnumeration, TValue>
         where TValue : IComparable
 {
-    private static readonly Lazy<TEnumeration[]> enumerations = new Lazy<TEnumeration[]>(GetEnumerations);
-    private static readonly Lazy<TEnumeration> maximum = new Lazy<TEnumeration>(() => ParseValue(GetAll().Max(x => x.Value)));
-    private static readonly Lazy<TEnumeration> minimum = new Lazy<TEnumeration>(() => ParseValue(GetAll().Min(x => x.Value)));
+    private static readonly Lazy<TEnumeration[]> enumerations = new(GetEnumerations);
+    private static readonly Lazy<TEnumeration> maximum = new(() => ParseValue(GetAll().Max(x => x.Value)));
+    private static readonly Lazy<TEnumeration> minimum = new(() => ParseValue(GetAll().Min(x => x.Value)));
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> class.
@@ -93,7 +93,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// <returns><c>true</c> if the first parameter value property is less than the other.</returns>
     public static bool operator <(ExtendableEnumBase<TEnumeration, TValue> left, ExtendableEnumBase<TEnumeration, TValue> right)
     {
-        return left != null && left.CompareTo((TEnumeration)right) < 0;
+        return left is not null && left.CompareTo((TEnumeration)right) < 0;
     }
 
     /// <summary>
@@ -104,7 +104,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// <returns><c>true</c> if the first parameter value property is less than or equal to the other.</returns>
     public static bool operator <=(ExtendableEnumBase<TEnumeration, TValue> left, ExtendableEnumBase<TEnumeration, TValue> right)
     {
-        return left != null && left.CompareTo((TEnumeration)right) <= 0;
+        return left is not null && left.CompareTo((TEnumeration)right) <= 0;
     }
 
     /// <summary>
@@ -126,7 +126,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// <returns><c>true</c> if the first parameter value property is greater than the other.</returns>
     public static bool operator >(ExtendableEnumBase<TEnumeration, TValue> left, ExtendableEnumBase<TEnumeration, TValue> right)
     {
-        return left != null && left.CompareTo((TEnumeration)right) > 0;
+        return left is not null && left.CompareTo((TEnumeration)right) > 0;
     }
 
     /// <summary>
@@ -137,7 +137,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// <returns><c>true</c> if the first parameter value property is greater than or equal to the other.</returns>
     public static bool operator >=(ExtendableEnumBase<TEnumeration, TValue> left, ExtendableEnumBase<TEnumeration, TValue> right)
     {
-        return left != null && left.CompareTo((TEnumeration)right) >= 0;
+        return left is not null && left.CompareTo((TEnumeration)right) >= 0;
     }
 
     /// <summary>
@@ -196,26 +196,27 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// </summary>
     /// <param name="value">The value for which to search.</param>
     /// <returns>The enumeration object with a matching value, or a new enumeration object if no match exists.</returns>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3011:Reflection should not be used to increase accessibility of classes, methods, or fields", Justification = "Hitting the protected constructor in this library.")]
     public static TEnumeration ParseValueOrCreate(TValue value)
     {
         if (!TryFind(item => item.Value.Equals(value), out var result))
         {
             var constructor = typeof(TEnumeration).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).First();
             var constructorParameters = constructor.GetParameters();
-            var parameters = new List<object>(constructorParameters.Length);
-            foreach (var parameter in constructorParameters)
+            var parameters = new List<object?>(constructorParameters.Length);
+            foreach (var parameterType in constructorParameters.Select(x => x.ParameterType))
             {
-                if (parameter.ParameterType == typeof(TValue))
+                if (parameterType == typeof(TValue))
                 {
                     parameters.Add(value);
                 }
-                else if (parameter.ParameterType == typeof(string))
+                else if (parameterType == typeof(string))
                 {
                     parameters.Add(value.ToString());
                 }
                 else
                 {
-                    parameters.Add(parameter.ParameterType.GetDefault());
+                    parameters.Add(parameterType.GetDefault());
                 }
             }
 
@@ -250,11 +251,11 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// <inheritdoc/>
     public int CompareTo(TEnumeration other)
     {
-        return Value.CompareTo(other == default(TEnumeration) ? default : other.Value);
+        return Value.CompareTo(other is null ? default : other.Value);
     }
 
     /// <inheritdoc/>
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj == null)
         {
@@ -279,7 +280,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// </summary>
     /// <param name="obj">The other object with which to compare.</param>
     /// <returns>True if this instance and the other have the same value, otherwise false.</returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return Equals(obj as TEnumeration);
     }
@@ -289,9 +290,9 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// </summary>
     /// <param name="other">The other enumeration object with which to compare.</param>
     /// <returns>True if this instance and the other have the same value, otherwise false.</returns>
-    public bool Equals(TEnumeration other)
+    public bool Equals(TEnumeration? other)
     {
-        return other != null && ValueEquals(other.Value);
+        return other is not null && ValueEquals(other.Value);
     }
 
     /// <summary>
@@ -348,6 +349,6 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     {
         var allItems = GetAll();
         result = allItems.FirstOrDefault(predicate);
-        return result != null;
+        return result is not null;
     }
 }

@@ -11,10 +11,10 @@ namespace ExtendableEnums;
 /// </summary>
 public class ExtendableEnumTypeConverter : TypeConverter
 {
-    private static readonly ConcurrentDictionary<Type, MethodInfo> ParseMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
-    private static readonly ConcurrentDictionary<Type, MethodInfo> ParseValueMethodCache = new ConcurrentDictionary<Type, MethodInfo>();
-    private Type enumerationType;
-    private Type valueType;
+    private static readonly ConcurrentDictionary<Type, MethodInfo> parseMethodCache = new();
+    private static readonly ConcurrentDictionary<Type, MethodInfo> parseValueMethodCache = new();
+    private Type enumerationType = typeof(object);
+    private Type valueType = typeof(object);
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExtendableEnumTypeConverter"/> class.
@@ -76,7 +76,7 @@ public class ExtendableEnumTypeConverter : TypeConverter
     {
         if (value is string)
         {
-            var parseMethod = ParseMethodCache.GetOrAdd(enumerationType, t => t.GetMethod("Parse", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy));
+            var parseMethod = parseMethodCache.GetOrAdd(enumerationType, t => t.GetMethod("Parse", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy));
 
             try
             {
@@ -89,7 +89,7 @@ public class ExtendableEnumTypeConverter : TypeConverter
                 {
                     if (valueType == typeof(string))
                     {
-                        var parseValueMethod = ParseValueMethodCache.GetOrAdd(enumerationType, t => t.GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy));
+                        var parseValueMethod = parseValueMethodCache.GetOrAdd(enumerationType, t => t.GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy));
 
                         var result = parseValueMethod.Invoke(null, new object[] { value });
                         return result;

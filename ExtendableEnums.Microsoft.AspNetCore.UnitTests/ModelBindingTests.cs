@@ -13,7 +13,7 @@ namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests;
 [TestClass]
 public class ModelBindingTests : IDisposable
 {
-    private readonly HttpClient client = new HttpClient();
+    private readonly HttpClient client = new();
 
     private bool hasDisposed;
 
