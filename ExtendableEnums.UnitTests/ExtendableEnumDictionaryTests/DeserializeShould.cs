@@ -4,75 +4,74 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace ExtendableEnums.UnitTests.ExtendableEnumDictionaryTests
+namespace ExtendableEnums.UnitTests.ExtendableEnumDictionaryTests;
+
+[TestClass]
+public class DeserializeShould
 {
-    [TestClass]
-    public class DeserializeShould
+    [TestMethod]
+    public void DeserializeGivenValidSerialized()
     {
-        [TestMethod]
-        public void DeserializeGivenValidSerialized()
+        var serialized = "{ \"1\":\"Active\",\"2\":\"Deleted\"}";
+
+        var expected = new ExtendableEnumDictionary<SampleStatus, string>
         {
-            var serialized = "{ \"1\":\"Active\",\"2\":\"Deleted\"}";
+            { SampleStatus.Active, nameof(SampleStatus.Active) },
+            { SampleStatus.Deleted, nameof(SampleStatus.Deleted) },
+        };
 
-            var expected = new ExtendableEnumDictionary<SampleStatus, string>
-            {
-                { SampleStatus.Active, nameof(SampleStatus.Active) },
-                { SampleStatus.Deleted, nameof(SampleStatus.Deleted) },
-            };
+        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatus, string>>(serialized);
 
-            var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatus, string>>(serialized);
+        result.Should().BeEquivalentTo(expected);
+    }
 
-            result.Should().BeEquivalentTo(expected);
-        }
+    [TestMethod]
+    public void DeserializeGivenValidSerializedByString()
+    {
+        var serialized = "{ \"B\":\"Active\",\"C\":\"Deleted\"}";
 
-        [TestMethod]
-        public void DeserializeGivenValidSerializedByString()
+        var expected = new ExtendableEnumDictionary<SampleStatusByString, string>
         {
-            var serialized = "{ \"B\":\"Active\",\"C\":\"Deleted\"}";
+            { SampleStatusByString.Active, nameof(SampleStatusByString.Active) },
+            { SampleStatusByString.Deleted, nameof(SampleStatusByString.Deleted) },
+        };
 
-            var expected = new ExtendableEnumDictionary<SampleStatusByString, string>
-            {
-                { SampleStatusByString.Active, nameof(SampleStatusByString.Active) },
-                { SampleStatusByString.Deleted, nameof(SampleStatusByString.Deleted) },
-            };
+        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatusByString, string>>(serialized);
 
-            var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatusByString, string>>(serialized);
+        result.Should().BeEquivalentTo(expected);
+    }
 
-            result.Should().BeEquivalentTo(expected);
-        }
+    [TestMethod]
+    public void DeserializeGivenDisplayNameSerializedByString()
+    {
+        Console.WriteLine(JsonConvert.SerializeObject(SampleStatusByString.Active));
+        var serialized = "{ \"Active\":\"Active\",\"Deleted\":\"Deleted\"}";
 
-        [TestMethod]
-        public void DeserializeGivenDisplayNameSerializedByString()
+        var expected = new ExtendableEnumDictionary<SampleStatusByString, string>
         {
-            Console.WriteLine(JsonConvert.SerializeObject(SampleStatusByString.Active));
-            var serialized = "{ \"Active\":\"Active\",\"Deleted\":\"Deleted\"}";
+            { SampleStatusByString.Active, nameof(SampleStatusByString.Active) },
+            { SampleStatusByString.Deleted, nameof(SampleStatusByString.Deleted) },
+        };
 
-            var expected = new ExtendableEnumDictionary<SampleStatusByString, string>
-            {
-                { SampleStatusByString.Active, nameof(SampleStatusByString.Active) },
-                { SampleStatusByString.Deleted, nameof(SampleStatusByString.Deleted) },
-            };
+        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatusByString, string>>(serialized);
 
-            var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatusByString, string>>(serialized);
+        result.Should().BeEquivalentTo(expected);
+    }
 
-            result.Should().BeEquivalentTo(expected);
-        }
+    [TestMethod]
+    public void DeserializeGivenDisplayNameSerialized()
+    {
+        Console.WriteLine(JsonConvert.SerializeObject(SampleStatus.Active));
+        var serialized = "{ \"Active\":\"Active\",\"Deleted\":\"Deleted\"}";
 
-        [TestMethod]
-        public void DeserializeGivenDisplayNameSerialized()
+        var expected = new ExtendableEnumDictionary<SampleStatus, string>
         {
-            Console.WriteLine(JsonConvert.SerializeObject(SampleStatus.Active));
-            var serialized = "{ \"Active\":\"Active\",\"Deleted\":\"Deleted\"}";
+            { SampleStatus.Active, nameof(SampleStatus.Active) },
+            { SampleStatus.Deleted, nameof(SampleStatus.Deleted) },
+        };
 
-            var expected = new ExtendableEnumDictionary<SampleStatus, string>
-            {
-                { SampleStatus.Active, nameof(SampleStatus.Active) },
-                { SampleStatus.Deleted, nameof(SampleStatus.Deleted) },
-            };
+        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatus, string>>(serialized);
 
-            var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatus, string>>(serialized);
-
-            result.Should().BeEquivalentTo(expected);
-        }
+        result.Should().BeEquivalentTo(expected);
     }
 }

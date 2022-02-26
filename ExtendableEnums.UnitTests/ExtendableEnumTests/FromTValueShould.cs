@@ -1,16 +1,15 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
+namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+
+[TestClass]
+public class FromTValueShould
 {
-    [TestClass]
-    public class FromTValueShould
+    [TestMethod]
+    public void ReturnExpandableEnumerationGivenMatchFound()
     {
-        [TestMethod]
-        public void ReturnExpandableEnumerationGivenMatchFound()
-        {
-            var result = SampleStatus.FromTValue(SampleStatus.Inactive.Value);
-            Assert.AreEqual(SampleStatus.Inactive, result);
-        }
+        var result = SampleStatus.FromTValue(SampleStatus.Inactive.Value);
+        Assert.AreEqual(SampleStatus.Inactive, result);
     }
 }

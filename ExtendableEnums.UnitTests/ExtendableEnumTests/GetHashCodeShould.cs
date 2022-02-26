@@ -1,15 +1,14 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
+namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+
+[TestClass]
+public class GetHashCodeShould
 {
-    [TestClass]
-    public class GetHashCodeShould
+    [TestMethod]
+    public void ReturnHashCodeOfValue()
     {
-        [TestMethod]
-        public void ReturnHashCodeOfValue()
-        {
-            Assert.AreEqual(SampleStatus.Inactive.GetHashCode(), SampleStatus.Inactive.Value.GetHashCode());
-        }
+        Assert.AreEqual(SampleStatus.Inactive.GetHashCode(), SampleStatus.Inactive.Value.GetHashCode());
     }
 }

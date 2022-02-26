@@ -5,53 +5,52 @@ using FluentAssertions;
 using LiteDB;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.LiteDB.UnitTests.BsonMapperExtensions
+namespace ExtendableEnums.LiteDB.UnitTests.BsonMapperExtensions;
+
+[TestClass]
+public class RegisterExtendableEnumAsInt32Should
 {
-    [TestClass]
-    public class RegisterExtendableEnumAsInt32Should
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void ThrowArgumentExceptionGivenTypeIsNotExtendableEnum()
     {
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void ThrowArgumentExceptionGivenTypeIsNotExtendableEnum()
-        {
-            BsonMapper.Global.RegisterExtendableEnumAsInt32(typeof(string));
-        }
+        BsonMapper.Global.RegisterExtendableEnumAsInt32(typeof(string));
+    }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void ThrowArgumentExceptionGivenValueTypeOfExtendableEnumIsNotInt()
-        {
-            BsonMapper.Global.RegisterExtendableEnumAsInt32(typeof(SampleStatusByString));
-        }
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void ThrowArgumentExceptionGivenValueTypeOfExtendableEnumIsNotInt()
+    {
+        BsonMapper.Global.RegisterExtendableEnumAsInt32(typeof(SampleStatusByString));
+    }
 
-        [TestMethod]
-        public void RegisterCorrectlyGivenProperType()
-        {
-            var mapper = new BsonMapper();
-            mapper.RegisterExtendableEnumAsInt32(typeof(SampleStatus));
+    [TestMethod]
+    public void RegisterCorrectlyGivenProperType()
+    {
+        var mapper = new BsonMapper();
+        mapper.RegisterExtendableEnumAsInt32(typeof(SampleStatus));
 
-            var fileName = Path.GetTempFileName();
-            try
+        var fileName = Path.GetTempFileName();
+        try
+        {
+            using var db = new LiteDatabase($"Filename={fileName}", mapper);
+            var book = new SampleBook
             {
-                using var db = new LiteDatabase($"Filename={fileName}", mapper);
-                var book = new SampleBook
-                {
-                    Status = SampleStatus.Deleted,
-                    Id = Guid.NewGuid().ToString(),
-                    Title = "The Greatest Book in the World",
-                };
+                Status = SampleStatus.Deleted,
+                Id = Guid.NewGuid().ToString(),
+                Title = "The Greatest Book in the World",
+            };
 
-                var collection = db.GetCollection<SampleBook>();
-                collection.Insert(book);
+            var collection = db.GetCollection<SampleBook>();
+            collection.Insert(book);
 
-                var bookFromDb = collection.FindOne(x => x.Id == book.Id);
+            var bookFromDb = collection.FindOne(x => x.Id == book.Id);
 
-                bookFromDb.Should().BeEquivalentTo(book);
-            }
-            finally
-            {
-                File.Delete(fileName);
-            }
+            bookFromDb.Should().BeEquivalentTo(book);
+        }
+        finally
+        {
+            File.Delete(fileName);
         }
     }
 }

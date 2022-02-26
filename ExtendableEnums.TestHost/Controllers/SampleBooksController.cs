@@ -3,32 +3,31 @@ using ExtendableEnums.TestHost.Models;
 using ExtendableEnums.Testing.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ExtendableEnums.TestHost.Controllers
+namespace ExtendableEnums.TestHost.Controllers;
+
+public class SampleBooksController : Controller
 {
-    public class SampleBooksController : Controller
+    [HttpPost]
+    public IActionResult Edit(int id, SampleBook model)
     {
-        [HttpPost]
-        public IActionResult Edit(int id, SampleBook model)
+        if (!ModelState.IsValid)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            else
-            {
-                Console.WriteLine($"Editing book with id of {id}");
-                return Ok(model);
-            }
+            return BadRequest(ModelState);
         }
-
-        public IActionResult Index()
+        else
         {
-            var model = new SampleBooksModel
-            {
-                Status = SampleStatus.Inactive,
-            };
-
-            return View(model);
+            Console.WriteLine($"Editing book with id of {id}");
+            return Ok(model);
         }
+    }
+
+    public IActionResult Index()
+    {
+        var model = new SampleBooksModel
+        {
+            Status = SampleStatus.Inactive,
+        };
+
+        return View(model);
     }
 }

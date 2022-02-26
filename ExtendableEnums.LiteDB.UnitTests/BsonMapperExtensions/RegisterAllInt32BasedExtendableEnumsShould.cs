@@ -5,39 +5,38 @@ using FluentAssertions;
 using LiteDB;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.LiteDB.UnitTests.BsonMapperExtensions
+namespace ExtendableEnums.LiteDB.UnitTests.BsonMapperExtensions;
+
+[TestClass]
+public class RegisterAllInt32BasedExtendableEnumsShould
 {
-    [TestClass]
-    public class RegisterAllInt32BasedExtendableEnumsShould
+    [TestMethod]
+    public void RegisterAllIntBasedExtendableEnumsGivenAssemblyMarkerType()
     {
-        [TestMethod]
-        public void RegisterAllIntBasedExtendableEnumsGivenAssemblyMarkerType()
+        var mapper = new BsonMapper();
+        mapper.RegisterAllInt32BasedExtendableEnums(typeof(SampleBook));
+
+        var fileName = Path.GetTempFileName();
+        try
         {
-            var mapper = new BsonMapper();
-            mapper.RegisterAllInt32BasedExtendableEnums(typeof(SampleBook));
-
-            var fileName = Path.GetTempFileName();
-            try
+            using var db = new LiteDatabase($"Filename={fileName}", mapper);
+            var book = new SampleBook
             {
-                using var db = new LiteDatabase($"Filename={fileName}", mapper);
-                var book = new SampleBook
-                {
-                    Status = SampleStatus.Deleted,
-                    Id = Guid.NewGuid().ToString(),
-                    Title = "The Greatest Book in the World",
-                };
+                Status = SampleStatus.Deleted,
+                Id = Guid.NewGuid().ToString(),
+                Title = "The Greatest Book in the World",
+            };
 
-                var collection = db.GetCollection<SampleBook>();
-                collection.Insert(book);
+            var collection = db.GetCollection<SampleBook>();
+            collection.Insert(book);
 
-                var bookFromDb = collection.FindOne(x => x.Id == book.Id);
+            var bookFromDb = collection.FindOne(x => x.Id == book.Id);
 
-                bookFromDb.Should().BeEquivalentTo(book);
-            }
-            finally
-            {
-                File.Delete(fileName);
-            }
+            bookFromDb.Should().BeEquivalentTo(book);
+        }
+        finally
+        {
+            File.Delete(fileName);
         }
     }
 }

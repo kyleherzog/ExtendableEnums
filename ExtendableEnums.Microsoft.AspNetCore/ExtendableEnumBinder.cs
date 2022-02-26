@@ -3,45 +3,44 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 
-namespace ExtendableEnums.Microsoft.AspNetCore
+namespace ExtendableEnums.Microsoft.AspNetCore;
+
+/// <summary>
+/// Defines an interface for ExtendableEnum model binders.
+/// </summary>
+public class ExtendableEnumBinder : IModelBinder
 {
     /// <summary>
-    /// Defines an interface for ExtendableEnum model binders.
+    /// Attempts to bind a model.
     /// </summary>
-    public class ExtendableEnumBinder : IModelBinder
+    /// <param name="bindingContext">The <see cref="ModelBindingContext"/>.</param>
+    /// <returns>
+    ///     A <see cref="Task"/> which will complete when the model binding process completes.
+    ///
+    ///     If model binding was successful, IsModelSet is set to <c>true</c>.
+    /// </returns>
+    public Task BindModelAsync(ModelBindingContext bindingContext)
     {
-        /// <summary>
-        /// Attempts to bind a model.
-        /// </summary>
-        /// <param name="bindingContext">The <see cref="ModelBindingContext"/>.</param>
-        /// <returns>
-        ///     A <see cref="Task"/> which will complete when the model binding process completes.
-        ///
-        ///     If model binding was successful, IsModelSet is set to <c>true</c>.
-        /// </returns>
-        public Task BindModelAsync(ModelBindingContext bindingContext)
+        if (bindingContext == null)
         {
-            if (bindingContext == null)
-            {
-                throw new ArgumentNullException(nameof(bindingContext));
-            }
+            throw new ArgumentNullException(nameof(bindingContext));
+        }
 
-            var modelName = bindingContext.ModelName;
+        var modelName = bindingContext.ModelName;
 
-            // Try to fetch the value of the argument by name
-            var valueProviderResult = bindingContext.ValueProvider.GetValue(modelName);
+        // Try to fetch the value of the argument by name
+        var valueProviderResult = bindingContext.ValueProvider.GetValue(modelName);
 
-            if (valueProviderResult == ValueProviderResult.None || string.IsNullOrEmpty(valueProviderResult.FirstValue))
-            {
-                bindingContext.Result = ModelBindingResult.Success(null);
-                return Task.CompletedTask;
-            }
-
-            var result = JsonConvert.DeserializeObject($"'{valueProviderResult.FirstValue}'", bindingContext.ModelType);
-
-            bindingContext.Result = ModelBindingResult.Success(result);
-
+        if (valueProviderResult == ValueProviderResult.None || string.IsNullOrEmpty(valueProviderResult.FirstValue))
+        {
+            bindingContext.Result = ModelBindingResult.Success(null);
             return Task.CompletedTask;
         }
+
+        var result = JsonConvert.DeserializeObject($"'{valueProviderResult.FirstValue}'", bindingContext.ModelType);
+
+        bindingContext.Result = ModelBindingResult.Success(result);
+
+        return Task.CompletedTask;
     }
 }

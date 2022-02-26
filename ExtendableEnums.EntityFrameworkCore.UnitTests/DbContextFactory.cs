@@ -1,24 +1,23 @@
 ﻿using System.Linq;
 using ExtendableEnums.EntityFrameworkCore.UnitTests.Entities;
 
-namespace ExtendableEnums.EntityFrameworkCore.UnitTests
+namespace ExtendableEnums.EntityFrameworkCore.UnitTests;
+
+public static class DbContextFactory
 {
-    public static class DbContextFactory
+    private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=ExtendableEnumTests;Trusted_Connection=True;";
+
+    public static TestingContext Generate(int seedCount)
     {
-        private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=ExtendableEnumTests;Trusted_Connection=True;";
+        SamplePersonEntityFactory.Initialize();
 
-        public static TestingContext Generate(int seedCount)
+        var context = new TestingContext(connectionString)
         {
-            SamplePersonEntityFactory.Initialize();
+            SeedData = SamplePersonEntityFactory.Generate(seedCount).ToArray(),
+        };
 
-            var context = new TestingContext(connectionString)
-            {
-                SeedData = SamplePersonEntityFactory.Generate(seedCount).ToArray(),
-            };
-
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
-            return context;
-        }
+        context.Database.EnsureDeleted();
+        context.Database.EnsureCreated();
+        return context;
     }
 }
