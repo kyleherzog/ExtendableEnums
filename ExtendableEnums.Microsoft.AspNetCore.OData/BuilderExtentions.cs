@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Microsoft.AspNet.OData.Builder;
+using Microsoft.OData.ModelBuilder;
 
 namespace ExtendableEnums.Microsoft.AspNetCore.OData;
 
@@ -82,6 +82,12 @@ public static class BuilderExtentions
     private static void AddProperty(StructuralTypeConfiguration config, string propertyName)
     {
         var propertyInfo = config.ClrType.GetProperty(propertyName);
+
+        if (propertyInfo is null)
+        {
+            throw new MissingMemberException($"Unable to find the property '{propertyName}'.", propertyName);
+        }
+
         var property = config.AddProperty(propertyInfo);
 
         var attribute = propertyInfo.GetCustomAttribute<DataMemberAttribute>(inherit: false);

@@ -11,7 +11,12 @@ on NuGet.org.
 - [x] Enabled Nullable References
 - [x] Updated Microsoft.EntityFrameworkeCore to v6.0.2
 - [x] Updated Simple.OData.Client to v5.26.0
-- [x] ExtendableEnum.EntityFrameworkCore now only supports .NET 6.0
+- [x] Updated to Newtonsoft.Json v13.0.1
+- [x] Updaetd to System.ComponentModel.Annotations v5.0.0 
+- [x] ExtendableEnum.EntityFrameworkCore is now a .NET 6.0 library
+- [x] ExtendableEnum.Microsoft.AspNetCore is now a .NET 6.0 library
+- [x] ExtendableEnum.Microsoft.AspNetCore.OData is now a .NET 6.0 library
+
 
 ## 4.1
 **2020-9-8**

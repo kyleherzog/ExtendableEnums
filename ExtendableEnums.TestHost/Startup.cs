@@ -1,13 +1,13 @@
 ﻿using ExtendableEnums.Microsoft.AspNetCore;
 using ExtendableEnums.Microsoft.AspNetCore.OData;
 using ExtendableEnums.Testing.Models;
-using Microsoft.AspNet.OData.Builder;
-using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
 
 namespace ExtendableEnums.TestHost;
 
@@ -34,15 +34,17 @@ public class Startup
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-            endpoints.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
-            endpoints.MapODataRoute("odata", "odata", GetEdmModel());
         });
     }
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddOData();
+        services.AddControllers().AddOData(opt =>
+        {
+            opt.Select().Expand().Filter().OrderBy().SetMaxTop(100).Count();
+            opt.AddRouteComponents("odata", GetEdmModel());
+        });
         services.AddMvc(options =>
         {
             options.UseExtendableEnumModelBinding();

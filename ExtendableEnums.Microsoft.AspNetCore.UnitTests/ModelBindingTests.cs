@@ -43,7 +43,7 @@ public class ModelBindingTests : IDisposable
         var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
         var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
 
-        Assert.AreEqual(SampleStatus.Deleted, book.Status);
+        Assert.AreEqual(SampleStatus.Deleted, book?.Status);
     }
 
     [TestMethod]
@@ -65,7 +65,7 @@ public class ModelBindingTests : IDisposable
         var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
         var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
 
-        Assert.IsNull(book.Status);
+        Assert.IsNull(book?.Status);
     }
 
     [TestMethod]
@@ -88,7 +88,7 @@ public class ModelBindingTests : IDisposable
         var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
         var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
 
-        Assert.IsNull(book.Status);
+        Assert.IsNull(book?.Status);
     }
 
     [TestMethod]
@@ -111,7 +111,7 @@ public class ModelBindingTests : IDisposable
         var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
         var book = JsonConvert.DeserializeObject<SampleBookByStringStatus>(responseContent);
 
-        Assert.AreEqual(SampleStatusByString.Deleted, book.Status);
+        Assert.AreEqual(SampleStatusByString.Deleted, book?.Status);
     }
 
     // This code added to correctly implement the disposable pattern.

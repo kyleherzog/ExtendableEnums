@@ -49,7 +49,7 @@ public class SerializeShould
     public void DeserializeFromObjectNotDefined()
     {
         var status = JsonConvert.DeserializeObject<SampleStatus>("{\"value\" : -123}");
-        Assert.AreEqual(-123, status.Value);
+        Assert.AreEqual(-123, status?.Value);
     }
 
     [TestMethod]
@@ -61,7 +61,7 @@ public class SerializeShould
         var serialized = JsonConvert.SerializeObject(dictionary);
         Console.WriteLine(serialized);
         var deserialized = JsonConvert.DeserializeObject<Dictionary<SampleStatus, string>>(serialized);
-        Assert.AreEqual(dictionary[keyStatus], deserialized[keyStatus]);
+        Assert.AreEqual(dictionary[keyStatus], deserialized?[keyStatus]);
     }
 
     [TestMethod]
