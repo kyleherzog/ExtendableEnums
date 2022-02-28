@@ -8,6 +8,7 @@ These are the changes to each version that has been released
 on NuGet.org.
 
 ## 5.0
+**2022-2-28**
 - [x] Enabled Nullable References
 - [x] Updated Microsoft.EntityFrameworkeCore to v6.0.2
 - [x] Updated Simple.OData.Client to v5.26.0
