@@ -3,13 +3,10 @@
 namespace ExtendableEnums.Testing.Models;
 
 [DataContract]
-public class SampleBookByStringStatus
+public class SampleBookBase
 {
     [DataMember(Name = "id")]
     public string? Id { get; set; }
-
-    [DataMember(Name = "status")]
-    public SampleStatusByString? Status { get; set; }
 
     [DataMember(Name = "title")]
     public string? Title { get; set; }

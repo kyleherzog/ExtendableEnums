@@ -6,40 +6,40 @@
     <members>
         <member name="T:ExtendableEnums.Microsoft.AspNetCore.OData.BuilderExtentions">
             <summary>
-            Provides helper methods to register ExtendableEnums with the <see cref="T:Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder" />.
+            Provides helper methods to register ExtendableEnums with the <see cref="T:Microsoft.OData.ModelBuilder.ODataConventionModelBuilder" />.
             </summary>
         </member>
-        <member name="M:ExtendableEnums.Microsoft.AspNetCore.OData.BuilderExtentions.AddAllExtendableEnums(Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder,System.Type)">
+        <member name="M:ExtendableEnums.Microsoft.AspNetCore.OData.BuilderExtentions.AddAllExtendableEnums(Microsoft.OData.ModelBuilder.ODataConventionModelBuilder,System.Type)">
             <summary>
-            Registers all types existing in the <see cref="T:System.Reflection.Assembly"/> containing the given marker type, that inherit from <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> with the <see cref="T:Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder"/>.
+            Registers all types existing in the <see cref="T:System.Reflection.Assembly"/> containing the given marker type, that inherit from <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> with the <see cref="T:Microsoft.OData.ModelBuilder.ODataConventionModelBuilder"/>.
             </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder"/> with which to register the ExtendableEnum.</param>
+            <param name="builder">The <see cref="T:Microsoft.OData.ModelBuilder.ODataConventionModelBuilder"/> with which to register the ExtendableEnum.</param>
             <param name="assemblyMarkerType">The <see cref="T:System.Type"/> to use as a reference to find the containing <see cref="T:System.Reflection.Assembly"/> that will be searched for ExtendableEnums to be registered.</param>
-            <returns>The original <see cref="T:Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder"/> which was passed in as a parameter.</returns>
+            <returns>The original <see cref="T:Microsoft.OData.ModelBuilder.ODataConventionModelBuilder"/> which was passed in as a parameter.</returns>
         </member>
-        <member name="M:ExtendableEnums.Microsoft.AspNetCore.OData.BuilderExtentions.AddAllExtendableEnums(Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder,System.Reflection.Assembly)">
+        <member name="M:ExtendableEnums.Microsoft.AspNetCore.OData.BuilderExtentions.AddAllExtendableEnums(Microsoft.OData.ModelBuilder.ODataConventionModelBuilder,System.Reflection.Assembly)">
             <summary>
-            Registers all types existing in the given <see cref="T:System.Reflection.Assembly"/> that inherit from <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> with the <see cref="T:Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder"/>.
+            Registers all types existing in the given <see cref="T:System.Reflection.Assembly"/> that inherit from <see cref="T:ExtendableEnums.ExtendableEnumBase`2"/> with the <see cref="T:Microsoft.OData.ModelBuilder.ODataConventionModelBuilder"/>.
             </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder"/> with which to register the ExtendableEnum.</param>
+            <param name="builder">The <see cref="T:Microsoft.OData.ModelBuilder.ODataConventionModelBuilder"/> with which to register the ExtendableEnum.</param>
             <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> in which to search for ExtendableEnums.</param>
-            <returns>The original <see cref="T:Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder"/> which was passed in as a parameter.</returns>
+            <returns>The original <see cref="T:Microsoft.OData.ModelBuilder.ODataConventionModelBuilder"/> which was passed in as a parameter.</returns>
         </member>
-        <member name="M:ExtendableEnums.Microsoft.AspNetCore.OData.BuilderExtentions.AddExtendableEnum``1(Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder)">
+        <member name="M:ExtendableEnums.Microsoft.AspNetCore.OData.BuilderExtentions.AddExtendableEnum``1(Microsoft.OData.ModelBuilder.ODataConventionModelBuilder)">
             <summary>
-            Registers an ExtendableEnum type with the <see cref="T:Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder" />.
+            Registers an ExtendableEnum type with the <see cref="T:Microsoft.OData.ModelBuilder.ODataConventionModelBuilder" />.
             </summary>
             <typeparam name="TEnumeration">The actual <see cref="T:System.Type"/> of the class that inherits from <see cref="T:ExtendableEnums.ExtendableEnumBase`2" /> that is to be registered.</typeparam>
-            <param name="builder">The <see cref="T:Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder"/> with which to register the ExtendableEnum.</param>
-            <returns>The <see cref="T:Microsoft.AspNet.OData.Builder.ComplexTypeConfiguration"/> that the ExtendableEnum gets registered as.</returns>
+            <param name="builder">The <see cref="T:Microsoft.OData.ModelBuilder.ODataConventionModelBuilder"/> with which to register the ExtendableEnum.</param>
+            <returns>The <see cref="T:Microsoft.OData.ModelBuilder.ComplexTypeConfiguration"/> that the ExtendableEnum gets registered as.</returns>
         </member>
-        <member name="M:ExtendableEnums.Microsoft.AspNetCore.OData.BuilderExtentions.AddExtendableEnum(Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder,System.Type)">
+        <member name="M:ExtendableEnums.Microsoft.AspNetCore.OData.BuilderExtentions.AddExtendableEnum(Microsoft.OData.ModelBuilder.ODataConventionModelBuilder,System.Type)">
             <summary>
-            Registers an ExtendableEnum type with the <see cref="T:Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder" />.
+            Registers an ExtendableEnum type with the <see cref="T:Microsoft.OData.ModelBuilder.ODataConventionModelBuilder" />.
             </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNet.OData.Builder.ODataConventionModelBuilder"/> with which to register the ExtendableEnum.</param>
+            <param name="builder">The <see cref="T:Microsoft.OData.ModelBuilder.ODataConventionModelBuilder"/> with which to register the ExtendableEnum.</param>
             <param name="enumerationType">The actual <see cref="T:System.Type"/> of the class that inherits from <see cref="T:ExtendableEnums.ExtendableEnumBase`2" /> that is to be registered.</param>
-            <returns>The <see cref="T:Microsoft.AspNet.OData.Builder.ComplexTypeConfiguration"/> that the ExtendableEnum gets registered as.</returns>
+            <returns>The <see cref="T:Microsoft.OData.ModelBuilder.ComplexTypeConfiguration"/> that the ExtendableEnum gets registered as.</returns>
         </member>
     </members>
 </doc>

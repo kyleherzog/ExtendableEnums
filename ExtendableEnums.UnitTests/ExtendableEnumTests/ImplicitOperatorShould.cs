@@ -1,16 +1,15 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
+namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+
+[TestClass]
+public class ImplicitOperatorShould
 {
-    [TestClass]
-    public class ImplicitOperatorShould
+    [TestMethod]
+    public void ConvertToExpandedEnumerationFromValue()
     {
-        [TestMethod]
-        public void ConvertToExpandedEnumerationFromValue()
-        {
-            ExtendableEnumBase<SampleStatus, int> status = SampleStatus.Active.Value;
-            Assert.AreEqual(SampleStatus.Active, status);
-        }
+        ExtendableEnumBase<SampleStatus, int> status = SampleStatus.Active.Value;
+        Assert.AreEqual(SampleStatus.Active, status);
     }
 }
