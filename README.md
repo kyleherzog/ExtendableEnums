@@ -146,7 +146,7 @@ public IActionResult Post([FromBody] JsonElement json)
 {
     var book = JsonConvert.DeserializeObject<SampleBook>(json.GetRawText());
     var matchingBook = books.FirstOrDefault(b => b.Id == book.Id);
-    if (matchingBook == null)
+    if (matchingBook is null)
     {
         books.Add(book);
         return Created(book);

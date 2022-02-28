@@ -9,20 +9,6 @@
             A static class that provides helper methods to allows the Simple OData client to serialize/deserialize ExtendableEnums.
             </summary>
         </member>
-        <member name="M:ExtendableEnums.SimpleOData.Client.ExtendableEnumConverter.RegisterExtendableEnum``1(Simple.OData.Client.ODataClientSettings)">
-            <summary>
-            Registers type converter with the ODataSettings to be used with an ODataClient.
-            </summary>
-            <typeparam name="T">The <see cref="T:System.Type" /> to be registered as an ExtenableEnum.</typeparam>
-            <param name="settings">The <see cref="T:Simple.OData.Client.ODataClientSettings" /> with which to register the type converter.</param>
-        </member>
-        <member name="M:ExtendableEnums.SimpleOData.Client.ExtendableEnumConverter.RegisterExtendableEnum(Simple.OData.Client.ODataClientSettings,System.Type)">
-            <summary>
-            Registers type converter with the ODataSettings to be used with an ODataClient.
-            </summary>
-            <param name="settings">The <see cref="T:Simple.OData.Client.ODataClientSettings" /> with which to register the type converter.</param>
-            <param name="enumDescendant">The <see cref="T:System.Type" /> to be registered as an ExtenableEnum.</param>
-        </member>
         <member name="M:ExtendableEnums.SimpleOData.Client.ExtendableEnumConverter.RegisterAllExtendableEnums(Simple.OData.Client.ODataClientSettings,System.Type)">
             <summary>
             Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums in the <see cref="T:System.Reflection.Assembly"/> that contais the given <see cref="T:System.Type"/>.
@@ -36,6 +22,20 @@
             </summary>
             <param name="settings">The <see cref="T:Simple.OData.Client.ODataClientSettings" /> with which to register the type converter.</param>
             <param name="assembly">The <see cref="T:System.Reflection.Assembly"/> in which to search for ExtendableEnums to register.</param>
+        </member>
+        <member name="M:ExtendableEnums.SimpleOData.Client.ExtendableEnumConverter.RegisterExtendableEnum``1(Simple.OData.Client.ODataClientSettings)">
+            <summary>
+            Registers type converter with the ODataSettings to be used with an ODataClient.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Type" /> to be registered as an ExtenableEnum.</typeparam>
+            <param name="settings">The <see cref="T:Simple.OData.Client.ODataClientSettings" /> with which to register the type converter.</param>
+        </member>
+        <member name="M:ExtendableEnums.SimpleOData.Client.ExtendableEnumConverter.RegisterExtendableEnum(Simple.OData.Client.ODataClientSettings,System.Type)">
+            <summary>
+            Registers type converter with the ODataSettings to be used with an ODataClient.
+            </summary>
+            <param name="settings">The <see cref="T:Simple.OData.Client.ODataClientSettings" /> with which to register the type converter.</param>
+            <param name="enumDescendant">The <see cref="T:System.Type" /> to be registered as an ExtenableEnum.</param>
         </member>
         <member name="M:ExtendableEnums.SimpleOData.Client.ExtendableEnumConverter.Convert(System.Type,System.Type,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>

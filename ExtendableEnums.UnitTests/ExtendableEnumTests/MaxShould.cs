@@ -1,15 +1,14 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
+namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+
+[TestClass]
+public class MaxShould
 {
-    [TestClass]
-    public class MaxShould
+    [TestMethod]
+    public void ReturnTheEnumerationItemWithTheMaximumValue()
     {
-        [TestMethod]
-        public void ReturnTheEnumerationItemWithTheMaximumValue()
-        {
-            Assert.AreEqual(SampleStatusDeclared.Pending, SampleStatus.Max);
-        }
+        Assert.AreEqual(SampleStatusDeclared.Pending, SampleStatus.Max);
     }
 }

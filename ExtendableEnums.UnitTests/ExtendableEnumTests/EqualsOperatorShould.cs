@@ -1,36 +1,35 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests
+namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+
+[TestClass]
+public class EqualsOperatorShould
 {
-    [TestClass]
-    public class EqualsOperatorShould
+    [TestMethod]
+    public void ReturnFalseGivenDifferentValues()
     {
-        [TestMethod]
-        public void ReturnFalseGivenDifferentValues()
-        {
-            var active = SampleStatus.Active;
-            var inactive = SampleStatus.Inactive;
+        var active = SampleStatus.Active;
+        var inactive = SampleStatus.Inactive;
 
-            Assert.IsFalse(active == inactive);
-        }
+        Assert.IsFalse(active == inactive);
+    }
 
-        [TestMethod]
-        public void ReturnTrueGivenMatchingInstances()
-        {
-            var active1 = SampleStatus.Active;
-            var active2 = SampleStatus.Active;
+    [TestMethod]
+    public void ReturnTrueGivenMatchingInstances()
+    {
+        var active1 = SampleStatus.Active;
+        var active2 = SampleStatus.Active;
 
-            Assert.IsTrue(active1 == active2);
-        }
+        Assert.IsTrue(active1 == active2);
+    }
 
-        [TestMethod]
-        public void ReturnTrueGivenMatchingValues()
-        {
-            var deleted = SampleStatus.Deleted;
-            var discontinued = SampleStatus.Discontinued;
+    [TestMethod]
+    public void ReturnTrueGivenMatchingValues()
+    {
+        var deleted = SampleStatus.Deleted;
+        var discontinued = SampleStatus.Discontinued;
 
-            Assert.IsTrue(deleted == discontinued);
-        }
+        Assert.IsTrue(deleted == discontinued);
     }
 }
