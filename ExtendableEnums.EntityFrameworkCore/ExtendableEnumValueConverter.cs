@@ -22,8 +22,10 @@ public static class ExtendableEnumValueConverter
     public static ValueConverter Create(Type type)
     {
         var genericMethod = GetGenericCreateMethod(type);
-        var result = (ValueConverter)genericMethod.Invoke(null, Array.Empty<object>());
-        return result;
+        var result = genericMethod.Invoke(null, Array.Empty<object>()) as ValueConverter;
+
+        return result
+            ?? throw new ArgumentException($"Unable to create ValueConverter for type '{type.Name}'.", nameof(type));
     }
 
     /// <summary>
@@ -35,7 +37,13 @@ public static class ExtendableEnumValueConverter
         where T : ExtendableEnum<T>
     {
         var parseMethod = typeof(T).GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public);
-        return new ValueConverter<T, int>(x => x.Value, x => (T)parseMethod.Invoke(null, new object[] { x }));
+
+        if (parseMethod is null)
+        {
+            throw new MissingMethodException(typeof(T).Name, "ParseValueOrCreate");
+        }
+
+        return new ValueConverter<T, int>(x => x.Value, x => (T)parseMethod.Invoke(null, new object[] { x })!);
     }
 
     private static MethodInfo GetGenericCreateMethod(Type type)
