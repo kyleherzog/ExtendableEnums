@@ -16,6 +16,15 @@ public class EqualsOperatorShould
     }
 
     [TestMethod]
+    public void ReturnTrueGivenBothNull()
+    {
+        SampleStatus? null1 = null;
+        SampleStatus? null2 = null;
+
+        Assert.IsTrue(null1 == null2);
+    }
+
+    [TestMethod]
     public void ReturnTrueGivenMatchingInstances()
     {
         var active1 = SampleStatus.Active;

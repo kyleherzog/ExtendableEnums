@@ -24,4 +24,32 @@ public class GreaterThanOrEqualsOperatorShould
     {
         Assert.IsFalse(SampleStatus.Min >= SampleStatus.Max);
     }
+
+    [TestMethod]
+    public void ReturnTrueGivenBothNull()
+    {
+        SampleStatus? null1 = null;
+        SampleStatus? null2 = null;
+
+        Assert.IsTrue(null1 >= null2);
+    }
+
+    [TestMethod]
+    public void ReturnTrueGivenRightIsNull()
+    {
+        var left = SampleStatus.Min;
+        SampleStatus? right = null;
+
+        Assert.IsTrue(left >= right);
+    }
+
+    [TestMethod]
+    public void ReturnFalseGivenLeftIsNull()
+    {
+        var right = SampleStatus.Min;
+        SampleStatus? left = null;
+
+        Assert.IsFalse(left >= right);
+    }
+
 }
