@@ -7,6 +7,12 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 5.1
+**2022-6-30**
+- [x] Addressed some nullability comparison operator issues
+- [x] Updated Microsoft.AspNetCore.OData to v8.0.10
+- [x] Updated Micrsoft.EntityFrameworkCore and Microsoft.EntityFrameworkCore.SqlServer to v6.0.6
+
 ## 5.0
 **2022-2-28**
 - [x] Enabled Nullable References
