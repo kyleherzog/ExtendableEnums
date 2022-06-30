@@ -7,6 +7,30 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
 public class GreaterThanOrEqualsOperatorShould
 {
     [TestMethod]
+    public void ReturnFalseGivenLeftIsNull()
+    {
+        var right = SampleStatus.Min;
+        SampleStatus? left = null;
+
+        Assert.IsFalse(left >= right);
+    }
+
+    [TestMethod]
+    public void ReturnFalseGivenLeftLessThanRight()
+    {
+        Assert.IsFalse(SampleStatus.Min >= SampleStatus.Max);
+    }
+
+    [TestMethod]
+    public void ReturnTrueGivenBothNull()
+    {
+        SampleStatus? null1 = null;
+        SampleStatus? null2 = null;
+
+        Assert.IsTrue(null1 >= null2);
+    }
+
+    [TestMethod]
     public void ReturnTrueGivenLeftEqualsRight()
     {
         var altMax = SampleStatus.ParseValue(SampleStatus.Max.Value);
@@ -20,8 +44,11 @@ public class GreaterThanOrEqualsOperatorShould
     }
 
     [TestMethod]
-    public void ReturnFalseGivenLeftLessThanRight()
+    public void ReturnTrueGivenRightIsNull()
     {
-        Assert.IsFalse(SampleStatus.Min >= SampleStatus.Max);
+        var left = SampleStatus.Min;
+        SampleStatus? right = null;
+
+        Assert.IsTrue(left >= right);
     }
 }

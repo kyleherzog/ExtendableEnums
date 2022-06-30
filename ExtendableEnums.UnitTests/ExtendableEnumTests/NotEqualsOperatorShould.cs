@@ -7,6 +7,15 @@ namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
 public class NotEqualsOperatorShould
 {
     [TestMethod]
+    public void ReturnFalseGivenBothNull()
+    {
+        SampleStatus? null1 = null;
+        SampleStatus? null2 = null;
+
+        Assert.IsFalse(null1 != null2);
+    }
+
+    [TestMethod]
     public void ReturnFalseGivenMatchingInstances()
     {
         var active1 = SampleStatus.Active;
