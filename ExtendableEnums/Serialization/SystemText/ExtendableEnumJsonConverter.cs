@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using ExtendableEnums.Extensions;
 using ExtendableEnums.Internals;
 
 namespace ExtendableEnums.Serialization.SystemText;
@@ -12,12 +11,14 @@ namespace ExtendableEnums.Serialization.SystemText;
 /// </summary>
 public class ExtendableEnumJsonConverter : JsonConverterFactory
 {
+    /// <inheritdoc/>
     public override bool CanConvert(Type typeToConvert)
     {
         var canConvert = typeToConvert.IsExtendableEnum();
         return canConvert;
     }
 
+    /// <inheritdoc/>
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
         if (typeToConvert == null)
@@ -49,12 +50,9 @@ public class ExtendableEnumJsonConverter : JsonConverterFactory
             var shouldReturnDefault = false;
 
             var element = JsonSerializer.Deserialize<JsonElement>(ref reader);
-            if (element.ValueKind == JsonValueKind.Object)
+            if (element.ValueKind == JsonValueKind.Object && !element.TryGetProperty("value", out element))
             {
-                if (!element.TryGetProperty("value", out element))
-                {
-                    shouldReturnDefault = true;
-                }
+                shouldReturnDefault = true;
             }
 
             if (!shouldReturnDefault)

@@ -49,6 +49,22 @@ public static class TypeExtensions
         return IsTypeDerivedFromGenericType(type, typeof(ExtendableEnumDictionary<,>));
     }
 
+    internal static Type[] GetExtendableEnumArgs(this Type type)
+    {
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ExtendableEnumBase<,>))
+        {
+            var args = type.GetGenericArguments();
+            return args;
+        }
+
+        if (type.BaseType != typeof(object))
+        {
+            return GetExtendableEnumArgs(type.BaseType);
+        }
+
+        return Array.Empty<Type>();
+    }
+
     private static bool IsTypeDerivedFromGenericType(Type typeToCheck, Type genericType)
     {
         if (typeToCheck == typeof(object))

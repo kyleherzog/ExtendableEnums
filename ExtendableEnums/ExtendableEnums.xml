@@ -390,10 +390,22 @@
             Converts ExtendableEnum objects to and from JSON.
             </summary>
         </member>
+        <member name="M:ExtendableEnums.Serialization.SystemText.ExtendableEnumDictionaryJsonConverter.CanConvert(System.Type)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ExtendableEnums.Serialization.SystemText.ExtendableEnumDictionaryJsonConverter.CreateConverter(System.Type,System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc/>
+        </member>
         <member name="T:ExtendableEnums.Serialization.SystemText.ExtendableEnumJsonConverter">
             <summary>
             Converts ExtendableEnum objects to and from JSON.
             </summary>
+        </member>
+        <member name="M:ExtendableEnums.Serialization.SystemText.ExtendableEnumJsonConverter.CanConvert(System.Type)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ExtendableEnums.Serialization.SystemText.ExtendableEnumJsonConverter.CreateConverter(System.Type,System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc/>
         </member>
         <member name="T:ExtendableEnums.TypeExtensions">
             <summary>

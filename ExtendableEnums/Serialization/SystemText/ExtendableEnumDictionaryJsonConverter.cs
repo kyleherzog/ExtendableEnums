@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using ExtendableEnums.Extensions;
 using ExtendableEnums.Internals;
 
 namespace ExtendableEnums.Serialization.SystemText;
@@ -14,12 +13,14 @@ namespace ExtendableEnums.Serialization.SystemText;
 /// </summary>
 public class ExtendableEnumDictionaryJsonConverter : JsonConverterFactory
 {
+    /// <inheritdoc/>
     public override bool CanConvert(Type typeToConvert)
     {
         return typeToConvert.IsGenericType
             && typeToConvert.GetGenericTypeDefinition() == typeof(ExtendableEnumDictionary<,>);
     }
 
+    /// <inheritdoc/>
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
         if (typeToConvert == null)
