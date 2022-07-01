@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Globalization;
-using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ExtendableEnums.Extensions;
@@ -29,7 +27,7 @@ public class ExtendableEnumJsonConverter : JsonConverterFactory
 
         if (options == null)
         {
-            throw new ArgumentException(nameof(options));
+            throw new ArgumentNullException(nameof(options));
         }
 
         var argTypes = typeToConvert.GetExtendableEnumArgs();

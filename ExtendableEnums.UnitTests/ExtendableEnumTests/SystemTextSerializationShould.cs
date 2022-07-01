@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using ExtendableEnums.Serialization.SystemText;
 using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -55,12 +56,12 @@ public class SystemTextSerializationShould
     [TestMethod]
     public void DeserializeFromSerializedDictionaryGivenExtendedEnumIsKey()
     {
-        var dictionary = new Dictionary<SampleStatus, string>();
+        var dictionary = new ExtendableEnumDictionary<SampleStatus, string>();
         var keyStatus = SampleStatus.Discontinued;
         dictionary.Add(keyStatus, "test value");
         var serialized = JsonSerializer.Serialize(dictionary);
         Console.WriteLine(serialized);
-        var deserialized = JsonSerializer.Deserialize<Dictionary<SampleStatus, string>>(serialized);
+        var deserialized = JsonSerializer.Deserialize<ExtendableEnumDictionary<SampleStatus, string>>(serialized);
         Assert.AreEqual(dictionary[keyStatus], deserialized?[keyStatus]);
     }
 

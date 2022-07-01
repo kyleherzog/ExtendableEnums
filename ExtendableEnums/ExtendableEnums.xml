@@ -385,6 +385,11 @@
             <param name="value">The value.</param>
             <param name="serializer">The calling serializer.</param>
         </member>
+        <member name="T:ExtendableEnums.Serialization.SystemText.ExtendableEnumDictionaryJsonConverter">
+            <summary>
+            Converts ExtendableEnum objects to and from JSON.
+            </summary>
+        </member>
         <member name="T:ExtendableEnums.Serialization.SystemText.ExtendableEnumJsonConverter">
             <summary>
             Converts ExtendableEnum objects to and from JSON.

@@ -7,7 +7,6 @@
 public abstract class ExtendableEnum<TEnumeration> : ExtendableEnumBase<TEnumeration, int>
     where TEnumeration : ExtendableEnumBase<TEnumeration, int>
 {
-
     /// <summary>
     /// Initializes a new instance of the <see cref="ExtendableEnum{TEnumeration}"/> class.
     /// </summary>
