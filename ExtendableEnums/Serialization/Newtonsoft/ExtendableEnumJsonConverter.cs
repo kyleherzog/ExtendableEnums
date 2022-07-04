@@ -1,22 +1,16 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Globalization;
-using System.Reflection;
+using ExtendableEnums.Internals;
 using Newtonsoft.Json;
 
-namespace ExtendableEnums;
+namespace ExtendableEnums.Serialization.Newtonsoft;
 
 /// <summary>
 /// Converts ExtendableEnum objects to and from JSON.
 /// </summary>
 public class ExtendableEnumJsonConverter : JsonConverter
 {
-    private static readonly ConcurrentDictionary<Type, MethodInfo> tryParseValueMethodCache = new();
-
-    private static readonly ConcurrentDictionary<Type, MethodInfo> parseValueOrCreateMethodCache = new();
-    private static readonly ConcurrentDictionary<Type, MethodInfo> tryParseMethodCache = new();
-
     /// <summary>
     /// Determines whether this instance can convert the specified object type.
     /// </summary>
@@ -52,7 +46,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
             throw new ArgumentNullException(nameof(serializer));
         }
 
-        var valueType = GetTypeOfValueParameter(objectType);
+        var valueType = objectType.GetExtendableEnumArgs()[1];
 
         var rawValue = reader.Value;
         if (rawValue is null)
@@ -66,7 +60,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
             rawValue = dynamicObject.value?.Value;
         }
 
-        var parseValueOrCreateMethod = GetParseValueOrCreateMethod(objectType);
+        var parseValueOrCreateMethod = Methods.GetParseValueOrCreate(objectType);
 
         if (rawValue is null)
         {
@@ -79,7 +73,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
             {
                 var value = Convert.ChangeType(rawValue, valueType, CultureInfo.InvariantCulture);
 
-                var tryParseValueMethod = GetTryParseValueMethod(objectType);
+                var tryParseValueMethod = Methods.GetTryParseValue(objectType);
 
                 var parameters = new object?[] { value, null };
                 if ((bool)tryParseValueMethod.Invoke(null, parameters))
@@ -95,7 +89,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
             if (rawValue is string)
             {
                 var rawParameters = new object?[] { rawValue, null };
-                var tryParseMethod = GetTryParseMethod(objectType);
+                var tryParseMethod = Methods.GetTryParse(objectType);
                 if ((bool)tryParseMethod.Invoke(null, rawParameters))
                 {
                     return rawParameters[1];
@@ -135,36 +129,5 @@ public class ExtendableEnumJsonConverter : JsonConverter
         {
             return null;
         }
-    }
-
-    private static MethodInfo GetTryParseValueMethod(Type type)
-    {
-        return tryParseValueMethodCache.GetOrAdd(type, _ => type.GetMethod("TryParseValue", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
-    }
-
-    private static MethodInfo GetParseValueOrCreateMethod(Type type)
-    {
-        return parseValueOrCreateMethodCache.GetOrAdd(type, _ => type.GetMethod("ParseValueOrCreate", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
-    }
-
-    private static MethodInfo GetTryParseMethod(Type type)
-    {
-        return tryParseMethodCache.GetOrAdd(type, _ => type.GetMethod("TryParse", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy));
-    }
-
-    private Type GetTypeOfValueParameter(Type type)
-    {
-        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ExtendableEnumBase<,>))
-        {
-            var args = type.GetGenericArguments();
-            return args[1];
-        }
-
-        if (type.BaseType != typeof(object))
-        {
-            return GetTypeOfValueParameter(type.BaseType);
-        }
-
-        return typeof(object);
     }
 }

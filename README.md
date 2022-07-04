@@ -54,6 +54,14 @@ The minimum or maximum values in an enumeration can be retrieved by calling the 
 ### As an IDictionary Key
 When it is desired to use an ExtendableEnum as a key in a generic dictionary, `ExtendableEnumDictionary{TKey, TValue}` should be used in order to ensure proper serialization. 
 
+### Serialization
+Serialization is supported natively when using Newtonsoft.Json.
+
+When leveraging System.Text.Json.Serialization, the enumeration implementations must be attributed with the `ExtendableEnumJsonConverterAttribute`.
+```csharp
+[System.Text.Json.Serialization.JsonConverter(typeof(ExtendableEnumJsonConverter))]
+```
+
 ### ASP.net Core Support
 
 #### Tag Helpers

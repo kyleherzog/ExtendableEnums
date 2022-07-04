@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
 
 [TestClass]
-public class SerializeShould
+public class NewsonsoftSerializationShould
 {
     [TestMethod]
     public void DeserializeFromNull()

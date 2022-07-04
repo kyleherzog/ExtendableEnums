@@ -12,6 +12,7 @@ public abstract class ExtendableEnum<TEnumeration> : ExtendableEnumBase<TEnumera
     /// </summary>
     /// <param name="value">The unique value that represents this enumeration value.</param>
     /// <param name="displayName">The <see cref="string"/> value that represents its display name.</param>
+    [System.Text.Json.Serialization.JsonConstructor]
     protected ExtendableEnum(int value, string displayName)
         : base(value, displayName)
     {

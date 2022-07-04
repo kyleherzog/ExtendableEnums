@@ -2,7 +2,7 @@
 using System.Collections;
 using Newtonsoft.Json;
 
-namespace ExtendableEnums;
+namespace ExtendableEnums.Serialization.Newtonsoft;
 
 /// <summary>
 /// Converts <see cref="ExtendableEnumDictionary{TKey, TValue}"/> objects to and from JSON.
