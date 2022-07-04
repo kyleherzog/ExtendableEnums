@@ -7,6 +7,11 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 6.0
+**2022-7-4**
+- [x] Added ExtendableEnumJsonConverter and ExtendableEnumDictionaryJsonConverter for System.Text.Json
+
+
 ## 5.1
 **2022-6-30**
 - [x] Addressed some nullability comparison operator issues

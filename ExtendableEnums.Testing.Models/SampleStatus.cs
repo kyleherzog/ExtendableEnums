@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using ExtendableEnums.Serialization.SystemText;
 
 namespace ExtendableEnums.Testing.Models;
 
+[System.Text.Json.Serialization.JsonConverter(typeof(ExtendableEnumJsonConverter))]
 public class SampleStatus : ExtendableEnums.ExtendableEnum<SampleStatus>
 {
     public static readonly SampleStatus Active = new(1, nameof(Active), "ACT");

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using ExtendableEnums.Serialization.Newtonsoft;
 using Newtonsoft.Json;
 
 namespace ExtendableEnums;
@@ -12,6 +13,7 @@ namespace ExtendableEnums;
 /// </summary>
 /// <typeparam name="TKey">The type of the key.</typeparam>
 /// <typeparam name="TValue">The type of the value.</typeparam>
+[System.Text.Json.Serialization.JsonConverter(typeof(ExtendableEnums.Serialization.SystemText.ExtendableEnumDictionaryJsonConverter))]
 [JsonConverter(typeof(ExtendableEnumDictionaryJsonConverter))]
 [Serializable]
 public class ExtendableEnumDictionary<TKey, TValue> : Dictionary<TKey, TValue>
