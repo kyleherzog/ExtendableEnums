@@ -58,7 +58,7 @@
         </member>
         <member name="T:ExtendableEnums.Microsoft.AspNetCore.MvcOptionsExtensions">
             <summary>
-            Provides extention methods for adding ExtendableEnum support to <see cref="T:Microsoft.AspNetCore.Mvc.MvcOptions"/>.
+            Provides extension methods for adding ExtendableEnum support to <see cref="T:Microsoft.AspNetCore.Mvc.MvcOptions"/>.
             </summary>
         </member>
         <member name="M:ExtendableEnums.Microsoft.AspNetCore.MvcOptionsExtensions.UseExtendableEnumModelBinding(Microsoft.AspNetCore.Mvc.MvcOptions)">

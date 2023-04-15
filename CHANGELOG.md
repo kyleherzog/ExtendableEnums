@@ -1,11 +1,13 @@
-# Roadmap
-- [ ] ???
-
-
 # Changelog
 
 These are the changes to each version that has been released
 on NuGet.org.
+
+## 6.1
+**2023-4-15**
+- [x] Updated Newtonsoft.Json to v13.0.3 
+- [x] Updated Microsoft.AspNetCore.OData to v8.1.1
+- [x] Explicitly setting CLSCompliant values 
 
 ## 6.0
 **2022-7-4**
@@ -24,7 +26,7 @@ on NuGet.org.
 - [x] Updated Microsoft.EntityFrameworkeCore to v6.0.2
 - [x] Updated Simple.OData.Client to v5.26.0
 - [x] Updated to Newtonsoft.Json v13.0.1
-- [x] Updaetd to System.ComponentModel.Annotations v5.0.0 
+- [x] Updated to System.ComponentModel.Annotations v5.0.0 
 - [x] ExtendableEnum.EntityFrameworkCore is now a .NET 6.0 library
 - [x] ExtendableEnum.Microsoft.AspNetCore is now a .NET 6.0 library
 - [x] ExtendableEnum.Microsoft.AspNetCore.OData is now a .NET 6.0 library
