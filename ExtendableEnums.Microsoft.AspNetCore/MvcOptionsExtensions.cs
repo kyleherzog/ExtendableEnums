@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ExtendableEnums.Microsoft.AspNetCore;
 
 /// <summary>
-/// Provides extention methods for adding ExtendableEnum support to <see cref="MvcOptions"/>.
+/// Provides extension methods for adding ExtendableEnum support to <see cref="MvcOptions"/>.
 /// </summary>
 public static class MvcOptionsExtensions
 {
