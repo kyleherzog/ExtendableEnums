@@ -48,7 +48,7 @@ public static class ExtendableEnumValueConverter
 
     private static MethodInfo GetGenericCreateMethod(Type type)
     {
-        var result = genericCreateMethodCache.GetOrAdd(type, t => lazyCreateMethod.Value.MakeGenericMethod(new Type[] { type }));
+        var result = genericCreateMethodCache.GetOrAdd(type, t => lazyCreateMethod.Value.MakeGenericMethod(type));
         return result;
     }
 }
