@@ -6,7 +6,7 @@ namespace ExtendableEnums.Testing.Models;
 public class SampleBookBase
 {
     [DataMember(Name = "id")]
-    public string? Id { get; set; }
+    public string Id { get; set; } = string.Empty;
 
     [DataMember(Name = "title")]
     public string? Title { get; set; }

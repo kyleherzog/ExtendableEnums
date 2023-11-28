@@ -13,6 +13,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Kyle Herzog</Authors>
     <Description>A .NET Standard library that allows ExtendableEnums to be used with LiteDB</Description>
+    <NoWarn>NU1904</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>..\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
@@ -24,15 +25,15 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="LiteDB" Version="4.1.4" />
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.1">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.55.0.65544">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.14.0.81108">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

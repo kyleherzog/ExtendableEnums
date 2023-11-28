@@ -25,7 +25,7 @@ public class RegisterShould
         settings.RegisterExtendableEnum<SampleStatus>();
         var client = new ODataClient(settings);
 
-        var target = DataContext.Books.First();
+        var target = DataContext.Books[0];
 
         var book = await client
             .For<SampleBook>()
@@ -78,7 +78,7 @@ public class RegisterShould
         settings.RegisterExtendableEnum(typeof(SampleStatus));
         var client = new ODataClient(settings);
 
-        var target = DataContext.Books.First();
+        var target = DataContext.Books[0];
 
         var book = await client
             .For<SampleBook>()
