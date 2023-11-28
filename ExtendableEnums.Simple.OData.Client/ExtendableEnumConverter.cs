@@ -103,7 +103,7 @@ public static class ExtendableEnumConverter
     /// to the value found in the dictionary parameter passed in.</returns>
     internal static dynamic Convert(Type enumerationType, Type valueType, IDictionary<string, object> dictionary)
     {
-        var genericMethod = genericConvertMethodCache.GetOrAdd(enumerationType, _ => primaryConvertMethod.Value.MakeGenericMethod(enumerationType, valueType));
+        var genericMethod = genericConvertMethodCache.GetOrAdd(enumerationType, t => primaryConvertMethod.Value.MakeGenericMethod(t, valueType));
         return genericMethod.Invoke(null, new object[] { dictionary });
     }
 

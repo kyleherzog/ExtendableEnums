@@ -103,7 +103,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
             return true;
         }
 
-        return left is not null && left.CompareTo((TEnumeration?)right) < 0;
+        return left.CompareTo((TEnumeration?)right) < 0;
     }
 
     /// <summary>
@@ -124,7 +124,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
             return false;
         }
 
-        return left is not null && left.CompareTo((TEnumeration?)right) <= 0;
+        return left.CompareTo((TEnumeration?)right) <= 0;
     }
 
     /// <summary>
@@ -167,7 +167,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// <returns><c>true</c> if the first parameter value property is greater than or equal to the other.</returns>
     public static bool operator >=(ExtendableEnumBase<TEnumeration, TValue>? left, ExtendableEnumBase<TEnumeration, TValue>? right)
     {
-        if ((right is null) || (left is null && right is null))
+        if (right is null)
         {
             return true;
         }
@@ -236,7 +236,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     {
         if (!TryFind(item => item.Value.Equals(value), out var result))
         {
-            var constructor = typeof(TEnumeration).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).First();
+            var constructor = typeof(TEnumeration).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)[0];
             var constructorParameters = constructor.GetParameters();
             var parameters = new List<object?>(constructorParameters.Length);
             foreach (var parameterType in constructorParameters.Select(x => x.ParameterType))
@@ -380,10 +380,10 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
             .Select(info => info.GetValue(null));
     }
 
-    private static bool TryFind(Func<TEnumeration, bool> predicate, out TEnumeration result)
+    private static bool TryFind(Predicate<TEnumeration> predicate, out TEnumeration result)
     {
         var allItems = GetAll();
-        result = allItems.FirstOrDefault(predicate);
+        result = Array.Find(allItems, predicate);
         return result is not null;
     }
 }

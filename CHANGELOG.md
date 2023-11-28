@@ -3,6 +3,15 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 7.0
+**2023-11-28**
+- [x] Updated Microsoft.AspNetCore.OData to v8.2.3
+- [x] Updated Microsoft.Extensions.Configuration to v8.0.0
+- [x] Updated Microsoft.Extensions.DependencyInjection.Abstractions to v8.0.0
+- [x] Updated Microsoft.Entensions.Hosting to v8.0.0
+- [x] Updated Simple.OData.Client to v6.0.1
+- [x] Updated System.Text.Json to v8.0.0
+
 ## 6.1
 **2023-4-15**
 - [x] Updated Newtonsoft.Json to v13.0.3 

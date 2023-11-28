@@ -116,7 +116,7 @@ public class TestingHost : IDisposable
     private static string GetSolutionRelativeContentRoot(string path)
     {
         var solutionRoot = new DirectoryInfo(PlatformServices.Default.Application.ApplicationBasePath) // netcoreapp#.# folder
-            ?.Parent // Debug or Release folder
+            .Parent // Debug or Release folder
             ?.Parent // bin folder
             ?.Parent // project folder
             ?.Parent?.FullName;  // solution folder

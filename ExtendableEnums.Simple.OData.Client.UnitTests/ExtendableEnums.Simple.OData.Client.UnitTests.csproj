@@ -17,18 +17,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.1">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
     <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="5.3.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
-    <PackageReference Include="Simple.OData.Client" Version="5.26.0" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.55.0.65544">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+    <PackageReference Include="Simple.OData.Client" Version="6.0.1" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.14.0.81108">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

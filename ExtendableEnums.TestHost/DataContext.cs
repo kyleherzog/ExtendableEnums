@@ -28,6 +28,6 @@ public static class DataContext
             });
         }
 
-        Books.Last().Status = null;
+        Books[Books.Count - 1].Status = null;
     }
 }
