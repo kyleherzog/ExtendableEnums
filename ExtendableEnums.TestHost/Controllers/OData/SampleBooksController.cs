@@ -38,11 +38,6 @@ public class SampleBooksController : ODataController
     [EnableQuery]
     public IActionResult Post([FromBody] JsonElement json)
     {
-        if (json.Equals(default))
-        {
-            throw new ArgumentNullException(nameof(json));
-        }
-
         var book = JsonConvert.DeserializeObject<SampleBook>(json.GetRawText());
 
         if (book is null)
