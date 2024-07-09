@@ -3,6 +3,13 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 8.0
+**2024-7-9**
+- [x] Updated LitDb to v5.0.21
+- [x] Updated Microsoft.AspNetCore.OData to v8.2.5
+- [x] Updated System.Text.Json to v8.0.4
+- [x] Updated Microsoft.EntityFrameworkCore to v6.0.32
+
 ## 7.0
 **2023-11-28**
 - [x] Updated Microsoft.AspNetCore.OData to v8.2.3

@@ -298,6 +298,9 @@ dotnet_diagnostic.S2931.severity = warning
 # S3216: "ConfigureAwait(false)" should be used
 dotnet_diagnostic.S3216.severity = suggestion
 
+# S6934: Specify the RouteAttribute when an HttpMethodAttribute or RouteAttribute is specified at an action level.
+dotnet_diagnostic.S6934.severity = suggestion
+
 # SA0001: XML comment analysis disabled
 dotnet_diagnostic.SA0001.severity = none
 
