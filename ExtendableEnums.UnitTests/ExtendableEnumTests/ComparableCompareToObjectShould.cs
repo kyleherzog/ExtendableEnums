@@ -1,5 +1,4 @@
-﻿using System;
-using ExtendableEnums.Testing.Models;
+﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
@@ -35,13 +34,11 @@ public class ComparableCompareToObjectShould
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void ThrowExceptionGivenComparingAgainstNoncomparableValueType()
     {
         IComparable active = SampleStatus.Active;
 
-        active.CompareTo("BAD-OBJECT");
-        Assert.Fail();
+        Assert.ThrowsException<ArgumentException>(() => active.CompareTo("BAD-OBJECT"));
     }
 
     [TestMethod]

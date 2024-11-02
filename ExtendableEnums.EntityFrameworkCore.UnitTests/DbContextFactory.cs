@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using ExtendableEnums.EntityFrameworkCore.UnitTests.Entities;
+﻿using ExtendableEnums.EntityFrameworkCore.UnitTests.Entities;
 
 namespace ExtendableEnums.EntityFrameworkCore.UnitTests;
 

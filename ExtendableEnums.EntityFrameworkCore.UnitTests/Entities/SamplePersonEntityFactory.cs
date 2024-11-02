@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Bogus;
+﻿using Bogus;
 using ExtendableEnums.Testing.Models;
 
 namespace ExtendableEnums.EntityFrameworkCore.UnitTests.Entities;

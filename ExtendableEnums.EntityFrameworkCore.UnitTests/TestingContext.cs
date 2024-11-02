@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ExtendableEnums.EntityFrameworkCore.UnitTests.Entities;
+﻿using ExtendableEnums.EntityFrameworkCore.UnitTests.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;

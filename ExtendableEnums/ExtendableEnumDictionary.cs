@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.Serialization;
 using ExtendableEnums.Serialization.Newtonsoft;
 using Newtonsoft.Json;

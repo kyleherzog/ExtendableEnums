@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ExtendableEnums;
+﻿namespace ExtendableEnums;
 
 /// <summary>
 /// An interface extending <see cref="IExtendableEnum"/> which also exposes the value property.

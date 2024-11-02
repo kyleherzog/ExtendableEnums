@@ -1,5 +1,4 @@
-﻿using System;
-using ExtendableEnums.Testing.Models;
+﻿using ExtendableEnums.Testing.Models;
 
 namespace ExtendableEnums.TestHost.Models;
 

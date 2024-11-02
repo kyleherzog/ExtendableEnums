@@ -1,5 +1,4 @@
-﻿using System;
-using ExtendableEnums.Testing.Models;
+﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.UnitTests.ExtendableEnumTypeConverterTests;
@@ -26,12 +25,10 @@ public class ConvertFromShould
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void ThrowArgumentExceptionGivenNoDisplayNameMatchFound()
     {
         var converter = new ExtendableEnumTypeConverter(typeof(SampleStatus));
-        converter.ConvertFrom("Can't find this");
-        Assert.Fail("An ArgumentException should have been thrown.");
+        Assert.ThrowsException<ArgumentException>(() => converter.ConvertFrom("Can't find this"));
     }
 
     [TestMethod]

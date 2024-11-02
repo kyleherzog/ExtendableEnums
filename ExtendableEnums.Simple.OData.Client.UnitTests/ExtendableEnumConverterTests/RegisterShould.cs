@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using ExtendableEnums.SimpleOData.Client;
+﻿using ExtendableEnums.SimpleOData.Client;
 using ExtendableEnums.TestHost;
 using ExtendableEnums.Testing;
 using ExtendableEnums.Testing.Models;
@@ -90,7 +87,6 @@ public class RegisterShould
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public async Task ThrowArgumentExceptionGivenTypeIsNotExtendableEnumDescendant()
     {
         await TestingHost.GetRequiredInstance().GetNewWebHost().ConfigureAwait(true);
@@ -99,7 +95,6 @@ public class RegisterShould
             BaseUri = TestingHost.GetRequiredInstance().BaseODataUrl,
         };
 
-        settings.RegisterExtendableEnum(typeof(string));
-        Assert.Fail("An ArgumentException should have been thrown.");
+        Assert.ThrowsException<ArgumentException>(() => settings.RegisterExtendableEnum(typeof(string)));
     }
 }
