@@ -1,4 +1,3 @@
-using System;
 using ExtendableEnums.TestHost;
 using ExtendableEnums.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ExtendableEnums.Testing.Models;
+﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.SimpleOData.Client.UnitTests.ExtendableEnumConverterTests;

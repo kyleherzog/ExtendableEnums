@@ -1,5 +1,4 @@
-﻿using System;
-using ExtendableEnums.Testing.Models;
+﻿using ExtendableEnums.Testing.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;

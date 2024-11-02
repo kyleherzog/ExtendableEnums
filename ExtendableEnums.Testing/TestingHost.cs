@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Net;
 using ExtendableEnums.TestHost;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
@@ -90,10 +86,7 @@ public class TestingHost : IDisposable
         if (host is not null)
         {
             await host.StopAsync().ConfigureAwait(false);
-            if (host is not null)
-            {
-                host.Dispose();
-            }
+            host?.Dispose();
         }
 
         GetNewWebHostInternal();

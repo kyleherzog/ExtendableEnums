@@ -1,11 +1,7 @@
 ﻿using ExtendableEnums.Microsoft.AspNetCore;
 using ExtendableEnums.Microsoft.AspNetCore.OData;
 using ExtendableEnums.Testing.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 

@@ -1,5 +1,4 @@
-﻿using System;
-using ExtendableEnums.TestHost.Models;
+﻿using ExtendableEnums.TestHost.Models;
 using ExtendableEnums.Testing.Models;
 using Microsoft.AspNetCore.Mvc;
 
