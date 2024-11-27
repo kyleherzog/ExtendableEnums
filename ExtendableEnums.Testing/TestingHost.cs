@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.PlatformAbstractions;
 
 namespace ExtendableEnums.Testing;
 
@@ -43,11 +42,8 @@ public class TestingHost : IDisposable
 
             var server = host.Services.GetRequiredService<IServer>();
 
-            var feature = server.Features.Get<IServerAddressesFeature>();
-            if (feature is null)
-            {
-                throw new InvalidOperationException("Unable to find the 'IServerAddressFeature' to read the address.");
-            }
+            var feature = server.Features.Get<IServerAddressesFeature>()
+                ?? throw new InvalidOperationException("Unable to find the 'IServerAddressFeature' to read the address.");
 
             return feature.Addresses.First();
         }
@@ -108,16 +104,12 @@ public class TestingHost : IDisposable
 
     private static string GetSolutionRelativeContentRoot(string path)
     {
-        var solutionRoot = new DirectoryInfo(PlatformServices.Default.Application.ApplicationBasePath) // netcoreapp#.# folder
+        var solutionRoot = new DirectoryInfo(AppContext.BaseDirectory) // netcoreapp#.# folder
             .Parent // Debug or Release folder
             ?.Parent // bin folder
             ?.Parent // project folder
-            ?.Parent?.FullName;  // solution folder
-
-        if (solutionRoot is null)
-        {
-            throw new FileNotFoundException("Unable to find the solution root.");
-        }
+            ?.Parent?.FullName
+            ?? throw new FileNotFoundException("Unable to find the solution root.");  // solution folder
 
         var result = Path.GetFullPath(Path.Combine(solutionRoot, path));
         return result;

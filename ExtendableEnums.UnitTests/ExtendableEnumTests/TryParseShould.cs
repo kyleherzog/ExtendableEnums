@@ -1,7 +1,7 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+namespace ExtendableEnums.UnitTests.ExtendableEnumTests;
 
 [TestClass]
 public class TryParseShould
@@ -9,7 +9,7 @@ public class TryParseShould
     [TestMethod]
     public void ReturnFalseGivenDisplayNameMatchDoesNotExist()
     {
-        var result = SampleStatus.TryParse(System.Guid.NewGuid().ToString(), out var status);
+        var result = SampleStatus.TryParse(Guid.NewGuid().ToString(), out _);
         Assert.IsFalse(result);
     }
 
