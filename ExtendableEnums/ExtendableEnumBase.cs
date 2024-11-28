@@ -17,7 +17,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
         where TEnumeration : ExtendableEnumBase<TEnumeration, TValue>
         where TValue : IComparable
 {
-    private static readonly Lazy<TEnumeration[]> enumerations = new(GetEnumerations);
+    private static readonly Lazy<List<TEnumeration>> enumerations = new(GetEnumerations);
     private static readonly Lazy<TEnumeration> maximum = new(() => ParseValue(GetAll().Max(x => x.Value)));
     private static readonly Lazy<TEnumeration> minimum = new(() => ParseValue(GetAll().Min(x => x.Value)));
 
@@ -188,7 +188,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// <returns>An array of all enumeration objects defined for this type of enumeration.</returns>
     public static TEnumeration[] GetAll()
     {
-        return enumerations.Value;
+        return enumerations.Value.ToArray();
     }
 
     /// <summary>
@@ -355,7 +355,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
         return Value.Equals(value);
     }
 
-    private static TEnumeration[] GetEnumerations()
+    private static List<TEnumeration> GetEnumerations()
     {
         var enumerationType = typeof(TEnumeration);
         var results = new List<object>();
@@ -366,7 +366,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
             results.AddRange(GetEnumerations(type));
         }
 
-        return results.Cast<TEnumeration>().ToArray();
+        return results.Cast<TEnumeration>().ToList();
     }
 
     private static IEnumerable<object> GetEnumerations(Type type)

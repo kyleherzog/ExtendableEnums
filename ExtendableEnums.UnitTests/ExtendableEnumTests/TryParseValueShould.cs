@@ -1,7 +1,7 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+namespace ExtendableEnums.UnitTests.ExtendableEnumTests;
 
 [TestClass]
 public class TryParseValueShould
@@ -9,7 +9,7 @@ public class TryParseValueShould
     [TestMethod]
     public void ReturnFalseGivenNoMatchingValueExists()
     {
-        var result = SampleStatus.TryParseValue(-1234, out var status);
+        var result = SampleStatus.TryParseValue(-1234, out _);
         Assert.IsFalse(result);
     }
 

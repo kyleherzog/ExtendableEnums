@@ -36,6 +36,7 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        Console.WriteLine(Configuration);
         services.AddControllers().AddOData(opt =>
         {
             opt.Select().Expand().Filter().OrderBy().SetMaxTop(100).Count();

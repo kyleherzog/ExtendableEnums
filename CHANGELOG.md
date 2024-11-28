@@ -3,6 +3,13 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 9.0
+**2024-11-27**
+- [x] Fix for recursive type definition exception in .NET 9 Blazor WASM
+- [x] Updated System.Text.Json to v9.0.0
+- [x] Updated Microsoft.EntityFrameworkCore to v6.0.36
+- [x] Updated Microsoft.AspNetCore.OData to v8.2.7
+
 ## 8.1
 **2024-11-02**
 - [x] Updated System.Text.Json to v8.0.5

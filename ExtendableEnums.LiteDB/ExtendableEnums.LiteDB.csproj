@@ -1,31 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>12.0</LangVersion>
+    <LangVersion>13.0</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationVersion>8.1</ApplicationVersion>
+    <ApplicationVersion>9.0</ApplicationVersion>
     <ApplicationRevision>0</ApplicationRevision>
-    <Version>8.1</Version>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/kyleherzog/ExtendableEnums/master/LICENSE</PackageLicenseUrl>
+    <Version>9.0</Version>
     <PackageProjectUrl>https://github.com/kyleherzog/ExtendableEnums</PackageProjectUrl>
     <PackageTags>Enum Enumeration Extendable Class LiteDB</PackageTags>
     <RepositoryUrl>https://github.com/kyleherzog/ExtendableEnums</RepositoryUrl>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>Kyle Herzog</Authors>
     <Description>A .NET Standard library that allows ExtendableEnums to be used with LiteDB</Description>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>..\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>C:\Repos\kyleherzog\ExtendableEnums\ExtendableEnums.LiteDb\ExtendableEnums.LiteDB.xml</DocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>..\ExtendableEnums.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>C:\Repos\kyleherzog\ExtendableEnums\ExtendableEnums.LiteDb\ExtendableEnums.LiteDB.xml</DocumentationFile>
-  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="LiteDB" Version="5.0.21" />
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -33,7 +28,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.32.0.97167">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.3.0.106239">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
