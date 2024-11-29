@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExtendableEnums.EntityFrameworkCore;
 
@@ -23,7 +25,7 @@ public static class ModelBuilderExtensions
         foreach (var clrType in entityTypes.Select(x => x.ClrType))
         {
             var properties = clrType.GetProperties();
-            foreach (var property in properties.Where(x => x.PropertyType.IsExtendableEnum()))
+            foreach (var property in properties.Where(x => x.PropertyType.IsExtendableEnum() && !x.GetCustomAttributes<NotMappedAttribute>().Any()))
             {
                 modelBuilder.Entity(clrType).Property(property.Name).HasConversion(ExtendableEnumValueConverter.Create(property.PropertyType));
             }
