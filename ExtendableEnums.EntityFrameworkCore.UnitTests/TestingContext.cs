@@ -52,6 +52,8 @@ public class TestingContext : DbContext
             throw new ArgumentNullException(nameof(modelBuilder));
         }
 
+        modelBuilder.Entity<SamplePersonEntity>().Ignore(x => x.IgnoredStatus);
+
         if (SeedData is not null)
         {
             var types = SeedData.Select(x => x.GetType()).Distinct();
