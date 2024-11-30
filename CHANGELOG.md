@@ -5,7 +5,7 @@ on NuGet.org.
 
 ## 9.1
 **2024-11-29**
-- [x] Fix for NotMappedAttribute handling in EF Core
+- [x] Fix for model properties ignored in EF Core
 
 ## 9.0
 **2024-11-27**

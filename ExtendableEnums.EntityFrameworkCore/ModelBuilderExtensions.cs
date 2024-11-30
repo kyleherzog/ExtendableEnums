@@ -22,10 +22,14 @@ public static class ModelBuilderExtensions
         }
 
         var entityTypes = modelBuilder.Model.GetEntityTypes();
-        foreach (var clrType in entityTypes.Select(x => x.ClrType))
+
+        foreach (var entityType in entityTypes.Where(x => !x.IsIgnored(x.Name)))
         {
+            var ignoredMembers = entityType.GetIgnoredMembers();
+
+            var clrType = entityType.ClrType;
             var properties = clrType.GetProperties();
-            foreach (var property in properties.Where(x => x.PropertyType.IsExtendableEnum() && !x.GetCustomAttributes<NotMappedAttribute>().Any()))
+            foreach (var property in properties.Where(x => x.PropertyType.IsExtendableEnum() && !ignoredMembers.Contains(x.Name)))
             {
                 modelBuilder.Entity(clrType).Property(property.Name).HasConversion(ExtendableEnumValueConverter.Create(property.PropertyType));
             }

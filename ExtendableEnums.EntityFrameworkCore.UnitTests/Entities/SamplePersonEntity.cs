@@ -14,5 +14,7 @@ public class SamplePersonEntity
     public SampleStatus? Status { get; set; }
 
     [NotMapped]
-    public SampleStatus? AlternateStatus { get => Status; set => Status = value; }
+    public SampleStatus? NotMapppedStatus { get => Status; set => Status = value; }
+
+    public SampleStatus? IgnoredStatus { get => Status; set => Status = value; }
 }
