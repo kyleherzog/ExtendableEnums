@@ -18,19 +18,6 @@ public class ApplyExtendableEnumConversionsShould
     }
 
     [TestMethod]
-    public void NotApplyTheValueConversionsGivenNotMappedAttribute()
-    {
-        var seedCount = 1;
-        using var context = DbContextFactory.Generate(seedCount);
-        var entityProperties = context.Model.FindEntityType(typeof(SamplePersonEntity))!.GetProperties();
-        var notMappedStatusProperty = entityProperties.FirstOrDefault(p => p.Name == nameof(SamplePersonEntity.NotMapppedStatus));
-        Assert.IsNull(notMappedStatusProperty);
-
-        var statusProperty = entityProperties.FirstOrDefault(p => p.Name == nameof(SamplePersonEntity.Status));
-        Assert.IsNotNull(statusProperty);
-    }
-
-    [TestMethod]
     public void NotApplyTheValueConversionsGivenIgnoredModelBuilder()
     {
         var seedCount = 1;
@@ -43,4 +30,16 @@ public class ApplyExtendableEnumConversionsShould
         Assert.IsNotNull(statusProperty);
     }
 
+    [TestMethod]
+    public void NotApplyTheValueConversionsGivenNotMappedAttribute()
+    {
+        var seedCount = 1;
+        using var context = DbContextFactory.Generate(seedCount);
+        var entityProperties = context.Model.FindEntityType(typeof(SamplePersonEntity))!.GetProperties();
+        var notMappedStatusProperty = entityProperties.FirstOrDefault(p => p.Name == nameof(SamplePersonEntity.NotMapppedStatus));
+        Assert.IsNull(notMappedStatusProperty);
+
+        var statusProperty = entityProperties.FirstOrDefault(p => p.Name == nameof(SamplePersonEntity.Status));
+        Assert.IsNotNull(statusProperty);
+    }
 }
