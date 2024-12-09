@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ExtendableEnums.Serialization.Newtonsoft.Json\ExtendableEnums.Serialization.Newtonsoft.Json.csproj" />
     <ProjectReference Include="..\ExtendableEnums.Testing.Models\ExtendableEnums.Testing.Models.csproj" />
   </ItemGroup>
 

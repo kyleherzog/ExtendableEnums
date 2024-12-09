@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace ExtendableEnums.Microsoft.AspNetCore;
 
@@ -22,7 +24,8 @@ public class ExtendableEnumModelBinderProvider : IModelBinderProvider
 
         if (context.Metadata.ModelType.IsExtendableEnum())
         {
-            return new ExtendableEnumBinder();
+            var options = context.Services.GetRequiredService<IOptions<JsonOptions>>().Value;
+            return new ExtendableEnumBinder(options.JsonSerializerOptions);
         }
 
         return null;

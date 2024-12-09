@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ExtendableEnums.Serialization.SystemText;
+namespace ExtendableEnums.Serialization.System.Text.Json;
 
 /// <summary>
 /// Converts ExtendableEnum objects to and from JSON.

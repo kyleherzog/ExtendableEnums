@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using ExtendableEnums.Serialization.SystemText;
+using ExtendableEnums.Serialization.System.Text.Json;
 
 namespace ExtendableEnums.Testing.Models;
 
 [System.Text.Json.Serialization.JsonConverter(typeof(ExtendableEnumJsonConverter))]
+[Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.ExtendableEnumJsonConverter))]
 public class SampleStatus : ExtendableEnums.ExtendableEnum<SampleStatus>
 {
     public static readonly SampleStatus Active = new(1, nameof(Active), "ACT");

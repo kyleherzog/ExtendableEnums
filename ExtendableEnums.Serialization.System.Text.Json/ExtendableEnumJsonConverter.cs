@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using ExtendableEnums.Internals;
+using ExtendableEnums.Serialization.System.Text.Json.Internals;
 
-namespace ExtendableEnums.Serialization.SystemText;
+namespace ExtendableEnums.Serialization.System.Text.Json;
 
 /// <summary>
 /// Converts ExtendableEnum objects to and from JSON.
@@ -90,10 +90,8 @@ public class ExtendableEnumJsonConverter : JsonConverterFactory
             {
                 return Activator.CreateInstance(t);
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
     }
 }

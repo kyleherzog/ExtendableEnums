@@ -3,7 +3,6 @@ using ExtendableEnums.Testing.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
-using Newtonsoft.Json;
 
 namespace ExtendableEnums.TestHost.Controllers.OData;
 
@@ -35,7 +34,7 @@ public class SampleBooksController : ODataController
     [EnableQuery]
     public IActionResult Post([FromBody] JsonElement json)
     {
-        var book = JsonConvert.DeserializeObject<SampleBook>(json.GetRawText());
+        var book = JsonSerializer.Deserialize<SampleBook>(json.GetRawText());
 
         if (book is null)
         {

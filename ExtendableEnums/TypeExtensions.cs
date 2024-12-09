@@ -47,7 +47,7 @@ public static class TypeExtensions
         return IsTypeDerivedFromGenericType(type, typeof(ExtendableEnumDictionary<,>));
     }
 
-    internal static Type[] GetExtendableEnumArgs(this Type type)
+    public static Type[] GetExtendableEnumArgs(this Type type)
     {
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ExtendableEnumBase<,>))
         {
@@ -55,12 +55,12 @@ public static class TypeExtensions
             return args;
         }
 
-        if (type.BaseType != typeof(object))
+        if (type.BaseType is { } baseType && baseType != typeof(object))
         {
-            return GetExtendableEnumArgs(type.BaseType);
+            return GetExtendableEnumArgs(baseType);
         }
 
-        return Array.Empty<Type>();
+        return [];
     }
 
     private static bool IsTypeDerivedFromGenericType(Type typeToCheck, Type genericType)
@@ -69,17 +69,17 @@ public static class TypeExtensions
         {
             return false;
         }
-        else if (typeToCheck is null)
+
+        if (typeToCheck is null)
         {
             return false;
         }
-        else if (typeToCheck.IsGenericType && typeToCheck.GetGenericTypeDefinition() == genericType)
+
+        if (typeToCheck.IsGenericType && typeToCheck.GetGenericTypeDefinition() == genericType)
         {
             return true;
         }
-        else
-        {
-            return IsTypeDerivedFromGenericType(typeToCheck.BaseType, genericType);
-        }
+
+        return IsTypeDerivedFromGenericType(typeToCheck.BaseType, genericType);
     }
 }
