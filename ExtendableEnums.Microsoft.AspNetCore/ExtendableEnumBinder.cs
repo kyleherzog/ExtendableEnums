@@ -1,7 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Newtonsoft.Json;
 
 namespace ExtendableEnums.Microsoft.AspNetCore;
 
@@ -10,6 +8,13 @@ namespace ExtendableEnums.Microsoft.AspNetCore;
 /// </summary>
 public class ExtendableEnumBinder : IModelBinder
 {
+    private JsonSerializerOptions jsonSerializerOptions;
+
+    public ExtendableEnumBinder(JsonSerializerOptions jsonSerializerOptions)
+    {
+        this.jsonSerializerOptions = jsonSerializerOptions;
+    }
+
     /// <summary>
     /// Attempts to bind a model.
     /// </summary>
@@ -37,7 +42,8 @@ public class ExtendableEnumBinder : IModelBinder
             return Task.CompletedTask;
         }
 
-        var result = JsonConvert.DeserializeObject($"'{valueProviderResult.FirstValue}'", bindingContext.ModelType);
+        var json = $"{{\"value\":\"{valueProviderResult.FirstValue}\"}}";
+        var result = JsonSerializer.Deserialize(json, returnType: bindingContext.ModelType, options: this.jsonSerializerOptions);
 
         bindingContext.Result = ModelBindingResult.Success(result);
 

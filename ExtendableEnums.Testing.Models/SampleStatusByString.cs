@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using ExtendableEnums.Serialization.SystemText;
+using ExtendableEnums.Serialization.System.Text.Json;
 
 namespace ExtendableEnums.Testing.Models;
 

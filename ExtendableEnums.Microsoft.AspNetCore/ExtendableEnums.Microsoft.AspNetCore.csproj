@@ -45,5 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExtendableEnums\ExtendableEnums.csproj" />
+    <ProjectReference Include="..\ExtendableEnums.Serialization.System.Text.Json\ExtendableEnums.Serialization.System.Text.Json.csproj" />
   </ItemGroup>
 </Project>

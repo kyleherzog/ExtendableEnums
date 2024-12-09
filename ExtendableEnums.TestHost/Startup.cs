@@ -1,5 +1,6 @@
 ﻿using ExtendableEnums.Microsoft.AspNetCore;
 using ExtendableEnums.Microsoft.AspNetCore.OData;
+using ExtendableEnums.Serialization.System.Text.Json;
 using ExtendableEnums.Testing.Models;
 using Microsoft.AspNetCore.OData;
 using Microsoft.OData.Edm;
@@ -37,15 +38,27 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         Console.WriteLine(Configuration);
-        services.AddControllers().AddOData(opt =>
-        {
-            opt.Select().Expand().Filter().OrderBy().SetMaxTop(100).Count();
-            opt.AddRouteComponents("odata", GetEdmModel());
-        });
-        services.AddMvc(options =>
-        {
-            options.UseExtendableEnumModelBinding();
-        });
+
+        services.AddControllers()
+            .AddOData(opt =>
+            {
+                opt.Select().Expand().Filter().OrderBy().SetMaxTop(100).Count();
+                opt.AddRouteComponents("odata", GetEdmModel());
+            })
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.AddExtendableEnums();
+            });
+
+        services
+            .AddMvc(options =>
+            {
+                options.UseExtendableEnumModelBinding();
+            })
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.AddExtendableEnums();
+            });
     }
 
     private static IEdmModel GetEdmModel()

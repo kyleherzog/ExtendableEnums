@@ -8,6 +8,19 @@ namespace ExtendableEnums.UnitTests.ExtendableEnumDictionaryTests;
 [TestClass]
 public class DeserializeShould
 {
+    private JsonSerializerSettings options = new();
+
+    [TestInitialize]
+    public void TestInitialize()
+    {
+        var options = new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented
+        };
+        options.Converters.AddExtendableEnums();
+        this.options = options;
+    }
+
     [TestMethod]
     public void DeserializeGivenValidSerialized()
     {
@@ -19,7 +32,7 @@ public class DeserializeShould
             { SampleStatus.Deleted, nameof(SampleStatus.Deleted) },
         };
 
-        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatus, string>>(serialized);
+        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatus, string>>(serialized, this.options);
 
         result.Should().BeEquivalentTo(expected);
     }
@@ -35,7 +48,7 @@ public class DeserializeShould
             { SampleStatusByString.Deleted, nameof(SampleStatusByString.Deleted) },
         };
 
-        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatusByString, string>>(serialized);
+        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatusByString, string>>(serialized, this.options);
 
         result.Should().BeEquivalentTo(expected);
     }
@@ -52,7 +65,7 @@ public class DeserializeShould
             { SampleStatusByString.Deleted, nameof(SampleStatusByString.Deleted) },
         };
 
-        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatusByString, string>>(serialized);
+        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatusByString, string>>(serialized, this.options);
 
         result.Should().BeEquivalentTo(expected);
     }
@@ -69,7 +82,7 @@ public class DeserializeShould
             { SampleStatus.Deleted, nameof(SampleStatus.Deleted) },
         };
 
-        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatus, string>>(serialized);
+        var result = JsonConvert.DeserializeObject<ExtendableEnumDictionary<SampleStatus, string>>(serialized, this.options);
 
         result.Should().BeEquivalentTo(expected);
     }

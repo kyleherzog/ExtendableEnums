@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace ExtendableEnums.Internals;
+namespace Newtonsoft.Json.Internals;
 
 internal static class Methods
 {

@@ -41,6 +41,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.EntityFrame
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendableEnums.Demo.Wasm", "ExtendableEnums.Demo.Wasm\ExtendableEnums.Demo.Wasm.csproj", "{D552BEE7-F8FD-4967-AFBF-BA0E054AD6CA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.Serialization.Newtonsoft.Json", "ExtendableEnums.Serialization.Newtonsoft.Json\ExtendableEnums.Serialization.Newtonsoft.Json.csproj", "{19AC125D-474C-4C01-B36E-3CE6EE1E3864}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.Serialization.System.Text.Json", "ExtendableEnums.Serialization.System.Text.Json\ExtendableEnums.Serialization.System.Text.Json.csproj", "{4AECE989-A952-4295-841F-3A40583FBE68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +111,14 @@ Global
 		{D552BEE7-F8FD-4967-AFBF-BA0E054AD6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D552BEE7-F8FD-4967-AFBF-BA0E054AD6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D552BEE7-F8FD-4967-AFBF-BA0E054AD6CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19AC125D-474C-4C01-B36E-3CE6EE1E3864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19AC125D-474C-4C01-B36E-3CE6EE1E3864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19AC125D-474C-4C01-B36E-3CE6EE1E3864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19AC125D-474C-4C01-B36E-3CE6EE1E3864}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AECE989-A952-4295-841F-3A40583FBE68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AECE989-A952-4295-841F-3A40583FBE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AECE989-A952-4295-841F-3A40583FBE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AECE989-A952-4295-841F-3A40583FBE68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

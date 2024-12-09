@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
-using ExtendableEnums.Internals;
-using Newtonsoft.Json;
+using ExtendableEnums;
+using Newtonsoft.Json.Internals;
 
-namespace ExtendableEnums.Serialization.Newtonsoft;
+namespace Newtonsoft.Json;
 
 /// <summary>
 /// Converts ExtendableEnum objects to and from JSON.
@@ -17,7 +17,34 @@ public class ExtendableEnumJsonConverter : JsonConverter
     /// <returns><c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.</returns>
     public override bool CanConvert(Type objectType)
     {
-        return true;
+        if (objectType is null)
+        {
+            throw new ArgumentNullException(nameof(objectType));
+        }
+
+        return IsExtendableEnum(objectType);
+    }
+
+    private static bool IsExtendableEnum(Type objectType)
+    {
+        if (objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(ExtendableEnumBase<,>))
+        {
+            return true;
+        }
+
+        // traverse type hierarchy
+        var baseType = objectType.BaseType;
+        while (baseType != null)
+        {
+            if (baseType.IsGenericType && baseType.GetGenericTypeDefinition() == typeof(ExtendableEnumBase<,>))
+            {
+                return true;
+            }
+
+            baseType = baseType.BaseType;
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -45,7 +72,13 @@ public class ExtendableEnumJsonConverter : JsonConverter
             throw new ArgumentNullException(nameof(serializer));
         }
 
-        var valueType = objectType.GetExtendableEnumArgs()[1];
+        var enumArgs = objectType.GetExtendableEnumArgs();
+        if (enumArgs.Length < 2)
+        {
+            return null;
+        }
+
+        var valueType = enumArgs[1];
 
         var rawValue = reader.Value;
         if (rawValue is null)

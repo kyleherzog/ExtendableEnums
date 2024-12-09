@@ -13,6 +13,19 @@ public class ModelBindingTests : IDisposable
 
     private bool hasDisposed;
 
+    private JsonSerializerSettings options = new();
+
+    [TestInitialize]
+    public void TestInitialize()
+    {
+        var options = new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented
+        };
+        options.Converters.AddExtendableEnums();
+        this.options = options;
+    }
+
     ~ModelBindingTests()
     {
         // Do not change this code. Put cleanup code in Dispose(bool disposing).
@@ -37,7 +50,7 @@ public class ModelBindingTests : IDisposable
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
         var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
-        var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
+        var book = JsonConvert.DeserializeObject<SampleBook>(responseContent, this.options);
 
         Assert.AreEqual(SampleStatus.Deleted, book?.Status);
     }
@@ -59,7 +72,7 @@ public class ModelBindingTests : IDisposable
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
         var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
-        var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
+        var book = JsonConvert.DeserializeObject<SampleBook>(responseContent, this.options);
 
         Assert.IsNull(book?.Status);
     }
@@ -82,7 +95,7 @@ public class ModelBindingTests : IDisposable
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
         var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
-        var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
+        var book = JsonConvert.DeserializeObject<SampleBook>(responseContent, this.options);
 
         Assert.IsNull(book?.Status);
     }
@@ -105,7 +118,7 @@ public class ModelBindingTests : IDisposable
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
         var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
-        var book = JsonConvert.DeserializeObject<SampleBookByStringStatus>(responseContent);
+        var book = JsonConvert.DeserializeObject<SampleBookByStringStatus>(responseContent, this.options);
 
         Assert.AreEqual(SampleStatusByString.Deleted, book?.Status);
     }

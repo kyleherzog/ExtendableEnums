@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
-using ExtendableEnums.Serialization.Newtonsoft;
-using Newtonsoft.Json;
 
 namespace ExtendableEnums;
 
@@ -11,7 +9,6 @@ namespace ExtendableEnums;
 /// </summary>
 /// <typeparam name="TEnumeration">The <see cref="Type"/> of this enumeration (itself).</typeparam>
 /// <typeparam name="TValue">The <see cref="Type"/> of the value property.</typeparam>
-[JsonConverter(typeof(ExtendableEnumJsonConverter))]
 [TypeConverter(typeof(ExtendableEnumTypeConverter))]
 public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum<TValue>, IComparable<TEnumeration>, IComparable, IEquatable<TEnumeration>
         where TEnumeration : ExtendableEnumBase<TEnumeration, TValue>

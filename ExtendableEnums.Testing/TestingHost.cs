@@ -132,7 +132,6 @@ public class TestingHost : IDisposable
                 .UseContentRoot(GetSolutionRelativeContentRoot(SolutionRelativeRootPath))
                 .UseStartup(StartupType);
             })
-
             .Build();
 
         host.Start();
