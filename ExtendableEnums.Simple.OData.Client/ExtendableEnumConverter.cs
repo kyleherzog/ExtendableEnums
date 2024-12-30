@@ -77,11 +77,8 @@ public static class ExtendableEnumConverter
             throw new ArgumentNullException(nameof(enumDescendant));
         }
 
-        var config = typeConfigurationCache.GetOrAdd(enumDescendant, GetTypeConverterConfiguration(enumDescendant));
-        if (config is null)
-        {
-            throw new ArgumentException($"The type argument must inherit from ExtendableEnumBase.", nameof(enumDescendant));
-        }
+        var config = typeConfigurationCache.GetOrAdd(enumDescendant, GetTypeConverterConfiguration(enumDescendant))
+            ?? throw new ArgumentException($"The type argument must inherit from ExtendableEnumBase.", nameof(enumDescendant));
 
         if (settings is null)
         {

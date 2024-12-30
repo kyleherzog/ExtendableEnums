@@ -13,6 +13,7 @@ namespace ExtendableEnums;
 /// <typeparam name="TValue">The <see cref="Type"/> of the value property.</typeparam>
 [JsonConverter(typeof(ExtendableEnumJsonConverter))]
 [TypeConverter(typeof(ExtendableEnumTypeConverter))]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4035:Classes implementing \"IEquatable<T>\" should be sealed", Justification = "We should only compare on Value property no matter what derives from this class.")]
 public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum<TValue>, IComparable<TEnumeration>, IComparable, IEquatable<TEnumeration>
         where TEnumeration : ExtendableEnumBase<TEnumeration, TValue>
         where TValue : IComparable

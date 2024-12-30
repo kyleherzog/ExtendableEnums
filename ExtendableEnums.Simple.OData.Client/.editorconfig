@@ -4,4 +4,4 @@
 # SA1600: Elements should be documented
 dotnet_diagnostic.SA1600.severity = warning
 
-vsspell_ignored_words_project = extendable
+vsspell_ignored_words_project = enums|extendable

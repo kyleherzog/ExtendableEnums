@@ -34,12 +34,8 @@ public class SampleBooksController : ODataController
     [EnableQuery]
     public IActionResult Post([FromBody] JsonElement json)
     {
-        var book = JsonSerializer.Deserialize<SampleBook>(json.GetRawText());
-
-        if (book is null)
-        {
-            throw new ArgumentException("Unable to deserialize the json parameter.", nameof(json));
-        }
+        var book = JsonSerializer.Deserialize<SampleBook>(json.GetRawText())
+            ?? throw new ArgumentException("Unable to deserialize the json parameter.", nameof(json));
 
         var matchingBook = books.FirstOrDefault(b => b.Id == book.Id);
         if (matchingBook is null)
