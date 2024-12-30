@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		CHANGELOG.md = CHANGELOG.md
+		ExtendableEnums.ruleset = ExtendableEnums.ruleset
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -40,6 +41,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtendableEnums.EntityFrameworkCore.UnitTests", "ExtendableEnums.EntityFrameworkCore.UnitTests\ExtendableEnums.EntityFrameworkCore.UnitTests.csproj", "{4F347C16-D5D8-4C60-B22C-F6D6280B1312}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendableEnums.Demo.Wasm", "ExtendableEnums.Demo.Wasm\ExtendableEnums.Demo.Wasm.csproj", "{D552BEE7-F8FD-4967-AFBF-BA0E054AD6CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendableEnums.Serialization.SystemText", "ExtendableEnums.Serialization.SystemText\ExtendableEnums.Serialization.SystemText.csproj", "{77192AB3-A84E-4B8B-B143-CE59DB5F2D1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendableEnums.Serialization.SystemText.UnitTests", "ExtendableEnums.Serialization.SystemText.UnitTests\ExtendableEnums.Serialization.SystemText.UnitTests.csproj", "{F7A3DEA9-8A56-421F-9D5B-92F698B65D34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +112,14 @@ Global
 		{D552BEE7-F8FD-4967-AFBF-BA0E054AD6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D552BEE7-F8FD-4967-AFBF-BA0E054AD6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D552BEE7-F8FD-4967-AFBF-BA0E054AD6CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77192AB3-A84E-4B8B-B143-CE59DB5F2D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77192AB3-A84E-4B8B-B143-CE59DB5F2D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77192AB3-A84E-4B8B-B143-CE59DB5F2D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77192AB3-A84E-4B8B-B143-CE59DB5F2D1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A3DEA9-8A56-421F-9D5B-92F698B65D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A3DEA9-8A56-421F-9D5B-92F698B65D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A3DEA9-8A56-421F-9D5B-92F698B65D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A3DEA9-8A56-421F-9D5B-92F698B65D34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

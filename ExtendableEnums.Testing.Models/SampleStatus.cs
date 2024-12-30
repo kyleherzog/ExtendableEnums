@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using ExtendableEnums.Serialization.SystemText;
 
 namespace ExtendableEnums.Testing.Models;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(ExtendableEnumJsonConverter))]
 public class SampleStatus : ExtendableEnums.ExtendableEnum<SampleStatus>
 {
     public static readonly SampleStatus Active = new(1, nameof(Active), "ACT");
@@ -12,7 +10,7 @@ public class SampleStatus : ExtendableEnums.ExtendableEnum<SampleStatus>
     public static readonly SampleStatus Inactive = new(3, nameof(Inactive), "INA");
     public static readonly SampleStatus Unknown = new(0, nameof(Unknown), "???");
 
-    private SampleStatus(int value, string displayName, string code)
+    protected SampleStatus(int value, string displayName, string code)
         : base(value, displayName)
     {
         Code = code;

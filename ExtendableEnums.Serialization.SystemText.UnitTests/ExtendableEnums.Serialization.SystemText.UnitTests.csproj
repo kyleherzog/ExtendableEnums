@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExtendableEnums.Testing.Models\ExtendableEnums.Testing.Models.csproj" />
+    <ProjectReference Include="..\ExtendableEnums.Serialization.SystemText\ExtendableEnums.Serialization.SystemText.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +49,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Repos\kyleherzog\ExtendableEnums\ExtendableEnums.Serialization.SystemText.UnitTests\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Repos\kyleherzog\ExtendableEnums\ExtendableEnums.Serialization.SystemText.UnitTests\.editorconfig" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using ExtendableEnums.Serialization.SystemText;
 
 namespace ExtendableEnums.Testing.Models;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(ExtendableEnumJsonConverter))]
 public class SampleStatusByString : ExtendableEnumBase<SampleStatusByString, string>
 {
     public static readonly SampleStatusByString Unknown = new("A", nameof(Unknown), "???");

@@ -1,0 +1,7 @@
+# Code files
+[*.{cs,vb}]
+
+# SA1600: Elements should be documented
+dotnet_diagnostic.SA1600.severity = warning
+
+vsspell_ignored_words_project = extendable|json|serializer

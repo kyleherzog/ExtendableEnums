@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using ExtendableEnums.Internals;
+using ExtendableEnums.Reflection;
 
 namespace ExtendableEnums.Serialization.SystemText;
 
@@ -67,8 +67,8 @@ public class ExtendableEnumJsonConverter : JsonConverterFactory
                 }
             }
 
-            var parseValueOrCreateMethod = Methods.GetParseValueOrCreate(typeof(TEnumeration));
-            var result = (TEnumeration)parseValueOrCreateMethod.Invoke(null, new object?[] { value });
+            var parseValueOrCreateMethod = ExtendableEnumMethods.GetParseValueOrCreate(typeof(TEnumeration));
+            var result = (TEnumeration)parseValueOrCreateMethod.Invoke(null, [value]);
             return result;
         }
 

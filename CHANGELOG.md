@@ -3,6 +3,9 @@
 These are the changes to each version that has been released
 on NuGet.org.
 
+## 10.0
+- [x] Moved System.Text.Json serialization support to ExtendableEnums.Serialization.SystemText package
+
 ## 9.1
 **2024-11-29**
 - [x] Fix for model properties ignored in EF Core

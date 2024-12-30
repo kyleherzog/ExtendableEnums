@@ -11,8 +11,7 @@ public class ExtendableEnumDictionaryJsonConverter : JsonConverterFactory
     /// <inheritdoc/>
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeToConvert.IsGenericType
-            && typeToConvert.GetGenericTypeDefinition() == typeof(ExtendableEnumDictionary<,>);
+        return typeToConvert.IsExtendableEnumDictionary();
     }
 
     /// <inheritdoc/>

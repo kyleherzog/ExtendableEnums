@@ -17,10 +17,14 @@ public static class ExtendableEnumConverter
     private static readonly ConcurrentDictionary<Type, TypeConverterConfiguration?> typeConfigurationCache = new();
 
     /// <summary>
-    /// Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums in the <see cref="Assembly"/> that contais the given <see cref="Type"/>.
+    /// Registers type converters with the ODataSettings to be used with an ODataClient for all ExtendableEnums
+    /// in the <see cref="Assembly"/> that contains the given <see cref="Type"/>.
     /// </summary>
     /// <param name="settings">The <see cref="ODataClientSettings" /> with which to register the type converter.</param>
-    /// <param name="assemblyMarkerType">The <see cref="Type"/> to use as a reference to find the containing <see cref="Assembly"/> that will be searched for ExtendableEnums to be registered.</param>
+    /// <param name="assemblyMarkerType">
+    /// The <see cref="Type"/> to use as a reference to find the containing <see cref="Assembly"/>
+    /// that will be searched for ExtendableEnums to be registered.
+    /// </param>
     public static void RegisterAllExtendableEnums(this ODataClientSettings settings, Type assemblyMarkerType)
     {
         if (assemblyMarkerType is null)
@@ -91,7 +95,7 @@ public static class ExtendableEnumConverter
     }
 
     /// <summary>
-    /// Converts a dictionary with a value key to an ExtendableEnum of equivilent value.
+    /// Converts a dictionary with a value key to an ExtendableEnum of equivalent value.
     /// </summary>
     /// <param name="enumerationType">The ExtendableEnum descendant type to convert to.</param>
     /// <param name="valueType">The <see cref="Type" /> of the value.</param>
@@ -101,7 +105,7 @@ public static class ExtendableEnumConverter
     internal static dynamic Convert(Type enumerationType, Type valueType, IDictionary<string, object> dictionary)
     {
         var genericMethod = genericConvertMethodCache.GetOrAdd(enumerationType, t => primaryConvertMethod.Value.MakeGenericMethod(t, valueType));
-        return genericMethod.Invoke(null, new object[] { dictionary });
+        return genericMethod.Invoke(null, [dictionary]);
     }
 
     private static ExtendableEnumBase<TEnumeration, TValue> Convert<TEnumeration, TValue>(IDictionary<string, object> dictionary)

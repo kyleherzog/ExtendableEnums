@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
-using ExtendableEnums.Internals;
+using ExtendableEnums.Reflection;
 using Newtonsoft.Json;
 
 namespace ExtendableEnums.Serialization.Newtonsoft;
@@ -59,12 +59,12 @@ public class ExtendableEnumJsonConverter : JsonConverter
             rawValue = dynamicObject.value?.Value;
         }
 
-        var parseValueOrCreateMethod = Methods.GetParseValueOrCreate(objectType);
+        var parseValueOrCreateMethod = ExtendableEnumMethods.GetParseValueOrCreate(objectType);
 
         if (rawValue is null)
         {
             var value = GetDefault(valueType);
-            return parseValueOrCreateMethod.Invoke(null, new object?[] { value });
+            return parseValueOrCreateMethod.Invoke(null, [value]);
         }
         else
         {
@@ -72,7 +72,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
             {
                 var value = Convert.ChangeType(rawValue, valueType, CultureInfo.InvariantCulture);
 
-                var tryParseValueMethod = Methods.GetTryParseValue(objectType);
+                var tryParseValueMethod = ExtendableEnumMethods.GetTryParseValue(objectType);
 
                 var parameters = new object?[] { value, null };
                 if ((bool)tryParseValueMethod.Invoke(null, parameters))
@@ -88,7 +88,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
             if (rawValue is string)
             {
                 var rawParameters = new object?[] { rawValue, null };
-                var tryParseMethod = Methods.GetTryParse(objectType);
+                var tryParseMethod = ExtendableEnumMethods.GetTryParse(objectType);
                 if ((bool)tryParseMethod.Invoke(null, rawParameters))
                 {
                     return rawParameters[1];
@@ -96,7 +96,7 @@ public class ExtendableEnumJsonConverter : JsonConverter
             }
 
             var convertedValue = Convert.ChangeType(rawValue, valueType, CultureInfo.InvariantCulture);
-            var result = parseValueOrCreateMethod.Invoke(null, new object[] { convertedValue });
+            var result = parseValueOrCreateMethod.Invoke(null, [convertedValue]);
             return result;
         }
     }

@@ -1,0 +1,4 @@
+# Code files
+[*.{cs,vb}]
+
+vsspell_ignored_words_project = deserialize|deserializer|json|serializer

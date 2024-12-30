@@ -28,6 +28,27 @@ public static class TypeExtensions
     }
 
     /// <summary>
+    /// Gets the type arguments of an <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> object.
+    /// </summary>
+    /// <param name="type">The <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> that is to be inspected.</param>
+    /// <returns>The type arguments of the <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>.</returns>
+    public static Type[] GetExtendableEnumArgs(this Type type)
+    {
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ExtendableEnumBase<,>))
+        {
+            var args = type.GetGenericArguments();
+            return args;
+        }
+
+        if (type.BaseType != typeof(object))
+        {
+            return GetExtendableEnumArgs(type.BaseType);
+        }
+
+        return Array.Empty<Type>();
+    }
+
+    /// <summary>
     /// Checks to see if the given type is derived from <see cref="ExtendableEnumBase{TEnumeration, TValue}" />.
     /// </summary>
     /// <param name="type">The <see cref="Type" /> to check to see if it is an <see cref="ExtendableEnumBase{TEnumeration, TValue}"/> decendant.</param>
@@ -45,22 +66,6 @@ public static class TypeExtensions
     public static bool IsExtendableEnumDictionary(this Type type)
     {
         return IsTypeDerivedFromGenericType(type, typeof(ExtendableEnumDictionary<,>));
-    }
-
-    internal static Type[] GetExtendableEnumArgs(this Type type)
-    {
-        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ExtendableEnumBase<,>))
-        {
-            var args = type.GetGenericArguments();
-            return args;
-        }
-
-        if (type.BaseType != typeof(object))
-        {
-            return GetExtendableEnumArgs(type.BaseType);
-        }
-
-        return Array.Empty<Type>();
     }
 
     private static bool IsTypeDerivedFromGenericType(Type typeToCheck, Type genericType)
