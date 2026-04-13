@@ -15,3 +15,11 @@
 **Team:** Buddy (Lead), Max (.NET Dev), Bella (Tester), Charlie (Docs & DevRel), Scribe (Logger), Ralph (Monitor)
 
 ## Learnings
+
+### v11 Newtonsoft Split (2025)
+- Current README mentions Newtonsoft support in "### Serialization" section (line 57–63)
+- Also referenced in OData example (line 155: `JsonConvert.DeserializeObject<>`)
+- Migration guide must be early in README for discoverability (suggest after Features section)
+- CHANGELOG needs breaking change callout with link to migration guide
+- Newtonsoft package should have minimal, focused README (avoid duplication)
+- Key insight: Developers need 2-step solution (NuGet + DI registration). Make it obvious.
