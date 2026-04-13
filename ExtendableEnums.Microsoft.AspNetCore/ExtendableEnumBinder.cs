@@ -1,7 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Newtonsoft.Json;
 
 namespace ExtendableEnums.Microsoft.AspNetCore;
 
@@ -14,11 +14,7 @@ public class ExtendableEnumBinder : IModelBinder
     /// Attempts to bind a model.
     /// </summary>
     /// <param name="bindingContext">The <see cref="ModelBindingContext"/>.</param>
-    /// <returns>
-    ///     A <see cref="Task"/> which will complete when the model binding process completes.
-    ///
-    ///     If model binding was successful, IsModelSet is set to <c>true</c>.
-    /// </returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public Task BindModelAsync(ModelBindingContext bindingContext)
     {
         if (bindingContext is null)
@@ -27,20 +23,20 @@ public class ExtendableEnumBinder : IModelBinder
         }
 
         var modelName = bindingContext.ModelName;
-
-        // Try to fetch the value of the argument by name
         var valueProviderResult = bindingContext.ValueProvider.GetValue(modelName);
 
-        if (valueProviderResult == ValueProviderResult.None || string.IsNullOrEmpty(valueProviderResult.FirstValue))
+        if (valueProviderResult == ValueProviderResult.None
+            || string.IsNullOrEmpty(valueProviderResult.FirstValue))
         {
             bindingContext.Result = ModelBindingResult.Success(null);
             return Task.CompletedTask;
         }
 
-        var result = JsonConvert.DeserializeObject($"'{valueProviderResult.FirstValue}'", bindingContext.ModelType);
+        var converter = TypeDescriptor.GetConverter(bindingContext.ModelType);
+        var result = converter.ConvertFromString(valueProviderResult.FirstValue);
 
         bindingContext.Result = ModelBindingResult.Success(result);
 
         return Task.CompletedTask;
     }
-}
+}

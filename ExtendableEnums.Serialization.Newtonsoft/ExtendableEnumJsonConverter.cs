@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Globalization;
 using ExtendableEnums.Reflection;
 using Newtonsoft.Json;
@@ -109,8 +109,14 @@ public class ExtendableEnumJsonConverter : JsonConverter
     /// <param name="serializer">The calling serializer.</param>
     public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
-        var dynamicValue = value as dynamic;
-        writer.WriteValue(dynamicValue?.Value);
+        if (value is null)
+        {
+            writer.WriteNull();
+            return;
+        }
+
+        var rawValue = value.GetType().GetProperty("Value")?.GetValue(value);
+        writer.WriteValue(rawValue);
     }
 
     private static object? GetDefault(Type t)

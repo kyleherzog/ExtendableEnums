@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using Newtonsoft.Json;
 
 namespace ExtendableEnums.Serialization.Newtonsoft;

@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
-using ExtendableEnums.Serialization.Newtonsoft;
-using Newtonsoft.Json;
 
 namespace ExtendableEnums;
 
@@ -11,7 +9,6 @@ namespace ExtendableEnums;
 /// </summary>
 /// <typeparam name="TEnumeration">The <see cref="Type"/> of this enumeration (itself).</typeparam>
 /// <typeparam name="TValue">The <see cref="Type"/> of the value property.</typeparam>
-[JsonConverter(typeof(ExtendableEnumJsonConverter))]
 [TypeConverter(typeof(ExtendableEnumTypeConverter))]
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4035:Classes implementing \"IEquatable<T>\" should be sealed", Justification = "We should only compare on Value property no matter what derives from this class.")]
 public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum<TValue>, IComparable<TEnumeration>, IComparable, IEquatable<TEnumeration>
@@ -384,4 +381,4 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
         result = Array.Find(allItems, predicate);
         return result is not null;
     }
-}
+}

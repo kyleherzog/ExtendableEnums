@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>14.0</LangVersion>
@@ -9,10 +9,11 @@
     <Version>11.0.0</Version>
     <PackageProjectUrl>https://github.com/kyleherzog/ExtendableEnums</PackageProjectUrl>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <PackageTags>Enum Enumeration Extendable Class Serialization</PackageTags>
+    <PackageTags>Enum Enumeration Extendable Class Serialization Newtonsoft Json</PackageTags>
     <RepositoryUrl>https://github.com/kyleherzog/ExtendableEnums</RepositoryUrl>
     <Authors>Kyle Herzog</Authors>
-    <Description>A .NET Standard library that provides System.Text.Json support for ExtendableEmums.</Description>
+    <Description>A .NET Standard library that provides Newtonsoft.Json support for ExtendableEnums.</Description>
+    <PackageId>ExtendableEnums.Serialization.Newtonsoft</PackageId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -26,6 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="10.23.0.137933">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -34,7 +36,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Text.Json" Version="10.0.5" />
     <PackageReference Include="Text.Analyzers" Version="3.3.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

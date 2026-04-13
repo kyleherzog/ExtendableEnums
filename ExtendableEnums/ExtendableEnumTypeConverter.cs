@@ -86,13 +86,27 @@ public class ExtendableEnumTypeConverter : TypeConverter
             {
                 try
                 {
+                    var parseValueMethod = parseValueMethodCache.GetOrAdd(enumerationType, t => t.GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy));
+
+                    object valueToUse;
                     if (valueType == typeof(string))
                     {
-                        var parseValueMethod = parseValueMethodCache.GetOrAdd(enumerationType, t => t.GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy));
-
-                        var result = parseValueMethod.Invoke(null, [value]);
-                        return result;
+                        valueToUse = value;
                     }
+                    else
+                    {
+                        try
+                        {
+                            valueToUse = Convert.ChangeType(value, valueType, culture ?? CultureInfo.InvariantCulture);
+                        }
+                        catch (Exception)
+                        {
+                            throw parseException.InnerException;
+                        }
+                    }
+
+                    var result = parseValueMethod.Invoke(null, [valueToUse]);
+                    return result;
                 }
                 catch (TargetInvocationException parseValueException) when (parseValueException.InnerException?.GetType() == typeof(ArgumentException))
                 {

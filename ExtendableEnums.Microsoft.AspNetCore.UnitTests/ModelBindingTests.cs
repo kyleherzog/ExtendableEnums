@@ -1,13 +1,20 @@
 using System.Net;
+using System.Text.Json;
+using ExtendableEnums.Serialization.SystemText;
 using ExtendableEnums.Testing;
 using ExtendableEnums.Testing.Models;
-using Newtonsoft.Json;
 
 namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests;
 
 [TestClass]
 public class ModelBindingTests : IDisposable
 {
+    private static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true,
+        Converters = { new ExtendableEnumJsonConverter() },
+    };
+
     private readonly HttpClient client = new();
 
     private bool hasDisposed;
@@ -38,7 +45,7 @@ public class ModelBindingTests : IDisposable
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
         var responseContent = await response.Content.ReadAsStringAsync(TestContext.CancellationToken).ConfigureAwait(true);
-        var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
+        var book = JsonSerializer.Deserialize<SampleBook>(responseContent, jsonOptions);
 
         Assert.AreEqual(SampleStatus.Deleted, book?.Status);
     }
@@ -60,7 +67,7 @@ public class ModelBindingTests : IDisposable
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
         var responseContent = await response.Content.ReadAsStringAsync(TestContext.CancellationToken).ConfigureAwait(true);
-        var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
+        var book = JsonSerializer.Deserialize<SampleBook>(responseContent, jsonOptions);
 
         Assert.IsNull(book?.Status);
     }
@@ -83,7 +90,7 @@ public class ModelBindingTests : IDisposable
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
         var responseContent = await response.Content.ReadAsStringAsync(TestContext.CancellationToken).ConfigureAwait(true);
-        var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
+        var book = JsonSerializer.Deserialize<SampleBook>(responseContent, jsonOptions);
 
         Assert.IsNull(book?.Status);
     }
@@ -106,7 +113,7 @@ public class ModelBindingTests : IDisposable
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
         var responseContent = await response.Content.ReadAsStringAsync(TestContext.CancellationToken).ConfigureAwait(true);
-        var book = JsonConvert.DeserializeObject<SampleBookByStringStatus>(responseContent);
+        var book = JsonSerializer.Deserialize<SampleBookByStringStatus>(responseContent, jsonOptions);
 
         Assert.AreEqual(SampleStatusByString.Deleted, book?.Status);
     }
@@ -131,4 +138,4 @@ public class ModelBindingTests : IDisposable
             hasDisposed = true;
         }
     }
-}
+}

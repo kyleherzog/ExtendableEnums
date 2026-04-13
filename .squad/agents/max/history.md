@@ -21,3 +21,4 @@
 **Team:** Buddy (Lead), Max (.NET Dev), Bella (Tester), Charlie (Docs & DevRel), Scribe (Logger), Ralph (Monitor)
 
 ## Learnings
+- Splitting Newtonsoft.Json support requires explicit converter attribution on models or specialized dictionaries once core attributes are removed.

@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ExtendableEnums.Serialization.SystemText\ExtendableEnums.Serialization.SystemText.csproj" />
     <ProjectReference Include="..\ExtendableEnums.Testing\ExtendableEnums.Testing.csproj" />
   </ItemGroup>
 
