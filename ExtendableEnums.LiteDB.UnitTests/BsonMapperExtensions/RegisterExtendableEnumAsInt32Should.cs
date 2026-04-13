@@ -9,17 +9,21 @@ namespace ExtendableEnums.LiteDB.UnitTests.BsonMapperExtensions;
 public class RegisterExtendableEnumAsInt32Should
 {
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void ThrowArgumentExceptionGivenTypeIsNotExtendableEnum()
     {
-        BsonMapper.Global.RegisterExtendableEnumAsInt32(typeof(string));
+        Assert.ThrowsExactly<ArgumentException>(() =>
+        {
+            BsonMapper.Global.RegisterExtendableEnumAsInt32(typeof(string));
+        });
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void ThrowArgumentExceptionGivenValueTypeOfExtendableEnumIsNotInt()
     {
-        BsonMapper.Global.RegisterExtendableEnumAsInt32(typeof(SampleStatusByString));
+        Assert.ThrowsExactly<ArgumentException>(() =>
+        {
+            BsonMapper.Global.RegisterExtendableEnumAsInt32(typeof(SampleStatusByString));
+        });
     }
 
     [TestMethod]

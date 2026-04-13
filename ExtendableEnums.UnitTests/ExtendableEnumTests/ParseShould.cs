@@ -1,7 +1,7 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+namespace ExtendableEnums.UnitTests.ExtendableEnumTests;
 
 [TestClass]
 public class ParseShould
@@ -14,9 +14,11 @@ public class ParseShould
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void ThrowArgumentExceptionGivenNoMatchingDisplayNameExists()
     {
-        SampleStatus.Parse(Guid.NewGuid().ToString());
+        Assert.ThrowsExactly<ArgumentException>(() =>
+        {
+            SampleStatus.Parse(Guid.NewGuid().ToString());
+        });
     }
 }

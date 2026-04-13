@@ -28,7 +28,7 @@ public class ConvertFromShould
     public void ThrowArgumentExceptionGivenNoDisplayNameMatchFound()
     {
         var converter = new ExtendableEnumTypeConverter(typeof(SampleStatus));
-        Assert.ThrowsException<ArgumentException>(() => converter.ConvertFrom("Can't find this"));
+        Assert.ThrowsExactly<ArgumentException>(() => converter.ConvertFrom("Can't find this"));
     }
 
     [TestMethod]

@@ -54,12 +54,8 @@ public class ExtendableEnumSelectTagHelper : SelectTagHelper
         {
             var selectItems = new List<SelectListItem>();
 
-            var getAllMethod = modelType.GetMethod("GetAll", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
-
-            if (getAllMethod is null)
-            {
-                throw new MissingMethodException("The ExtendableEnum 'GetAll' method could not be found.", "GetAll");
-            }
+            var getAllMethod = modelType.GetMethod("GetAll", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy)
+                ?? throw new MissingMethodException("The ExtendableEnum 'GetAll' method could not be found.", "GetAll");
 
             var result = getAllMethod.Invoke(null, null);
 
@@ -68,17 +64,11 @@ public class ExtendableEnumSelectTagHelper : SelectTagHelper
                 throw new InvalidCastException("Unable to cast GetAll result to IEnumberable<object>.");
             }
 
-            var valueProperty = items.First().GetType().GetProperty("Value");
-            if (valueProperty is null)
-            {
-                throw new MissingMemberException("The property 'Value' could not be found.", "Value");
-            }
+            var valueProperty = items.First().GetType().GetProperty("Value")
+                ?? throw new MissingMemberException("The property 'Value' could not be found.", "Value");
 
-            var displayNameProperty = items.First().GetType().GetProperty("DisplayName");
-            if (displayNameProperty is null)
-            {
-                throw new MissingMemberException("The property 'DisplayName' could not be found.", "DisplayName");
-            }
+            var displayNameProperty = items.First().GetType().GetProperty("DisplayName")
+                ?? throw new MissingMemberException("The property 'DisplayName' could not be found.", "DisplayName");
 
             foreach (var item in items)
             {

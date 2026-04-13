@@ -5,6 +5,8 @@ on NuGet.org.
 
 ## 10.0
 - [x] Moved System.Text.Json serialization support to ExtendableEnums.Serialization.SystemText package
+- [x] Updated Newtonsoft.Json to v13.0.4
+- [x] Updated Sysetm.Text.Json to v10.0.5
 
 ## 9.1
 **2024-11-29**
@@ -41,14 +43,13 @@ on NuGet.org.
 
 ## 6.1
 **2023-4-15**
-- [x] Updated Newtonsoft.Json to v13.0.3 
+- [x] Updated Newtonsoft.Json to v13.0.3
 - [x] Updated Microsoft.AspNetCore.OData to v8.1.1
-- [x] Explicitly setting CLSCompliant values 
+- [x] Explicitly setting CLSCompliant values
 
 ## 6.0
 **2022-7-4**
 - [x] Added ExtendableEnumJsonConverter and ExtendableEnumDictionaryJsonConverter for System.Text.Json
-
 
 ## 5.1
 **2022-6-30**
@@ -62,11 +63,10 @@ on NuGet.org.
 - [x] Updated Microsoft.EntityFrameworkeCore to v6.0.2
 - [x] Updated Simple.OData.Client to v5.26.0
 - [x] Updated to Newtonsoft.Json v13.0.1
-- [x] Updated to System.ComponentModel.Annotations v5.0.0 
+- [x] Updated to System.ComponentModel.Annotations v5.0.0
 - [x] ExtendableEnum.EntityFrameworkCore is now a .NET 6.0 library
 - [x] ExtendableEnum.Microsoft.AspNetCore is now a .NET 6.0 library
 - [x] ExtendableEnum.Microsoft.AspNetCore.OData is now a .NET 6.0 library
-
 
 ## 4.1
 **2020-9-8**
@@ -83,11 +83,11 @@ on NuGet.org.
 ## 3.0
 **2020-4-5**
 - [x] Added ExtendableEnumDictionary{TKey, TValue}
-- [x] Falling back to trying to deserialize from DisplayName if cannot deserialize from Value before creating a new value 
+- [x] Falling back to trying to deserialize from DisplayName if cannot deserialize from Value before creating a new value
 
 ## 2.1
 **2020-1-25**
-- [x] Fix for ASP.NET model binding nulls. 
+- [x] Fix for ASP.NET model binding nulls.
 
 ## 2.0
 **2020-1-4**
@@ -128,7 +128,6 @@ on NuGet.org.
 - [x] Added `AddAllExtendableEnums` method to ExtendableEnums.Microsoft.AspNetCore.OData library to allow bulk registration of ExtendableEnum types.
 - [x] Added `RegisterAll` to ExtendableEnums.Simple.OData.Client.ExtendableEnumConverter to allow for bulk registration of ExtendableEnum types.
 
-
 ## 1.3
 **2019-5-15**
 - [x] Added option to declare instances of the same ExtendableEnum across multiple classes.
@@ -147,9 +146,3 @@ on NuGet.org.
 **2018-12-15**
 
 - [x] Initial release
-
-
-
-
- 
- 

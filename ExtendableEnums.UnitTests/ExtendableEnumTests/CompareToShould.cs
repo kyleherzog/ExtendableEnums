@@ -1,7 +1,7 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+namespace ExtendableEnums.UnitTests.ExtendableEnumTests;
 
 [TestClass]
 public class CompareToShould
@@ -10,7 +10,7 @@ public class CompareToShould
     public void ReturnPositiveNumberGivenComparedWithNull()
     {
         var status = SampleStatus.Inactive;
-        Assert.IsTrue(status.CompareTo(null) > 0);
+        Assert.IsGreaterThan(0, status.CompareTo(null));
     }
 
     [TestMethod]

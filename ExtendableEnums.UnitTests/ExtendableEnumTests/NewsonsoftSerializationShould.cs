@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+namespace ExtendableEnums.UnitTests.ExtendableEnumTests;
 
 [TestClass]
 public class NewsonsoftSerializationShould

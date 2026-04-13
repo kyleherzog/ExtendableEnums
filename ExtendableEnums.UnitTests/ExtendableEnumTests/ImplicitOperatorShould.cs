@@ -1,7 +1,7 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+namespace ExtendableEnums.UnitTests.ExtendableEnumTests;
 
 [TestClass]
 public class ImplicitOperatorShould

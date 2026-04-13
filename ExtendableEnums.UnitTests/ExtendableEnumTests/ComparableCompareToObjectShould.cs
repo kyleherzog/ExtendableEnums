@@ -1,7 +1,7 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+namespace ExtendableEnums.UnitTests.ExtendableEnumTests;
 
 [TestClass]
 public class ComparableCompareToObjectShould
@@ -10,7 +10,7 @@ public class ComparableCompareToObjectShould
     public void ReturnPositiveNumberGivenComparedWithNull()
     {
         IComparable status = SampleStatus.Inactive;
-        Assert.IsTrue(status.CompareTo(null) > 0);
+        Assert.IsGreaterThan(0, status.CompareTo(null));
     }
 
     [TestMethod]
@@ -38,7 +38,7 @@ public class ComparableCompareToObjectShould
     {
         IComparable active = SampleStatus.Active;
 
-        Assert.ThrowsException<ArgumentException>(() => active.CompareTo("BAD-OBJECT"));
+        Assert.ThrowsExactly<ArgumentException>(() => active.CompareTo("BAD-OBJECT"));
     }
 
     [TestMethod]

@@ -1,7 +1,6 @@
 using System.Net;
 using ExtendableEnums.Testing;
 using ExtendableEnums.Testing.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
 namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests;
@@ -19,6 +18,8 @@ public class ModelBindingTests : IDisposable
         Dispose(false);
     }
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public async Task BindTheExtendableEnumCorrectlyGivenIntBasedValue()
     {
@@ -33,10 +34,10 @@ public class ModelBindingTests : IDisposable
 
         using var content = new FormUrlEncodedContent(values);
         var targetUrl = new Uri($"{TestingHost.GetRequiredInstance().Address}/samplebooks/edit/1");
-        using var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true);
+        using var response = await client.PostAsync(targetUrl, content, TestContext.CancellationToken).ConfigureAwait(true);
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
-        var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+        var responseContent = await response.Content.ReadAsStringAsync(TestContext.CancellationToken).ConfigureAwait(true);
         var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
 
         Assert.AreEqual(SampleStatus.Deleted, book?.Status);
@@ -55,10 +56,10 @@ public class ModelBindingTests : IDisposable
 
         using var content = new FormUrlEncodedContent(values);
         var targetUrl = new Uri($"{TestingHost.GetRequiredInstance().Address}/samplebooks/edit/1");
-        using var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true);
+        using var response = await client.PostAsync(targetUrl, content, TestContext.CancellationToken).ConfigureAwait(true);
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
-        var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+        var responseContent = await response.Content.ReadAsStringAsync(TestContext.CancellationToken).ConfigureAwait(true);
         var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
 
         Assert.IsNull(book?.Status);
@@ -78,10 +79,10 @@ public class ModelBindingTests : IDisposable
 
         using var content = new FormUrlEncodedContent(values);
         var targetUrl = new Uri($"{TestingHost.GetRequiredInstance().Address}/samplebooks/edit/1");
-        using var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true);
+        using var response = await client.PostAsync(targetUrl, content, TestContext.CancellationToken).ConfigureAwait(true);
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
-        var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+        var responseContent = await response.Content.ReadAsStringAsync(TestContext.CancellationToken).ConfigureAwait(true);
         var book = JsonConvert.DeserializeObject<SampleBook>(responseContent);
 
         Assert.IsNull(book?.Status);
@@ -101,10 +102,10 @@ public class ModelBindingTests : IDisposable
 
         using var content = new FormUrlEncodedContent(values);
         var targetUrl = new Uri($"{TestingHost.GetRequiredInstance().Address}/samplebooksbystringstatus/edit/1");
-        using var response = await client.PostAsync(targetUrl, content).ConfigureAwait(true);
+        using var response = await client.PostAsync(targetUrl, content, TestContext.CancellationToken).ConfigureAwait(true);
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
-        var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+        var responseContent = await response.Content.ReadAsStringAsync(TestContext.CancellationToken).ConfigureAwait(true);
         var book = JsonConvert.DeserializeObject<SampleBookByStringStatus>(responseContent);
 
         Assert.AreEqual(SampleStatusByString.Deleted, book?.Status);

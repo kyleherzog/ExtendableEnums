@@ -1,0 +1,17 @@
+{
+  "assignments": [
+    {
+      "assignment_id": "extendableenums-2026-04-13",
+      "universe": "Classic Dog Names",
+      "created_at": "2026-04-13T20:46:46Z",
+      "snapshot": [
+        { "name": "Buddy", "role": "Lead" },
+        { "name": "Max", "role": ".NET Dev" },
+        { "name": "Bella", "role": "Tester" },
+        { "name": "Charlie", "role": "Docs & DevRel" },
+        { "name": "Scribe", "role": "Session Logger" },
+        { "name": "Ralph", "role": "Work Monitor" }
+      ]
+    }
+  ]
+}

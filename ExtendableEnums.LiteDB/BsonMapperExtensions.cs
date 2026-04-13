@@ -123,7 +123,7 @@ public static class BsonMapperExtensions
         }
 
         var parseMethod = type.GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public);
-        mapper.RegisterType(type, s => ((IExtendableEnum<int>)s).Value, b => parseMethod.Invoke(null, new object[] { b.AsInt32 }));
+        mapper.RegisterType(type, s => ((IExtendableEnum<int>)s).Value, b => parseMethod.Invoke(null, [b.AsInt32]));
     }
 
     /// <summary>
@@ -155,6 +155,6 @@ public static class BsonMapperExtensions
         }
 
         var parseMethod = type.GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.Public);
-        mapper.RegisterType(type, s => ((IExtendableEnum<string>)s).Value, b => parseMethod.Invoke(null, new object[] { b.AsString }));
+        mapper.RegisterType(type, s => ((IExtendableEnum<string>)s).Value, b => parseMethod.Invoke(null, [b.AsString]));
     }
 }

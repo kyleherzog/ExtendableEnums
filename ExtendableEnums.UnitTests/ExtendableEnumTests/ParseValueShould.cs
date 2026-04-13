@@ -1,7 +1,7 @@
 ﻿using ExtendableEnums.Testing.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.UnitTests.ExpandableEnumerationTests;
+namespace ExtendableEnums.UnitTests.ExtendableEnumTests;
 
 [TestClass]
 public class ParseValueShould
@@ -14,9 +14,11 @@ public class ParseValueShould
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void ThrowArgumentExceptionGivenNoMatchingValueExists()
     {
-        SampleStatus.ParseValue(-1234);
+        Assert.ThrowsExactly<ArgumentException>(() =>
+        {
+            SampleStatus.ParseValue(-1234);
+        });
     }
 }

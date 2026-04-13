@@ -13,7 +13,7 @@ public static class ExtendableEnumConverter
     private static readonly ConcurrentDictionary<Type, MethodInfo> genericConvertMethodCache = new();
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3011:Reflection should not be used to increase accessibility of classes, methods, or fields", Justification = "Getting convert method in this class.")]
-    private static readonly Lazy<MethodInfo> primaryConvertMethod = new(() => typeof(ExtendableEnumConverter).GetMethod(nameof(Convert), BindingFlags.NonPublic | BindingFlags.Static, null, new Type[] { typeof(IDictionary<string, object>) }, null));
+    private static readonly Lazy<MethodInfo> primaryConvertMethod = new(() => typeof(ExtendableEnumConverter).GetMethod(nameof(Convert), BindingFlags.NonPublic | BindingFlags.Static, null, [typeof(IDictionary<string, object>)], null));
     private static readonly ConcurrentDictionary<Type, TypeConverterConfiguration?> typeConfigurationCache = new();
 
     /// <summary>

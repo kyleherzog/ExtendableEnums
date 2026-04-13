@@ -45,7 +45,7 @@ public static class TypeExtensions
             return GetExtendableEnumArgs(type.BaseType);
         }
 
-        return Array.Empty<Type>();
+        return [];
     }
 
     /// <summary>

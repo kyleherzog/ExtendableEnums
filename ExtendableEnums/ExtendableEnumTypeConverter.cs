@@ -79,7 +79,7 @@ public class ExtendableEnumTypeConverter : TypeConverter
 
             try
             {
-                var result = parseMethod.Invoke(null, new object[] { value });
+                var result = parseMethod.Invoke(null, [value]);
                 return result;
             }
             catch (TargetInvocationException parseException) when (parseException.InnerException?.GetType() == typeof(ArgumentException))
@@ -90,7 +90,7 @@ public class ExtendableEnumTypeConverter : TypeConverter
                     {
                         var parseValueMethod = parseValueMethodCache.GetOrAdd(enumerationType, t => t.GetMethod("ParseValueOrCreate", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy));
 
-                        var result = parseValueMethod.Invoke(null, new object[] { value });
+                        var result = parseValueMethod.Invoke(null, [value]);
                         return result;
                     }
                 }

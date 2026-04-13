@@ -1,0 +1,52 @@
+{
+  "agents": {
+    "buddy": {
+      "persistent_name": "Buddy",
+      "universe": "Classic Dog Names",
+      "role": "Lead",
+      "created_at": "2026-04-13T20:46:46Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "max": {
+      "persistent_name": "Max",
+      "universe": "Classic Dog Names",
+      "role": ".NET Dev",
+      "created_at": "2026-04-13T20:46:46Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "bella": {
+      "persistent_name": "Bella",
+      "universe": "Classic Dog Names",
+      "role": "Tester",
+      "created_at": "2026-04-13T20:46:46Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "charlie": {
+      "persistent_name": "Charlie",
+      "universe": "Classic Dog Names",
+      "role": "Docs & DevRel",
+      "created_at": "2026-04-13T20:46:46Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "scribe": {
+      "persistent_name": "Scribe",
+      "universe": "exempt",
+      "role": "Session Logger",
+      "created_at": "2026-04-13T20:46:46Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "ralph": {
+      "persistent_name": "Ralph",
+      "universe": "exempt",
+      "role": "Work Monitor",
+      "created_at": "2026-04-13T20:46:46Z",
+      "legacy_named": false,
+      "status": "active"
+    }
+  }
+}
