@@ -31,3 +31,18 @@
 - Extension methods provide one-line registration for consumers: `settings.UseExtendableEnums()`
 - Package ready for consumer migration: only requires changing `using` statement from `ExtendableEnums` to `ExtendableEnums.Serialization.Newtonsoft`
 - All code staged for testing phase
+
+### 2026-04-18 — Core Namespace Renamed from ExtendableEnums to ExtendableEnums.Core
+
+- Renamed namespace in all core project files from `ExtendableEnums` to `ExtendableEnums.Core`
+- Renamed `ExtendableEnums.Reflection` to `ExtendableEnums.Core.Reflection`
+- Updated all fully-qualified type references across the solution (Newtonsoft base classes, Testing.Models, test models)
+- Added `using ExtendableEnums.Core;` to all files that relied on parent-namespace lookup (integration libraries, test projects)
+- Assembly name and NuGet package ID remain unchanged - only C# namespaces affected
+- Breaking change forces consumers to explicitly choose between core types and serialization-enriched base classes
+- Build clean with 0 errors, 0 warnings after all updates
+- Files changed:
+  - Core project: 8 namespace declarations updated
+  - Integration libraries: 15 files updated with new using directives
+  - Test projects: 8 files updated with new using directives or fully-qualified references
+

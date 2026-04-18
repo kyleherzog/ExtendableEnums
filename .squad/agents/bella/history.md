@@ -38,3 +38,20 @@
 - Tests verify that base class attributes work correctly for automatic converter registration
 - Extension points documented through test examples for future consumers
 - Implementation validated: all base class functionality working as designed
+
+### 2026-04-18 — Namespace Rename Test Validation
+
+- Validated test suite after Max's namespace rename from `ExtendableEnums` to `ExtendableEnums.Core` across 33 files
+- **Test Results:** 126 total tests, 124 passed, 2 failed (both environmental, not regression)
+- **Failed tests:** `ExtendableEnums.EntityFrameworkCore.UnitTests` (2 tests on net8.0 and net10.0 frameworks)
+  - Failure cause: LocalDB database 'ExtendableEnumTests' permission/access issues
+  - Error: "User does not have permission to alter database" and "There is already an object named 'People'"
+  - **NOT a namespace regression** — purely environmental/infrastructure issue with SQL Server LocalDB
+- **All other test projects passed cleanly:**
+  - ExtendableEnums.UnitTests (net10.0) ✓
+  - ExtendableEnums.Serialization.SystemText.UnitTests (net10.0) ✓
+  - ExtendableEnums.Serialization.Newtonsoft.UnitTests (net10.0) ✓
+  - ExtendableEnums.LiteDB.UnitTests (net10.0) ✓
+  - ExtendableEnums.Microsoft.AspNetCore.UnitTests (net10.0) ✓
+  - ExtendableEnums.Simple.OData.Client.UnitTests (net10.0) ✓
+- **Verdict:** Namespace rename is clean from a test perspective. EF Core failures are pre-existing environmental issues requiring LocalDB setup/permissions.
