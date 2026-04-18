@@ -1,12 +1,13 @@
 # editorconfig.org
 
-# top-most EditorConfig file
+# Remove the line below if you want to inherit .editorconfig settings from higher directories
 root = true
 
 # Default settings:
 # A newline ending every file
 # Use 4 spaces as indentation
 [*]
+charset = utf-8
 indent_style = space
 trim_trailing_whitespace = true
 
@@ -23,7 +24,7 @@ insert_final_newline = false
 
 #### .NET Coding Conventions ####
 
-# Organize usings
+# Organize using directives
 dotnet_separate_import_directive_groups = false
 dotnet_sort_system_directives_first = true
 
@@ -50,7 +51,7 @@ dotnet_style_require_accessibility_modifiers = for_non_interface_members:silent
 dotnet_style_readonly_field = true:suggestion
 
 # Parameter preferences
-dotnet_code_quality_unused_parameters = all:suggestion
+dotnet_code_quality_unused_parameters = all
 
 # var preferences
 csharp_style_var_elsewhere = true:warning
@@ -87,7 +88,7 @@ csharp_prefer_simple_using_statement = true:suggestion
 csharp_prefer_simple_default_expression = true:suggestion
 csharp_style_deconstructed_variable_declaration = true:suggestion
 csharp_style_inlined_variable_declaration = true:suggestion
-csharp_style_pattern_local_over_anonymous_function = true:suggestion
+csharp_style_prefer_local_over_anonymous_function = true:silent
 csharp_style_prefer_index_operator = true:suggestion
 csharp_style_prefer_range_operator = true:suggestion
 csharp_style_throw_expression = true:suggestion
@@ -214,6 +215,9 @@ dotnet_naming_style.camel_case_name.required_suffix =
 dotnet_naming_style.camel_case_name.word_separator =
 dotnet_naming_style.camel_case_name.capitalization = camel_case
 
+
+# NOTE: Requires **VS2019 16.3** or later
+
 # Code files
 [*.{cs,vb}]
 
@@ -226,8 +230,17 @@ dotnet_diagnostic.CA1014.severity = none
 # CA1303: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1303.severity = silent
 
+# CA1304: Specify CultureInfo
+dotnet_diagnostic.CA1304.severity = suggestion
+
 # CA1305: Specify IFormatProvider
 dotnet_diagnostic.CA1305.severity = silent
+
+# CA1311: Specify a culture or use an invariant version
+dotnet_diagnostic.CA1311.severity = suggestion
+
+# CA1515: Consider making public types internal
+dotnet_diagnostic.CA1515.severity = silent
 
 # CA1704: Identifiers should be spelled correctly
 dotnet_diagnostic.CA1704.severity = none
@@ -235,11 +248,17 @@ dotnet_diagnostic.CA1704.severity = none
 # CA1711: Identifiers should not have incorrect suffix
 dotnet_diagnostic.CA1711.severity = silent
 
+# CA1727: Use PascalCase for named placeholders
+dotnet_diagnostic.CA1727.severity = warning
+
 # CA1821: Remove empty Finalizers
 dotnet_diagnostic.CA1821.severity = warning
 
 # CA1848: Use the LoggerMessage delegates
 dotnet_diagnostic.CA1848.severity = suggestion
+
+# CA1862: Use the 'StringComparison' method overloads to perform case-insensitive string comparisons
+dotnet_diagnostic.CA1862.severity = suggestion
 
 # CA2213: Disposable fields should be disposed
 dotnet_diagnostic.CA2213.severity = warning
@@ -247,20 +266,38 @@ dotnet_diagnostic.CA2213.severity = warning
 # CA2231: Overload operator equals on overriding value type Equals
 dotnet_diagnostic.CA2231.severity = warning
 
+# CA2283: Named placeholders should not be numeric values
+dotnet_diagnostic.CA2253.severity = warning
+
+#CA5391: Use anti-forgery token in ASP.NET Core MVC controllers - Duplicate of SCS0016
+dotnet_diagnostic.CA5391.severity = none
+
 # CS1591: Missing XML comment for publicly visible type or member 'Type_or_Member'
 dotnet_diagnostic.CS1591.severity = silent
 
-# MEL0001: Numerics should not be used in logging format string
-dotnet_diagnostic.MEL0001.severity = warning
+# IDE0045: Convert to conditional expression
+dotnet_diagnostic.IDE0045.severity = silent
 
-# MEL0002: Logging format string should not be dynamically generated
-dotnet_diagnostic.MEL0002.severity = warning
+# IDE0046: Convert to conditional expression
+dotnet_diagnostic.IDE0046.severity = silent
 
-# MEL0004: Use compiled log messages
-dotnet_diagnostic.MEL0004.severity = silent
+# IDE0060: Remove unused parameter
+dotnet_diagnostic.IDE0060.severity = suggestion
 
-# MEL0005: Use PascalCase for log message tokens
-dotnet_diagnostic.MEL0005.severity = warning
+# IDE0290: Use primary constructor
+dotnet_diagnostic.IDE0290.severity = silent
+
+# IDE0305: Use collection expression for fluent
+dotnet_diagnostic.IDE0305.severity = silent
+
+# RCS1021: Convert lambda expression body to expression body
+dotnet_diagnostic.RCS1021.severity = silent
+
+# RSC1194: Implement exception constructors
+dotnet_diagnostic.RCS1194.severity = silent
+
+# RCS1251: Remove unnecessary braces from record declaration
+dotnet_diagnostic.RCS1251.severity = none
 
 # S100: Methods and properties should be named in PascalCase
 dotnet_diagnostic.S100.severity = warning
@@ -268,11 +305,14 @@ dotnet_diagnostic.S100.severity = warning
 # S109: Magic numbers should not be used
 dotnet_diagnostic.S109.severity = silent
 
-# S1172: Remove this parameter, whose vaule is ignored in the method
-dotnet_diagnostic.S1172.severity = none
-
 # S121: Control structures should use curly braces
 dotnet_diagnostic.S121.severity = suggestion
+
+# S1128: Unused "using" should be removed
+dotnet_diagnostic.S1128.severity = warning
+
+# S1133: Deprecated code should be removed
+dotnet_diagnostic.S1133.severity = suggestion
 
 # S1135: Track uses of "TODO" tags
 dotnet_diagnostic.S1135.severity = suggestion
@@ -298,8 +338,8 @@ dotnet_diagnostic.S2931.severity = warning
 # S3216: "ConfigureAwait(false)" should be used
 dotnet_diagnostic.S3216.severity = suggestion
 
-# S6934: Specify the RouteAttribute when an HttpMethodAttribute or RouteAttribute is specified at an action level.
-dotnet_diagnostic.S6934.severity = suggestion
+# S3267: Loops should be simplified with "LINQ" expressions
+dotnet_diagnostic.S3267.severity = suggestion
 
 # SA0001: XML comment analysis disabled
 dotnet_diagnostic.SA0001.severity = none
@@ -316,10 +356,10 @@ dotnet_diagnostic.SA1121.severity = silent
 # SA1200: Using directives should be placed correctly
 dotnet_diagnostic.SA1200.severity = none
 
-# SA1303: Const field names should begin with upper-case letter
+# SA1303: Constant field names should begin with upper-case letter
 dotnet_diagnostic.SA1303.severity = none
 
-# SA1311: Static readonly fields should begin with upper-case letter
+# SA1311: Static read-only fields should begin with upper-case letter
 dotnet_diagnostic.SA1311.severity = none
 
 # SA1600: Elements should be documented
@@ -341,5 +381,12 @@ dotnet_diagnostic.SCS0005.severity = none
 # VSSpell001: Spell Check
 dotnet_diagnostic.VSSpell001.severity = suggestion
 
+# VSTHRD003: Avoid awaiting or returning a Task representing work that was not started within your context as that can lead to deadlocks.
+dotnet_diagnostic.VSTHRD003.severity = suggestion
+
 # VSTHRD200: Use "Async" suffix for async methods
 dotnet_diagnostic.VSTHRD200.severity = none
+
+[*.md]
+md_blanks_around_headings = false
+md_blanks_around_lists = false

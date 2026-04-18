@@ -1,5 +1,3 @@
-﻿using Microsoft.AspNetCore;
-
 namespace ExtendableEnums.TestHost;
 
 public static class Program

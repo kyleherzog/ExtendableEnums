@@ -23,4 +23,3 @@ public abstract class ExtendableEnum<TEnumeration> : ExtendableEnumBase<TEnumera
     {
     }
 }
-

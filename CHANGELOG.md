@@ -4,6 +4,8 @@ These are the changes to each version that has been released
 on NuGet.org.
 
 ## 10.0
+- [x] **BREAKING:** Removed Newtonsoft.Json dependency from the core 'ExtendableEnums' package
+- [x] Changed the namespace for core objects to ExtendableEnums.Core
 - [x] Moved System.Text.Json serialization support to ExtendableEnums.Serialization.SystemText package
 - [x] Updated Newtonsoft.Json to v13.0.4
 - [x] Updated Sysetm.Text.Json to v10.0.5

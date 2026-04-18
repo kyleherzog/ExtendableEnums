@@ -1,4 +1,3 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using ExtendableEnums.Core;
 using Microsoft.EntityFrameworkCore;

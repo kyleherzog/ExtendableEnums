@@ -41,4 +41,3 @@ public class ResolveContractConverterShould
         result.Should().BeNull();
     }
 }
-

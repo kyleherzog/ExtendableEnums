@@ -33,4 +33,3 @@ public class ExtendableEnumContractResolver : DefaultContractResolver
         return base.ResolveContractConverter(objectType);
     }
 }
-

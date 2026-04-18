@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using ExtendableEnums.Testing.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace ExtendableEnums.TestHost.Controllers.OData;
 
+[SuppressMessage("Major Code Smell", "S6934:A Route attribute should be added to the controller when a route template is specified at the action level", Justification = "Adding a route attribute breaks OData routing.")]
 public class SampleBooksController : ODataController
 {
     private readonly IList<SampleBook> books = DataContext.Books;
@@ -17,7 +19,8 @@ public class SampleBooksController : ODataController
         return Ok(books);
     }
 
-    [HttpGet("odata/SampleBooks({id})")]
+    [HttpGet]
+    [Route("odata/SampleBooks({id})")]
     [EnableQuery]
     public IActionResult Get(string id)
     {

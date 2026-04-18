@@ -25,4 +25,3 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : ExtendableEnums
     {
     }
 }
-
