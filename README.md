@@ -16,6 +16,76 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 - Core value can be of any `IComparible` type
 - Serializes to value only
 
+## Upgrading from v9 to v10
+
+Version 10 is a breaking release that reorganizes namespaces to reduce coupling and improve maintainability. The library split Newtonsoft.Json support into an optional package. 
+
+**What changed:**
+- Core types moved from `ExtendableEnums` namespace to `ExtendableEnums.Core`
+- Newtonsoft.Json serialization moved to a separate NuGet package `ExtendableEnums.Serialization.Newtonsoft`
+- Assembly names and functionality unchanged — only namespace organization
+
+**Choose one migration path:**
+
+### Option 1: Use Newtonsoft base classes (recommended for Newtonsoft users)
+
+Install `ExtendableEnums.Serialization.Newtonsoft` NuGet package and change your base class namespace. Drop-in replacement — only the `using` directive changes:
+
+```csharp
+// Before (v9):
+using ExtendableEnums;
+using Newtonsoft.Json;
+
+[JsonConverter(typeof(ExtendableEnumJsonConverter))]
+public class OrderStatus : ExtendableEnum<OrderStatus>
+{
+    public static readonly OrderStatus Active = new(1, nameof(Active));
+    protected OrderStatus(int value, string displayName) : base(value, displayName) { }
+}
+
+// After (v10):
+using ExtendableEnums.Serialization.Newtonsoft;
+
+public class OrderStatus : ExtendableEnum<OrderStatus>
+{
+    public static readonly OrderStatus Active = new(1, nameof(Active));
+    protected OrderStatus(int value, string displayName) : base(value, displayName) { }
+}
+```
+
+The `ExtendableEnums.Serialization.Newtonsoft` base classes include the converter automatically.
+
+### Option 2: Keep core namespace, register converter globally
+
+Stay on core package and register the contract resolver once at startup:
+
+```csharp
+using ExtendableEnums.Core;
+
+public class OrderStatus : ExtendableEnum<OrderStatus>
+{
+    public static readonly OrderStatus Active = new(1, nameof(Active));
+    protected OrderStatus(int value, string displayName) : base(value, displayName) { }
+}
+
+// At application startup:
+var settings = new JsonSerializerSettings().UseExtendableEnums();
+```
+
+### Option 3: Core namespace only, no Newtonsoft
+
+Update `using` statements only:
+
+```csharp
+// Before:
+using ExtendableEnums;
+
+// After:
+using ExtendableEnums.Core;
+```
+
+Then use System.Text.Json serialization (with `[JsonConverter]` attribute on enums) or no JSON serialization at all.
+
 ### Creating an Extended Enumerable
 Enumerables based on an `int` value can be created by inheriting from `ExtendableEnum<TEnumeration>`. The constructor must be overridden and should be made private.  Add any extra properties as desired.  Then just define each enumeration value as a static read only field as shown in the following example.
 
