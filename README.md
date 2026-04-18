@@ -5,7 +5,7 @@ This library is available from [NuGet.org](https://www.nuget.org/packages/Extend
 
 --------------------------
 
-A .NET Standard class library that provides base classes for creating enumerations that can be extended with additional class members. 
+A .NET Standard class library that provides base classes for creating enumerations that can be extended with additional class members.
 
 See the [changelog](CHANGELOG.md) for changes and roadmap.
 
@@ -18,7 +18,7 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 
 ## Upgrading from v9 to v10
 
-Version 10 is a breaking release that reorganizes namespaces to reduce coupling and improve maintainability. The library split Newtonsoft.Json support into an optional package. 
+Version 10 is a breaking release that reorganizes namespaces to reduce coupling and improve maintainability. The library split Newtonsoft.Json support into an optional package.
 
 **What changed:**
 - Core types moved from `ExtendableEnums` namespace to `ExtendableEnums.Core`
@@ -89,7 +89,6 @@ Then use System.Text.Json serialization (with `[JsonConverter]` attribute on enu
 ### Creating an Extended Enumerable
 Enumerables based on an `int` value can be created by inheriting from `ExtendableEnum<TEnumeration>`. The constructor must be overridden and should be made private.  Add any extra properties as desired.  Then just define each enumeration value as a static read only field as shown in the following example.
 
-
 ```c#
 public class SampleStatus : ExtendableEnums.ExtendableEnum<SampleStatus>
     {
@@ -114,7 +113,8 @@ All values that have been defined in an derived enumeration class can be retriev
 
 ### Defining Values in Multiple Classes
 Values can be defined in multiple classes.  However, upon startup of the assembly, the `DeclaringTypes` property must be set to include any classes that define the values other than the primary class that inherits from `ExtendableEnumBase` as seen in the following example.
-```
+
+```csharp
 MyEnum.DeclaringTypes.Add(typeof(MyEnumExtraValuesClass));
 ```
 
@@ -122,12 +122,13 @@ MyEnum.DeclaringTypes.Add(typeof(MyEnumExtraValuesClass));
 The minimum or maximum values in an enumeration can be retrieved by calling the static `Min` and `Max` properties.
 
 ### As an IDictionary Key
-When it is desired to use an ExtendableEnum as a key in a generic dictionary, `ExtendableEnumDictionary{TKey, TValue}` should be used in order to ensure proper serialization. 
+When it is desired to use an ExtendableEnum as a key in a generic dictionary, `ExtendableEnumDictionary{TKey, TValue}` should be used in order to ensure proper serialization.
 
 ### Serialization
 Serialization is supported natively when using Newtonsoft.Json.
 
 When leveraging System.Text.Json.Serialization, the enumeration implementations must be attributed with the `ExtendableEnumJsonConverterAttribute`.
+
 ```csharp
 [System.Text.Json.Serialization.JsonConverter(typeof(ExtendableEnumJsonConverter))]
 ```
@@ -136,12 +137,14 @@ When leveraging System.Text.Json.Serialization, the enumeration implementations 
 
 #### Tag Helpers
 A select tag helper is available through the `ExtendableEnums.Microsoft.AspNetCore` NuGet package. In order to use the tag helper, a call to `addTagHelper` must be added to the \_ViewImports.cshtml.
-```
+
+```html
 @addTagHelper *, ExtendableEnums.Microsoft.AspNetCore
 ```
 
 Then, just add a select tag to the desired view with the `extendable-enum-for` attribute set to the ExtendableEnum property of the model.
-```
+
+```html
 <select extendable-enum-for="Status" ></select>
 ```
 
@@ -151,7 +154,8 @@ NOTE: This select tag helper requires the setup of the Model Binding, which is d
 
 #### Model Binding
 By default, ASP.Net will model bind ExtendableEnums by their DisplayName property.  In order to do model binding by the Value property, ExtendableEnums must be registered when configuring services in ASP.net core projects.  This is done by calling `UseExtendableEnumModelBinding` on the `MvcOptions` parameter when calling `AddMvc`.
-```
+
+```csharp
  services.AddMvc(options =>
 {
     options.UseExtendableEnumModelBinding();
@@ -161,7 +165,7 @@ By default, ASP.Net will model bind ExtendableEnums by their DisplayName propert
 ### Entity Framework Core Support
 ExtendableEnums can be stored by their Value property in Entity Framework Core.  In order to do this, value converters must be registered by calling the `ApplyExtendableEnumConversions` extension method on the ModelBuilder.
 
-```        
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.ApplyExtendableEnumConversions();
@@ -173,8 +177,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 Using ExtendedableEnums in OData requires some modifications.
 
 #### OData ASP.net Core Server Support
-Support for adding ExtendableEnums to an ASP.net core OData server can be achieved by adding a NuGet package reference to `ExtendableEnums.Microsoft.AspNetCore.OData`.  Once this packages is added, the EDM model will need to register each ExtendableEnum type.  This can be done for all types that inherit from `ExtendableEnumBase` in a given assembly by calling an `ODataConventionModelBuilder` extension method called `AddAllExtendableEnums`. 
-```
+Support for adding ExtendableEnums to an ASP.net core OData server can be achieved by adding a NuGet package reference to `ExtendableEnums.Microsoft.AspNetCore.OData`.  Once this packages is added, the EDM model will need to register each ExtendableEnum type.  This can be done for all types that inherit from `ExtendableEnumBase` in a given assembly by calling an `ODataConventionModelBuilder` extension method called `AddAllExtendableEnums`.
+
+```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
     DataContext.ResetData();
@@ -207,18 +212,19 @@ private static IEdmModel GetEdmModel()
 
 A reference type can be passed to `AddAllExtendableEnums` instead of passing the assembly directly.  When this is done, the containing assembly of the type specified is scanned for ExtendableEnums to be registered.
 
-```
+```csharp
 builder.AddAllExtendableEnums(this.GetType());
 ```
 
-
 If desired, ExtendableEnum types can be registered individually as well, by calling an `ODataConventionModelBuilder` extension method called `AddExtendableEnum<>` as seen in the following example.
-```
+
+```csharp
 builder.AddExtendableEnum<SampleStatus>();
 ```
 
 Any POST methods for objects that have a property that includes an ExtendableEnum type can not have the parameter be the object type directly, but rather a `JsonElement` that is then converted to the actual object in the controller method.  This can be seen in the following example.
-```        
+
+```csharp
 [EnableQuery]
 public IActionResult Post([FromBody] JsonElement json)
 {
@@ -240,8 +246,9 @@ public IActionResult Post([FromBody] JsonElement json)
 ```
 
 #### OData Simple.OData.Client Support
-Compatibility with Simple.Odata.Client can be obtained by adding a NuGet package reference to `ExtendableEnums.Simple.OData.Client`. Once this package is added, a call can be made to the `ODataClientSettings` extension method `RegisterAllExtendableEnums` to register all ExtendableEnums in a given assembly.  This will allow Simple.OData.Client handle the minimal serialization of ExtendableEnums.  
-```
+Compatibility with Simple.Odata.Client can be obtained by adding a NuGet package reference to `ExtendableEnums.Simple.OData.Client`. Once this package is added, a call can be made to the `ODataClientSettings` extension method `RegisterAllExtendableEnums` to register all ExtendableEnums in a given assembly.  This will allow Simple.OData.Client handle the minimal serialization of ExtendableEnums.
+
+```csharp
 var clientSettings = new ODataClientSettings
 {
     BaseUri = TestingHost.Instance.BaseODataUrl,
@@ -251,19 +258,22 @@ var clientSettings = new ODataClientSettings
 clientSettings.RegisterAllExtendableEnums(Assembly.GetExecutingAssembly());
 var client = new ODataClient(clientSettings);
 ```
+
 A reference type can be passed to `RegisterAllExtendableEnums` instead of passing the assembly directly.  When this is done, the containing assembly of the type specified is scanned for ExtendableEnums to be registered.
 
-```
+```csharp
 clientSettings.RegisterAllExtendableEnums(this.GetType());
 ```
 
 If desired, ExtendableEnum types can be registered individually as well, by calling `Register<>`.
-```
+
+```csharp
 settings.RegisterExtendableEnum<SampleStatus>();
 ```
 
 All extended properties on any ExtendableEnums will also need to have the `NotMappedAttribute` applied as well.
-```        
+
+```csharp
 [NotMapped]
 public string Code { get; }
 ```
@@ -271,19 +281,21 @@ public string Code { get; }
 ### LiteDB Support
 Using ExtendedableEnums in LiteDB requires registering Bson mappings.  This can be done by adding a reference to the NuGet package `ExtendableEnums.LiteDB`.  Then, upon application startup, call the needed `BsonMapper` extension registration methods.  Currently, Int32 and string Value property types are supported.
 
-```
+```csharp
 BsonMapper.Global.RegisterAllInt32BasedExtendableEnums(Assembly.GetExecutingAssembly());
 ```
 
 A reference type can also be passed to register all types in the containing assembly.
 
-```
+```csharp
 BsonMapper.Global.RegisterAllInt32BasedExtendableEnums(typeof(SampleBook));
 ```
 
 If desired, individual ExtendableEnum types can be registered by calling `RegisterExtendableEnumAsInt32`
-```
+
+```csharp
 BsonMapper.Global.RegisterExtendableEnumsAsInt32(typeof(SampleStatus))
 ```
+
 ## License
 [MIT](LICENSE)
