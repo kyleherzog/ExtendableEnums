@@ -14,10 +14,6 @@
     <Authors>Kyle Herzog</Authors>
     <Description>A .NET Standard library that allows ExtendableEnums to be used with LiteDB</Description>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="LiteDB" Version="5.0.21" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.201">
