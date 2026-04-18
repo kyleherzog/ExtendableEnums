@@ -1,4 +1,4 @@
-﻿namespace ExtendableEnums;
+﻿namespace ExtendableEnums.Core;
 
 /// <summary>
 /// Provides extension method on <see cref="Type"/> that relate to ExtendableEnums.

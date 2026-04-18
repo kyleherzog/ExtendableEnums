@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
+using ExtendableEnums.Core;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExtendableEnums.EntityFrameworkCore;

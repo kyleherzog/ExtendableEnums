@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using ExtendableEnums.Core;
 
 namespace ExtendableEnums.Serialization.SystemText.UnitTests.Models;
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using ExtendableEnums.Core;
 using Microsoft.OData.ModelBuilder;
 
 namespace ExtendableEnums.Microsoft.AspNetCore.OData;

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace ExtendableEnums.Serialization.Newtonsoft.UnitTests.Models;
 
 [JsonConverter(typeof(ExtendableEnumJsonConverter))]
-internal class SerializableSampleStatus : ExtendableEnums.ExtendableEnum<SerializableSampleStatus>
+internal class SerializableSampleStatus : ExtendableEnums.Core.ExtendableEnum<SerializableSampleStatus>
 {
     public static readonly SerializableSampleStatus Active = new(1, nameof(Active), "ACT");
     public static readonly SerializableSampleStatus Deleted = new(2, nameof(Deleted), "DEL");

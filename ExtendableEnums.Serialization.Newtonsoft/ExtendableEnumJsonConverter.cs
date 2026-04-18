@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Globalization;
-using ExtendableEnums.Reflection;
+using ExtendableEnums.Core;
+using ExtendableEnums.Core.Reflection;
 using Newtonsoft.Json;
 
 namespace ExtendableEnums.Serialization.Newtonsoft;

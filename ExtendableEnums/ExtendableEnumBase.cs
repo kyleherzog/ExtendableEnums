@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 
-namespace ExtendableEnums;
+namespace ExtendableEnums.Core;
 
 /// <summary>
 /// An abstract base class providing extendable enumeration support.
@@ -381,4 +381,4 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
         result = Array.Find(allItems, predicate);
         return result is not null;
     }
-}
+}

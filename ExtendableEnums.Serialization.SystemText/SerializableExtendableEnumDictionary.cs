@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using ExtendableEnums.Core;
 
 namespace ExtendableEnums.Serialization.SystemText;
 

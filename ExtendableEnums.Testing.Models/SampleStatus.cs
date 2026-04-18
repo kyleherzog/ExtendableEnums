@@ -2,7 +2,7 @@
 
 namespace ExtendableEnums.Testing.Models;
 
-public class SampleStatus : ExtendableEnums.ExtendableEnum<SampleStatus>
+public class SampleStatus : ExtendableEnums.Core.ExtendableEnum<SampleStatus>
 {
     public static readonly SampleStatus Active = new(1, nameof(Active), "ACT");
     public static readonly SampleStatus Deleted = new(2, nameof(Deleted), "DEL");

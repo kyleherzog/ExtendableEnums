@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 
-namespace ExtendableEnums;
+namespace ExtendableEnums.Core;
 
 /// <summary>
 /// Provides a way of converting ExtendableEnums to/from other predefined types.

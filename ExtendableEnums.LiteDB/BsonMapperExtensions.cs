@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using ExtendableEnums.Core;
 using LiteDB;
 
 namespace ExtendableEnums.LiteDB;

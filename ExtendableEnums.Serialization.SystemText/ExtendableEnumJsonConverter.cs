@@ -1,7 +1,8 @@
 ﻿using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using ExtendableEnums.Reflection;
+using ExtendableEnums.Core;
+using ExtendableEnums.Core.Reflection;
 
 namespace ExtendableEnums.Serialization.SystemText;
 

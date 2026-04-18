@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Globalization;
 using System.Reflection;
+using ExtendableEnums.Core;
 using Simple.OData.Client;
 
 namespace ExtendableEnums.SimpleOData.Client;

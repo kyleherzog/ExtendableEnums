@@ -1,4 +1,4 @@
-﻿namespace ExtendableEnums;
+﻿namespace ExtendableEnums.Core;
 
 /// <summary>
 /// Base interface for <see cref="ExtendableEnumBase{TEnumeration, TValue}"/>, providing access to DisplayName.

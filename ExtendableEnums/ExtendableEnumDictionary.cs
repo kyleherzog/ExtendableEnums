@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.Serialization;
 
-namespace ExtendableEnums;
+namespace ExtendableEnums.Core;
 
 /// <summary>
 /// A specialized dictionary to ensure proper serialization when an <see cref="ExtendableEnumBase{TEnumeration, TValue}" />

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace ExtendableEnums.Reflection;
+namespace ExtendableEnums.Core.Reflection;
 
 /// <summary>
 /// Provides means for retrieving method infomormation from ExtendableEnum objects.
