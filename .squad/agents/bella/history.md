@@ -28,3 +28,13 @@
 - New `ExtendableEnums.Serialization.Newtonsoft.UnitTests` project will need local model types (like SystemText's pattern) because once the `[JsonConverter]` is removed from `ExtendableEnumBase`, `SampleStatus` from Testing.Models won't auto-wire the Newtonsoft converter.
 - Class name typo to fix on migration: `NewsonsoftSerializationShould` → `NewtonsoftSerializationShould`.
 - Full audit written to `.squad/decisions/inbox/bella-newtonsoft-test-audit.md`.
+
+### 2026-04-18 — Newtonsoft Base Classes Test Validation
+
+- Created comprehensive test suite for new base classes: `NewtonsoftSerializationShould.cs` with 7 passing tests
+- Test coverage: serialization, deserialization, dictionary serialization, polymorphic type handling, extension method integration, round-trip cycles
+- All tests isolated to Newtonsoft package (no cross-package test dependencies)
+- Test structure mirrors `ExtendableEnums.Serialization.SystemText.UnitTests` pattern
+- Tests verify that base class attributes work correctly for automatic converter registration
+- Extension points documented through test examples for future consumers
+- Implementation validated: all base class functionality working as designed

@@ -549,6 +549,125 @@ var status = SampleStatus.Active;  // value: 1
 
 ---
 
+### Decision: Newtonsoft Base Classes
+
+**Author:** Buddy (Lead)  
+**Date:** 2026-04-18  
+**Status:** Approved  
+**Requestor:** Kyle Herzog
+
+---
+
+## Problem
+
+After splitting Newtonsoft.Json support into a separate package, consumers need a clear, namespace-based way to adopt Newtonsoft serialization. The architecture should force explicit code changes (via namespace switching) and mirror the existing `SerializableExtendableEnumDictionary` pattern.
+
+## Decision Summary
+
+Create two new abstract base classes in the `ExtendableEnums.Serialization.Newtonsoft` namespace with `[JsonConverter]` attributes pre-applied:
+
+- `ExtendableEnumBase<TEnumeration, TValue>`  
+- `ExtendableEnum<TEnumeration>`
+
+These are identical in name to the core classes but in a different namespace, forcing consumers to explicitly change their `using` statement to opt into Newtonsoft serialization.
+
+## Implementation Details
+
+### 1. Class Design
+
+Both classes inherit from the core `ExtendableEnums` base classes and apply the `[JsonConverter]` attribute:
+
+```csharp
+namespace ExtendableEnums.Serialization.Newtonsoft;
+
+[JsonConverter(typeof(ExtendableEnumJsonConverter))]
+public abstract class ExtendableEnumBase<TEnumeration, TValue>
+    : ExtendableEnums.ExtendableEnumBase<TEnumeration, TValue>
+    where TEnumeration : ExtendableEnums.ExtendableEnumBase<TEnumeration, TValue>
+    where TValue : IComparable
+{
+    protected ExtendableEnumBase(TValue value, string displayName)
+        : base(value, displayName) { }
+}
+
+[JsonConverter(typeof(ExtendableEnumJsonConverter))]
+public abstract class ExtendableEnum<TEnumeration>
+    : ExtendableEnumBase<TEnumeration, int>
+    where TEnumeration : ExtendableEnums.ExtendableEnumBase<TEnumeration, int>
+{
+    protected ExtendableEnum(int value, string displayName)
+        : base(value, displayName) { }
+}
+```
+
+### 2. Type Constraint Design
+
+**Critical:** Constraints reference the CORE base class, not the Newtonsoft wrapper:
+
+```csharp
+// CORRECT
+where TEnumeration : ExtendableEnums.ExtendableEnumBase<TEnumeration, TValue>
+
+// WRONG (would not compile)
+where TEnumeration : ExtendableEnums.Serialization.Newtonsoft.ExtendableEnumBase<TEnumeration, TValue>
+```
+
+This allows the inheritance chain to work correctly:
+1. Consumer's `MyStatus` inherits from `ExtendableEnums.Serialization.Newtonsoft.ExtendableEnum<MyStatus>`
+2. Which inherits from `ExtendableEnums.Serialization.Newtonsoft.ExtendableEnumBase<MyStatus, int>`
+3. Which inherits from `ExtendableEnums.ExtendableEnumBase<MyStatus, int>` ✅
+
+### 3. Attribute Placement
+
+Apply `[JsonConverter]` to **both classes**:
+- Explicit is better than implicit for discoverability
+- IntelliSense clearly shows the converter on whichever class is inspected
+- No runtime harm — Newtonsoft uses the first converter found in the hierarchy
+- The class attribute takes precedence over the contract resolver (harmless redundancy)
+
+### 4. Dictionary Consistency
+
+Keep `SerializableExtendableEnumDictionary` as-is (no rename to mirror-with-same-name pattern):
+- Concrete class, not abstract — consumers instantiate it directly
+- Both names can coexist in same file without ambiguity
+- Renaming now would be a breaking change
+- For abstract base classes, same-name-different-namespace is cleaner
+
+### 5. Core Package Unchanged
+
+The core `ExtendableEnums` namespace remains 100% unchanged:
+- `ExtendableEnumBase<T, TValue>` — no changes
+- `ExtendableEnum<T>` — no changes
+- Zero breaking changes for existing consumers
+
+## Migration Guide
+
+### Option A: Change namespace only (use new base classes)
+```diff
+- using ExtendableEnums;
++ using ExtendableEnums.Serialization.Newtonsoft;
+
+  public class MyStatus : ExtendableEnum<MyStatus> { }
+```
+
+### Option B: Keep core base class, use resolver
+```csharp
+using ExtendableEnums;
+
+public class MyStatus : ExtendableEnum<MyStatus> { }
+
+// In serialization setup:
+var settings = new JsonSerializerSettings();
+settings.Converters.Add(new ExtendableEnumJsonConverter());
+```
+
+## Status
+
+✅ Approved and implemented  
+✅ 7 tests passing (serialization, deserialization, contract resolution, round-trip)
+
+---
+
 ## Governance
 
 - All meaningful changes require team consensus
