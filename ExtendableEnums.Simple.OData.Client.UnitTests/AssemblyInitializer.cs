@@ -1,8 +1,7 @@
 using ExtendableEnums.TestHost;
 using ExtendableEnums.Testing;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtendableEnums.SimpleOData.Client.UnitTests;
+namespace ExtendableEnums.Simple.OData.Client.UnitTests;
 
 [TestClass]
 public static class AssemblyInitializer

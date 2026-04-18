@@ -38,7 +38,7 @@ public abstract class ExtendableEnumBase<TEnumeration, TValue> : IExtendableEnum
     /// <summary>
     /// Gets a list of types other than itself that declare static extendable enums of this type.
     /// </summary>
-    public static IList<Type> DeclaringTypes { get; } = new List<Type>();
+    public static IList<Type> DeclaringTypes { get; } = [];
 
     /// <summary>
     /// Gets the enumeration object with the highest Value property.

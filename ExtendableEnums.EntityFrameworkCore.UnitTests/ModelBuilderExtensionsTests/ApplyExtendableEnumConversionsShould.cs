@@ -1,6 +1,5 @@
-﻿using ExtendableEnums.EntityFrameworkCore.UnitTests.Entities;
+using ExtendableEnums.EntityFrameworkCore.UnitTests.Entities;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.EntityFrameworkCore.UnitTests.ModelBuilderExtensionsTests;
 

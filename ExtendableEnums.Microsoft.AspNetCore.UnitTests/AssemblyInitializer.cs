@@ -1,6 +1,5 @@
 using ExtendableEnums.TestHost;
 using ExtendableEnums.Testing;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests;
 

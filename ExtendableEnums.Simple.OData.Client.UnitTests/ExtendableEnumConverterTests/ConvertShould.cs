@@ -1,7 +1,6 @@
-﻿using ExtendableEnums.Testing.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ExtendableEnums.Testing.Models;
 
-namespace ExtendableEnums.SimpleOData.Client.UnitTests.ExtendableEnumConverterTests;
+namespace ExtendableEnums.Simple.OData.Client.UnitTests.ExtendableEnumConverterTests;
 
 [TestClass]
 public class ConvertShould

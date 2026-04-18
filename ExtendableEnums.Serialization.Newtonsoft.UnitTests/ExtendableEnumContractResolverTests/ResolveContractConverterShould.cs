@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.Serialization.Newtonsoft.UnitTests.ExtendableEnumContractResolverTests;
 
@@ -12,7 +11,7 @@ public class ResolveContractConverterShould
         var resolver = new ExtendableEnumContractResolver();
         var method = typeof(ExtendableEnumContractResolver).GetMethod("ResolveContractConverter", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
-        var result = method?.Invoke(resolver, new object[] { typeof(Testing.Models.SampleStatus) });
+        var result = method?.Invoke(resolver, [typeof(Testing.Models.SampleStatus)]);
 
         result.Should().NotBeNull();
         result.Should().BeOfType<ExtendableEnumJsonConverter>();
@@ -24,7 +23,7 @@ public class ResolveContractConverterShould
         var resolver = new ExtendableEnumContractResolver();
         var method = typeof(ExtendableEnumContractResolver).GetMethod("ResolveContractConverter", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
-        var result = method?.Invoke(resolver, new object[] { typeof(SerializableExtendableEnumDictionary<Testing.Models.SampleStatus, string>) });
+        var result = method?.Invoke(resolver, [typeof(SerializableExtendableEnumDictionary<Testing.Models.SampleStatus, string>)]);
 
         result.Should().NotBeNull();
         result.Should().BeOfType<ExtendableEnumDictionaryJsonConverter>();
@@ -36,7 +35,7 @@ public class ResolveContractConverterShould
         var resolver = new ExtendableEnumContractResolver();
         var method = typeof(ExtendableEnumContractResolver).GetMethod("ResolveContractConverter", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
-        var result = method?.Invoke(resolver, new object[] { typeof(string) });
+        var result = method?.Invoke(resolver, [typeof(string)]);
 
         result.Should().BeNull();
     }

@@ -9,7 +9,7 @@ namespace ExtendableEnums.Microsoft.AspNetCore.UnitTests;
 [TestClass]
 public class ModelBindingTests : IDisposable
 {
-    private static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions
+    private static readonly JsonSerializerOptions jsonOptions = new()
     {
         PropertyNameCaseInsensitive = true,
         Converters = { new ExtendableEnumJsonConverter() },
@@ -138,4 +138,4 @@ public class ModelBindingTests : IDisposable
             hasDisposed = true;
         }
     }
-}
+}

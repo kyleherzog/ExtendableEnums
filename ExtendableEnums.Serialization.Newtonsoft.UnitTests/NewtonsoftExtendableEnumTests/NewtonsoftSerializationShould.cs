@@ -1,4 +1,3 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
 namespace ExtendableEnums.Serialization.Newtonsoft.UnitTests.NewtonsoftExtendableEnumTests;

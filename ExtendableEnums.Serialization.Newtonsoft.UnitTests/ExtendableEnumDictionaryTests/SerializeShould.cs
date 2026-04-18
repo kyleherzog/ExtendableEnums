@@ -1,5 +1,4 @@
-﻿using ExtendableEnums.Serialization.Newtonsoft.UnitTests.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ExtendableEnums.Serialization.Newtonsoft.UnitTests.Models;
 using Newtonsoft.Json;
 
 namespace ExtendableEnums.Serialization.Newtonsoft.UnitTests.ExtendableEnumDictionaryTests;

@@ -1,5 +1,4 @@
-﻿using ExtendableEnums.Testing.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ExtendableEnums.Testing.Models;
 
 namespace ExtendableEnums.UnitTests.ExtendableEnumTests;
 

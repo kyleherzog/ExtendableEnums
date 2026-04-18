@@ -1,7 +1,5 @@
-﻿using System.Text.Json;
-using ExtendableEnums.Serialization.SystemText;
+using System.Text.Json;
 using ExtendableEnums.Serialization.SystemText.UnitTests.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.Serialization.SystemText.UnitTests;
 

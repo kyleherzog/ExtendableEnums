@@ -15,9 +15,6 @@
     <Description>A .NET Standard library that provides Newtonsoft.Json support for ExtendableEnums.</Description>
     <PackageId>ExtendableEnums.Serialization.Newtonsoft</PackageId>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.201">
       <PrivateAssets>all</PrivateAssets>

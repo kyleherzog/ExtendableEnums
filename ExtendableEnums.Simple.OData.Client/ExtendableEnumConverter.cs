@@ -1,10 +1,10 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Globalization;
 using System.Reflection;
 using ExtendableEnums.Core;
 using Simple.OData.Client;
 
-namespace ExtendableEnums.SimpleOData.Client;
+namespace ExtendableEnums.Simple.OData.Client;
 
 /// <summary>
 /// A static class that provides helper methods to allows the Simple OData client to serialize/deserialize ExtendableEnums.

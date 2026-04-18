@@ -1,7 +1,6 @@
-﻿using ExtendableEnums.Testing.Models;
+using ExtendableEnums.Testing.Models;
 using FluentAssertions;
 using LiteDB;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtendableEnums.LiteDB.UnitTests.BsonMapperExtensions;
 

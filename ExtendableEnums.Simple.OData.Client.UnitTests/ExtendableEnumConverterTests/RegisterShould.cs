@@ -1,4 +1,3 @@
-﻿using ExtendableEnums.SimpleOData.Client;
 using ExtendableEnums.TestHost;
 using ExtendableEnums.Testing;
 using ExtendableEnums.Testing.Models;

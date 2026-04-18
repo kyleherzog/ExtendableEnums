@@ -1,4 +1,3 @@
-﻿using System;
 using ExtendableEnums.Core;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 

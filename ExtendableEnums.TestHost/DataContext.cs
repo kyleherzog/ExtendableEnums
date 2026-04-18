@@ -1,11 +1,11 @@
-﻿using System.Globalization;
+using System.Globalization;
 using ExtendableEnums.Testing.Models;
 
 namespace ExtendableEnums.TestHost;
 
 public static class DataContext
 {
-    public static IList<SampleBook> Books { get; } = new List<SampleBook>();
+    public static IList<SampleBook> Books { get; } = [];
 
     public static void ResetData()
     {
