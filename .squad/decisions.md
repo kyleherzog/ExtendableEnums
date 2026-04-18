@@ -668,6 +668,22 @@ settings.Converters.Add(new ExtendableEnumJsonConverter());
 
 ---
 
+---
+
+### 2026-04-18: User Directive — System.Text.Json Base Classes Not Needed
+
+**By:** Kyle Herzog (via Copilot)  
+**Date:** 2026-04-18  
+**Status:** Noted for guidance  
+
+**What:** Do NOT add Newtonsoft-style base classes (with pre-applied [JsonConverter]) to `ExtendableEnums.Serialization.SystemText`. System.Text.Json does not honor `[JsonConverter]` attributes inherited from base classes, so the pattern would not work there.
+
+**Why:** User request — captured for team memory
+
+**Impact:** Keep System.Text.Json approach as-is (users must register converters explicitly or use the existing `SerializableExtendableEnumDictionary`). Do not create mirror base classes in SystemText namespace.
+
+---
+
 ## Governance
 
 - All meaningful changes require team consensus

@@ -16,10 +16,14 @@
 
 ## Learnings
 
-### v11 Newtonsoft Split (2025)
+### v10 to v11 Namespace Reorganization (2025)
+- Added "## Upgrading from v9 to v10" section to README after Features, before implementation details
+- Three migration paths presented clearly: (1) Use Newtonsoft package classes, (2) Keep core + global resolver, (3) Core only
+- Before/after code blocks show realistic examples (OrderStatus class)
+- Placed early in README (line 18) for maximum discoverability — developers hit breaking changes before implementation examples
+- Key: Made Option 1 the "recommended" path to encourage adoption of the new Newtonsoft package structure
 - Current README mentions Newtonsoft support in "### Serialization" section (line 57–63)
 - Also referenced in OData example (line 155: `JsonConvert.DeserializeObject<>`)
-- Migration guide must be early in README for discoverability (suggest after Features section)
 - CHANGELOG needs breaking change callout with link to migration guide
 - Newtonsoft package should have minimal, focused README (avoid duplication)
 - Key insight: Developers need 2-step solution (NuGet + DI registration). Make it obvious.
